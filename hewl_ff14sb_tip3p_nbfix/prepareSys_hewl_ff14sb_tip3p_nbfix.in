@@ -1,0 +1,26 @@
+# Solvate model compound 
+source leaprc.protein.ff14SB                               # Load protein
+source leaprc.water.tip3p 
+
+set default PBradii mbondi
+
+
+loadamberparams frcmod.phmd
+loadamberparams frcmod.ff99cufix                   # Says ff99, but their site says it should work for ff99 and ff14
+loadoff phmd.lib
+
+model = loadpdb 2lzt_ready.pdb                      # Load PDB 
+
+solvateoct model TIP3PBOX 15 0.75   
+
+charge model 										   # Gives charge (k), need to add ions: r = (num_water)*0.15/56
+
+addions model Na+ 32                                   # num_Na = r - k/2
+addions model Cl- 40                                   # num_Cl = r + k/2
+
+charge model                                   
+
+savepdb model 2lzt_cphmd.pdb
+saveamberparm model 2lzt_cphmd.prmtop 2lzt_cphmd.rst7
+
+quit 

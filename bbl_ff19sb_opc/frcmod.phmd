@@ -1,4 +1,4 @@
-!Force field modifications for continuous phmd simulations (July 2022, Jana Shen)
+!Force field modifications for continuous phmd simulations (July 2024, Jana Shen)
 
 BOND
 O2-HO       553.0    0.960 ! copied from HO-OH 

@@ -16,8 +16,8 @@ savepdb model 2lzt_with_water.pdb
 
 charge model 										   # Gives charge (k), need to add ions: r = (num_water)*0.15/56
 
-addions model Na+ 33                                   # num_Na = r - k/2
-addions model Cl- 41                                   # num_Cl = r + k/2
+addions model Na+ 21                                   # num_Na = r - k/2
+addions model Cl- 29                                   # num_Cl = r + k/2
 
 charge model                                   
 

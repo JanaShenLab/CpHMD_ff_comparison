@@ -1,0 +1,7 @@
+# 05/23/24 10:26:55
+param lys.parm7
+parm lys.parm7
+trajin equil_1.2.rst7
+trajout equil.pdb pdb
+run
+exit

@@ -1,0 +1,11 @@
+source leaprc.protein.ff19SB
+source leaprc.water.opc
+set default PBradii mbondi3
+
+lys = sequence {ACE ALA ALA LYS ALA ALA NHE}
+
+addIons2 lys Cl- 0
+solvateoct lys OPCBOX 12.0 0.75
+
+saveAmberParm lys lys.parm7 lys.rst7
+quit

@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/craigp/Research/Ras/parameterization/asp_val/equil/async_cphmd.py", line 17, in <module>
+    re.do_replica_exchange(phs, 1, 'template_equil_2.{}.mdin'.format(step+1), 'asp.parm7', 'ff19sb_pme.parm', 'prod.phmdin', 'equil_2.{}'.format(step+1), initial_restart_file = 'equil_1.{}.rst7'.format(first_equil_stage))
+  File "/home/craigp/Research/Ras/parameterization/asp_val/equil/async_ph_replica_exchange/replica_exchange.py", line 372, in do_replica_exchange
+    append_files(md_set, cuda_devices, phs, replica_steps, output_directory, concatenate_parm_file, template_mdin)
+  File "/home/craigp/Research/Ras/parameterization/asp_val/equil/async_ph_replica_exchange/replica_exchange.py", line 145, in append_files
+    with open('{}/rep{}.phmdrestrt'.format(output_directory, ph_index), 'r') as infile:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'equil_2.1/rep0.phmdrestrt'
+Equilibration stage step 1 finished.
+Equilibration stage step 2 finished.
+Equilibration stage step 3 finished.
+Equilibration stage step 4 finished.

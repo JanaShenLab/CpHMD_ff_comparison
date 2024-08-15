@@ -1,0 +1,6 @@
+# 08/13/24 14:45:50
+parm glu.parm7
+trajin equil_1.2.rst7
+trajout heat.pdb
+run
+exit

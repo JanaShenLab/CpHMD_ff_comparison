@@ -1,0 +1,130 @@
+* Generate structure for rnasea blocked structure in vacuum
+*
+set input chaina.pdb
+set outname chaina_h
+set segid PROA
+! read in modified top and par files
+set TOPPAR = /home/craigp/software/c36b2/toppar
+set top = @TOPPAR/top_all22_prot.rtf
+set par = @TOPPAR/par_all22_prot.prm
+set watstr = @TOPPAR/toppar_water_ions.str
+set phstr = @TOPPAR/toppar_phmd_c22_foramber.str
+
+open unit 1 read form name @top
+read rtf card unit 1
+close unit 1
+
+open unit 1 read form name @par
+read param card unit 1 flex
+close unit 1
+
+stream @phstr
+stream @watstr
+
+! read in sequence
+open unit 1 read form name @input
+read sequ pdb unit 1
+
+! generate psf
+generate @segid first ACE last CT2 setup
+
+!patch disu @segid 6 @segid 127
+!patch disu @segid 30 @segid 115
+!patch disu @segid 64 @segid 80
+!patch disu @segid 76 @segid 94
+
+! read in coordinates
+open unit 1 read form name @input
+read coor pdb unit 1
+
+ic para
+ic build
+
+hbuild sele hydrogen end 
+
+! patch dummy atoms for ASP and GLU
+! ---------------------------------
+!define ANY sele bynu 1 end
+!set res1 = ?selresi         ! get the starting value of resid
+!calc reslast = ?selresi + ?nres -1
+
+!set ires @res1
+
+!prnlev -1 !turn off printing
+
+!label patch
+! define residue sele segid @segid .and. resid @ires show end
+! if ?selresn eq asp patch aspp2 @segid @ires
+! if ?selresn eq glu patch glup2 @segid @ires
+! incr ires
+!if ires le @reslast goto patch
+
+!autogen angles dihed
+
+!prnlev 5
+
+!hbuild sele segi @segid .and. resn asp .and. type hd* end
+!hbuild sele segi @segid .and. resn glu .and. type he* end
+
+! Edit Dihedrals for Glupp2 and Aspp2
+!------------------------------------
+
+!define ANY sele bynu 1 end
+!set res1 = ?selresi         ! get the starting value of resid
+!calc reslast = ?selresi + ?nres -1
+
+!ic gene
+!ic fill
+
+!set ires @res1
+
+!prnlev -1
+!label edit
+! define residue sele segid @segid .and. resid @ires show end
+! if ?selresn eq asp then
+!    IC EDIT
+!       DIHE @segid @ires CB @segid @ires CG @segid @ires OD1 @segid @ires HD1 180.0
+!       DIHE @segid @ires CB @segid @ires CG @segid @ires OD2 @segid @ires HD2 180.0
+!    END
+! endif
+! if ?selresn eq glu then
+!    IC EDIT
+!       DIHE @segid @ires CG @segid @ires CD @segid @ires OE1 @segid @ires HE1 180.0
+!       DIHE @segid @ires CG @segid @ires CD @segid @ires OE2 @segid @ires HE2 180.0
+!    END
+! endif
+! incr ires
+!if ires le @reslast goto edit
+
+!prnlev 5
+
+!coor init sele segi @segid .and. resn asp .and. type hd* end
+!coor init sele segi @segid .and. resn glu .and. type he* end
+
+ic build
+
+! Fast minimization
+! ------------------------
+
+define heavy sele .not. type H* end
+
+cons harm clear
+cons harm force 50.0 sele heavy end
+
+mini   sd nstep  10 nprint 10 step 0.005
+mini abnr nstep  10 nprint 10 step 0.005
+
+!mini sd nstep 300
+!mini abnr nstep 1200
+
+!print structure and coordinates
+
+open unit 1 write card name @{outname}.psf
+write psf card unit 1
+close unit 1
+
+open unit 1 write card name @{outname}.crd
+write coor card unit 1
+close unit 1
+
+stop

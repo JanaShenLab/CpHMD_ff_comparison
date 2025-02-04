@@ -1,0 +1,16 @@
+ SET XTLTYPE   = CUBIC
+ SET A         = 71
+ SET B         = 71
+ SET C         = 71
+ SET ALPHA     = 90
+ SET BETA      = 90
+ SET GAMMA     = 90
+ SET NWATER    = 10450
+ SET NPOSCOION = 0
+ SET NNEGCOION = 0
+ SET NPOS      = 32
+ SET NNEG      = 25
+ SET POSCOION  = SOD
+ SET NEGCOION  = CLA
+ SET POSION    = SOD
+ SET NEGION    = CLA

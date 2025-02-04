@@ -1,0 +1,424 @@
+1
+                 Chemistry at HARvard Macromolecular Mechanics
+           (CHARMM) - Developmental Version 36b2   February 15, 2012            
+       Copyright(c) 1984-2001  President and Fellows of Harvard College
+                              All Rights Reserved
+     Current operating system: Linux-5.15.0-113-generic(x86_64)@aura.umaryl     
+                 Created on  9/20/24 at 16:18:33 by user: craigp      
+
+            Maximum number of ATOMS:    360720, and RESidues:      120240
+ RDTITL> * ADD H TO CRYSTAL WATERS
+ RDTITL> *
+  
+ CHARMM>     
+  
+ CHARMM>    ! Inputs and Variables
+ CHARMM>    !-------------------------
+ CHARMM>    set in  =  xwatb_charmm
+ Parameter: IN <- "XWATB_CHARMM"
+  
+ CHARMM>    set out =  xwat_h
+ Parameter: OUT <- "XWAT_H"
+  
+ CHARMM>     
+  
+ CHARMM>    set toppar = /home/craigp/software/c36b2/toppar
+ Parameter: TOPPAR <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+  
+ CHARMM>    set top = @TOPPAR/top_all22_prot.rtf
+ Parameter: TOPPAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+ Parameter: TOP <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOP_ALL22_PROT.RTF"
+  
+ CHARMM>    set par = @TOPPAR/par_all22_prot.prm
+ Parameter: TOPPAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+ Parameter: PAR <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/PAR_ALL22_PROT.PRM"
+  
+ CHARMM>    set watstr = @TOPPAR/toppar_water_ions.str
+ Parameter: TOPPAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+ Parameter: WATSTR <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOPPAR_WATER_IONS.STR"
+  
+ CHARMM>    set phstr  = @TOPPAR/toppar_phmd_c22_foramber.str
+ Parameter: TOPPAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+ Parameter: PHSTR <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOPPAR_PHMD_C22_FORAMBER.STR"
+  
+ CHARMM>     
+  
+ CHARMM>    ! Read Topology and Parameter Files
+ CHARMM>    !----------------------------------
+ CHARMM>    open read card unit 10 name @top
+ Parameter: TOP -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOP_ALL22_PROT.RTF"
+ VOPEN> Attempting to open::/home/craigp/software/c36b2/toppar/top_all22_prot.rtf::
+ OPNLGU> Unit 10 opened for READONLY access to /home/craigp/software/c36b2/toppar/top_all22_prot.rtf
+  
+ CHARMM>    read rtf card unit 10
+ MAINIO> Residue topology file being read from unit  10.
+ TITLE> *>>>>>>>>CHARMM22 ALL-HYDROGEN TOPOLOGY FILE FOR PROTEINS <<<<<<
+ TITLE> *>>>>> INCLUDES PHI, PSI CROSS TERM MAP (CMAP) CORRECTION <<<<<<<
+ TITLE> *>>>>>>>>>>>>>>>>>>>>>> DECEMBER, 2003 <<<<<<<<<<<<<<<<<<<<<<<<<<
+ TITLE> * ALL COMMENTS TO ADM JR. VIA THE CHARMM WEB SITE: WWW.CHARMM.ORG
+ TITLE> *               PARAMETER SET DISCUSSION FORUM
+ TITLE> *
+  
+ CHARMM>    close unit 10
+ VCLOSE: Closing unit   10 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    open read card unit 10 name @par
+ Parameter: PAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/PAR_ALL22_PROT.PRM"
+ VOPEN> Attempting to open::/home/craigp/software/c36b2/toppar/par_all22_prot.prm::
+ OPNLGU> Unit 10 opened for READONLY access to /home/craigp/software/c36b2/toppar/par_all22_prot.prm
+  
+ CHARMM>    read param card flex unit 10
+
+          PARAMETER FILE BEING READ FROM UNIT 10
+ TITLE> *>>>>> CHARMM22 ALL-HYDROGEN PARAMETER FILE FOR PROTEINS <<<<<<<<
+ TITLE> *>>>>> INCLUDES PHI, PSI CROSS TERM MAP (CMAP) CORRECTION <<<<<<<
+ TITLE> *>>>>>>>>>>>>>>>>>>>>>> DECEMBER, 2003 <<<<<<<<<<<<<<<<<<<<<<<<<<
+ TITLE> * ALL COMMENTS TO ADM JR. VIA THE CHARMM WEB SITE: WWW.CHARMM.ORG
+ TITLE> *               PARAMETER SET DISCUSSION FORUM
+ TITLE> *
+ PARMIO> NONBOND, HBOND lists and IMAGE atoms cleared.
+  
+ CHARMM>    close unit 10
+ VCLOSE: Closing unit   10 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    ! Read PHMD input
+ CHARMM>    !-----------------
+ CHARMM>     
+  
+ CHARMM>    stream @phstr
+ Parameter: PHSTR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOPPAR_PHMD_C22_FORAMBER.STR"
+ VOPEN> Attempting to open::/home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str::
+ OPNLGU> Unit 99 opened for READONLY access to /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str
+
+                    INPUT STREAM SWITCHING TO UNIT    99
+ RDTITL> * TOPOLOGY AND PARAMETER INFORMATION FOR PHMD USED WITH C22 FF
+ RDTITL> * FOR BUILDING CHARMM FILES FOR AMBER
+ RDTITL> *
+ Parameter: IN1 <- "" <empty>
+  
+ CHARMM>     
+  
+ CHARMM>    !Robert Harris, 4/13/2020
+ CHARMM>    !
+ CHARMM>    !Removed bonds between hydrogens in TIPP and TIPU so that Amber treats them as not water
+ CHARMM>     
+  
+ CHARMM>    !Wei Chen, 3/30/2015
+ CHARMM>    !
+ CHARMM>    !Topology and parameters were copied from top_all22_prot_cmap_ephmd.inp & par_all22_prot_cmap_ephmd.inp
+ CHARMM>    !
+ CHARMM>    !Hydronium
+ CHARMM>    ! added by Jason Wallace
+ CHARMM>    ! Sagnella and Voth Biophys. J. (1996) 70:2043-2051
+ CHARMM>    !
+ CHARMM>    !Hydroxide
+ CHARMM>    ! added by Wei Chen
+ CHARMM>    ! copy from TIP3
+ CHARMM>    !
+ CHARMM>     
+  
+ CHARMM>    !test "append" to determine if previous toppar files have been read and
+ CHARMM>    !add append to "read rtf card" if true
+ CHARMM>    set nat ?NATC
+ RDCMND substituted energy or value "?NATC" to "87"
+ Parameter: NAT <- "87"
+  
+ CHARMM>    set app append
+ Parameter: APP <- "APPEND"
+  
+ CHARMM>    !We're exploiting what is arguably a bug in the parser. On the left hand side,
+ CHARMM>    !the quotes have priority, so NAT is correctly substituted. On the right hand
+ CHARMM>    !side, the ? has priority and NATC" (sic) is not a valid substitution...
+ CHARMM>    if "@NAT" eq "?NATC" stop
+ Parameter: NAT -> "87"
+ RDCMND: can not substitute energy "?NATC""
+ Comparing ""87"" and ""?NATC"".
+ IF test evaluated as false.  Skipping command
+  
+ CHARMM>     
+  
+ CHARMM>    read rtf card @app
+ Parameter: APP -> "APPEND"
+ MAINIO> Residue topology file being read from unit  99.
+ RDTITL> * TOPOLOGY FOR PHMD
+ RDTITL> *
+  
+ CHARMM>     
+  
+ CHARMM>    read para card flex @app
+ Parameter: APP -> "APPEND"
+
+          PARAMETER FILE BEING READ FROM UNIT 99
+ RDTITL> * PARAMETERS FOR PHMD
+ RDTITL> *
+ PARMIO> NONBOND, HBOND lists and IMAGE atoms cleared.
+  
+ VCLOSE: Closing unit   99 with status "KEEP"
+
+                    RETURNING TO INPUT STREAM     5
+  
+ CHARMM>     
+  
+ CHARMM>    ! Read Water Input
+ CHARMM>    !------------------
+ CHARMM>    stream @watstr
+ Parameter: WATSTR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOPPAR_WATER_IONS.STR"
+ VOPEN> Attempting to open::/home/craigp/software/c36b2/toppar/toppar_water_ions.str::
+ OPNLGU> Unit 99 opened for READONLY access to /home/craigp/software/c36b2/toppar/toppar_water_ions.str
+
+                    INPUT STREAM SWITCHING TO UNIT    99
+ RDTITL> * TOPLOGY AND PARAMETER INFORMATION FOR WATER AND IONS.
+ RDTITL> *
+ Parameter: IN1 <- "" <empty>
+  
+ CHARMM>     
+  
+ CHARMM>    !Testcase
+ CHARMM>    !test_water_ions.inp
+ CHARMM>     
+  
+ CHARMM>    ! IMPORTANT NOTE: this file contains NBFixes between carboxylates and sodium,
+ CHARMM>    ! which will only apply if the main files containing carboxylate atom types
+ CHARMM>    ! have been read in first!
+ CHARMM>     
+  
+ CHARMM>    !references
+ CHARMM>    !
+ CHARMM>    !TIP3P water model
+ CHARMM>    !
+ CHARMM>    !W.L. Jorgensen; J.Chandrasekhar; J.D. Madura; R.W. Impey;
+ CHARMM>    !M.L. Klein; "Comparison of simple potential functions for
+ CHARMM>    !simulating liquid water", J. Chem. Phys. 79 926-935 (1983).
+ CHARMM>    !
+ CHARMM>    !IONS
+ CHARMM>    !
+ CHARMM>    !Ions from Roux and coworkers
+ CHARMM>    !
+ CHARMM>    !Beglov, D. and Roux, B., Finite Representation of an Infinite
+ CHARMM>    !Bulk System: Solvent Boundary Potential for Computer Simulations,
+ CHARMM>    !Journal of Chemical Physics, 1994, 100: 9050-9063
+ CHARMM>    !
+ CHARMM>    !ZINC
+ CHARMM>    !
+ CHARMM>    !Stote, R.H. and Karplus, M. Zinc Binding in Proteins and
+ CHARMM>    !Solution: A Simple but Accurate Nonbonded Representation, PROTEINS:
+ CHARMM>    !Structure, Function, and Genetics 23:12-31 (1995)
+ CHARMM>    !
+ CHARMM>    !NBFIX for sodium-carbonyl oxygen (SOD-O) - added by Wei Chen, Feb. 2013.
+ CHARMM>    !Noskov,J. Mol. Biol. (2008). 377: 804-818.
+ CHARMM>    !
+ CHARMM>     
+  
+ CHARMM>    !test "append" to determine if previous toppar files have been read and
+ CHARMM>    !add append to "read rtf card" if true
+ CHARMM>    set nat ?NATC
+ RDCMND substituted energy or value "?NATC" to "87"
+ Parameter: NAT <- "87"
+  
+ CHARMM>    set app
+ Parameter: APP <- "" <empty>
+  
+ CHARMM>    !We're exploiting what is arguably a bug in the parser. On the left hand side,
+ CHARMM>    !the quotes have priority, so NAT is correctly substituted. On the right hand
+ CHARMM>    !side, the ? has priority and NATC" (sic) is not a valid substitution...
+ CHARMM>    if "@NAT" ne "?NATC" if @nat ne 0 set app append
+ Parameter: NAT -> "87"
+ Parameter: NAT -> "87"
+ RDCMND: can not substitute energy "?NATC""
+ Comparing ""87"" and ""?NATC"".
+ IF test evaluated as true.  Performing command
+ Comparing "87" and "0".
+ IF test evaluated as true.  Performing command
+ Parameter: APP <- "APPEND"
+  
+ CHARMM>     
+  
+ CHARMM>    read rtf card @app
+ Parameter: APP -> "APPEND"
+ MAINIO> Residue topology file being read from unit  99.
+ RDTITL> * TOPOLOGY FOR WATER AND IONS
+ RDTITL> *
+  
+ CHARMM>     
+  
+ CHARMM>    read para card flex @app
+ Parameter: APP -> "APPEND"
+
+          PARAMETER FILE BEING READ FROM UNIT 99
+ RDTITL> * PARAMETERS FOR WATER AND IONS
+ RDTITL> *
+ PARMIO> NONBOND, HBOND lists and IMAGE atoms cleared.
+  
+ CHARMM>     
+  
+ CHARMM>    ! The following section contains NBFixes for sodium interacting with
+ CHARMM>    ! carboxylate oxygens of various CHARMM force fields. It will generate
+ CHARMM>    ! level -1 warnings whenever any of these force fields have not been
+ CHARMM>    ! read prior to the current stream file. Since we don't want to force
+ CHARMM>    ! the user to always read all the force fields, we're suppressing the
+ CHARMM>    ! warnings. The only side effect is that you will have "most severe
+ CHARMM>    ! warning was at level 0" at the end of your output. Also note that
+ CHARMM>    ! the user is responsible for reading the current file last if they
+ CHARMM>    ! want the NBFixes to apply. A more elegant solution would require new
+ CHARMM>    ! features to be added to CHARMM.
+ CHARMM>    ! parallel fix, to avoid duplicated messages in the log
+ CHARMM>    set para
+ Parameter: PARA <- "" <empty>
+  
+ CHARMM>    if ?NUMNODE gt 1 set para node 0
+ RDCMND substituted energy or value "?NUMNODE" to "1"
+ Comparing "1" and "1".
+ IF test evaluated as false.  Skipping command
+  
+ CHARMM>     
+  
+ CHARMM>    set wrn ?WRNLEV
+ RDCMND: can not substitute energy "?WRNLEV"
+ Parameter: WRN <- "?WRNLEV"
+  
+ CHARMM>    ! Some versions of CHARMM don't seem to initialize wrnlev...
+ CHARMM>    if "@WRN" eq "?WRNLEV" set wrn 5
+ Parameter: WRN -> "?WRNLEV"
+ RDCMND: can not substitute energy "?WRNLEV""
+ Comparing ""?WRNLEV"" and ""?WRNLEV"".
+ IF test evaluated as true.  Performing command
+ Parameter: WRN <- "5"
+  
+ CHARMM>    set bom ?bomlev
+ RDCMND substituted energy or value "?BOMLEV" to "0"
+ Parameter: BOM <- "0"
+  
+ CHARMM>    WRNLEV -1 @PARA
+ Parameter: PARA -> "" <empty>
+  
+ CHARMM>    BOMLEV -1 @PARA
+ Parameter: PARA -> "" <empty>
+  
+ CHARMM>    read para card flex append
+
+          PARAMETER FILE BEING READ FROM UNIT 99
+ RDTITL> * NBFIX BETWEEN CARBOXYLATE AND SODIUM
+ RDTITL> *
+ PARMIO> NONBOND, HBOND lists and IMAGE atoms cleared.
+  
+ CHARMM>    BOMLEV @bom @PARA
+ Parameter: BOM -> "0"
+ Parameter: PARA -> "" <empty>
+  
+ CHARMM>    WRNLEV @wrn @PARA
+ Parameter: WRN -> "5"
+ Parameter: PARA -> "" <empty>
+  
+ CHARMM>     
+  
+ CHARMM>    return
+ VCLOSE: Closing unit   99 with status "KEEP"
+
+                    RETURNING TO INPUT STREAM     5
+  
+ CHARMM>     
+  
+ CHARMM>    ! Read Sequence Information
+ CHARMM>    !---------------------------
+ CHARMM>    open unit 10 read form name @{in}.pdb
+ Parameter: IN -> "XWATB_CHARMM"
+ VOPEN> Attempting to open::xwatb_charmm.pdb::
+ OPNLGU> Unit 10 opened for READONLY access to xwatb_charmm.pdb
+  
+ CHARMM>    read sequ pdb unit 10
+ MAINIO> Sequence information being read from unit  10.
+ TITLE>   PDB COORDS
+ TITLE>    DATE:     5/10/24     15:37:44      CREATED BY USER: CRAIGP
+ TITLE>  *
+
+          RESIDUE SEQUENCE --   133 RESIDUES
+          TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3
+          TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3
+          TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3
+          TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3
+          TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3
+          TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3
+          TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3TIP3
+  
+ CHARMM>    close unit 10
+ VCLOSE: Closing unit   10 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    generate TIP3 warn first none last none noangle nodihe setup
+ NO PATCHING WILL BE DONE ON THE FIRST RESIDUE
+ NO PATCHING WILL BE DONE ON THE LAST  RESIDUE
+ GENPSF> Segment   1 has been generated. Its identifier is TIP3.
+ PSFSUM> PSF modified: NONBOND lists and IMAGE atoms cleared.
+ PSFSUM> Summary of the structure file counters :
+         Number of segments      =        1   Number of residues   =      133
+         Number of atoms         =      399   Number of groups     =      133
+         Number of bonds         =      399   Number of angles     =      133
+         Number of dihedrals     =        0   Number of impropers  =        0
+         Number of cross-terms   =        0
+         Number of HB acceptors  =      133   Number of HB donors  =      266
+         Number of NB exclusions =        0   Total charge =    0.00000
+  
+ CHARMM>     
+  
+ CHARMM>    ! Read Coordinate Information
+ CHARMM>    !-----------------------------
+ CHARMM>    open read card unit 10 name @{in}.pdb
+ Parameter: IN -> "XWATB_CHARMM"
+ VOPEN> Attempting to open::xwatb_charmm.pdb::
+ OPNLGU> Unit 10 opened for READONLY access to xwatb_charmm.pdb
+  
+ CHARMM>    read coor pdb unit 10  resid
+  read CHARMM-pdb format
+          SPATIAL COORDINATES BEING READ FROM UNIT 10
+ TITLE>   PDB COORDS
+ TITLE>    DATE:     5/10/24     15:37:44      CREATED BY USER: CRAIGP
+ TITLE>  *
+  
+ CHARMM>    close unit 10
+ VCLOSE: Closing unit   10 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    ! Print Heavy Atoms with Unknown Coordinates
+ CHARMM>    !--------------------------------------------
+ CHARMM>    coor print sele ( .not. INIT ) .and. ( .not. hydrogen ) end
+ SELRPN>      0 atoms have been selected out of    399
+
+      ***** LEVEL  2 WARNING FROM <COORIO> *****
+      ***** ZERO ATOMS SPECIFIED TO WRITE. NO FILE CREATED
+      ******************************************
+      BOMLEV (  0) IS NOT REACHED. WRNLEV IS  5
+
+  
+ CHARMM>    ic para
+  
+ CHARMM>    ic build
+
+      ***** LEVEL  1 WARNING FROM <BILDC> *****
+      ***** BILDC called with a null IC table
+      ******************************************
+      BOMLEV (  0) IS NOT REACHED. WRNLEV IS  5
+
+
+      ***** LEVEL  4 WARNING FROM <GTHBUI> *****
+      ***** Zero selection specified
+      ******************************************
+      BOMLEV (  0) IS NOT REACHED. WRNLEV IS  5
+
+ RDTITL> No title read.
+ RDTITL> No title read.
+ CLOLGU>  *****  WARNING  ***** Attempt to close unit that was not open.
+$$$$$$  New timer profile $$$$$
+ Total time                      0.07 Other:            0.00
+
+                    NORMAL TERMINATION BY NORMAL STOP
+                    MOST SEVERE WARNING WAS AT LEVEL  0
+
+                    $$$$$ JOB ACCOUNTING INFORMATION $$$$$
+                     ELAPSED TIME:     0.07  SECONDS 
+                         CPU TIME:     0.07  SECONDS 

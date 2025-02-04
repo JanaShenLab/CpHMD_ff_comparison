@@ -1,0 +1,108 @@
+* Merge the protein and crystal waters 
+*
+
+! Prep File Variables
+!---------------------
+set protcrda = chaina_addh.crd
+set protpsfa = chaina_addh.psf
+!set protcrdb = chainb_h.crd
+!set protpsfb = chainb_h.psf
+set xwatcrd = xwat_h.crd 
+set xwatpsf = xwat_h.psf
+set outname = prot_xwat
+
+! Prep Parameter Variables
+!--------------------------
+set toppar   = /home/craigp/software/c36b2/toppar
+set top      = @TOPPAR/top_all22_prot.rtf
+set par      = @TOPPAR/par_all22_prot.prm
+set watstr   = @TOPPAR/toppar_water_ions.str
+set phmdstr  = @TOPPAR/toppar_phmd_c22_foramber.str
+
+! Read Topology and Parameter Files 
+!----------------------------------
+open read card unit 10 name @top
+read  rtf card unit 10
+!close unit 10@protpsfb
+
+open read card unit 10 name @par
+read param card flex unit 10
+close unit 10
+
+stream @watstr
+
+stream @phmdstr
+
+! Read CRD and PSF for chain A
+!------------------------------
+open unit 10 card read name @protpsfa 
+read psf card unit 10 
+close unit 10 
+
+open unit 10 card read name @protcrda 
+read coor card unit 10 
+close unit 10 
+
+! Read CRD and PSF for chain B
+!------------------------------
+!open unit 10 card read name @protpsfb
+!read psf card append unit 10 
+!close unit 10 
+
+!open unit 10 card read name @protcrdb
+!read coor card append unit 10 
+!close unit 10 
+
+! Read CRD and PSF for Crystal Waters
+!-------------------------------------
+open unit 10 card read name @xwatpsf 
+read psf card append unit 10 
+close unit 10 
+
+open unit 10 card read name @xwatcrd 
+read coor card append unit 10
+close unit 10 
+
+! Print Heavy Atoms with Unknown Coordinates 
+!-------------------------------------------
+coor print sele ( .not. INIT ) .and. ( .not. hydrogen ) end 
+
+! Write psf, crd and pdb files 
+!-----------------------------
+open write unit 10 card name @{outname}.psf 
+write psf card unit 10 
+* PSF Merge protein and crystal waters
+* 
+
+open write unit 10 card name @{outname}.pdb 
+write coor pdb card unit 10 
+* PDB Merge protein and crystal waters 
+*  
+
+open write unit 10 card name @{outname}.crd 
+write coor card unit 10 
+* CRD Merge protein and crystal waters
+* 
+
+coor stat sele all end 
+open write unit 10 card name @{outname}.str 
+write title unit 10 
+* set ncharge = ?cgtot
+* set xmax = ?xmax
+* set ymax = ?ymax
+* set zmax = ?zmax
+* set xmin = ?xmin
+* set ymin = ?ymin
+* set zmin = ?zmin
+*
+
+stop 
+
+
+
+
+
+
+
+
+

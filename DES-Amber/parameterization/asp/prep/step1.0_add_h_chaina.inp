@@ -1,0 +1,234 @@
+* Add Hydrogens and Minimize Structure
+* 
+
+! Input and Output Names 
+!-----------------------
+
+set in = chaina
+set nameout = chaina_addh
+set segid = PROA 
+
+
+! Parameter Locations
+!--------------------
+
+set toppar = /home/craigp/software/c36b2/toppar
+set top = @TOPPAR/top_all22_prot.rtf
+set par = @TOPPAR/par_all22_prot.prm
+set phstr = @TOPPAR/toppar_phmd_c22_foramber.str
+
+set gbradius = @toppar/gbsw/radius_gbsw.str
+
+random uniform
+faster on
+
+! Read topology and parameter files
+! ---------------------------------
+open unit 1 read form name @top
+read rtf card unit 1
+close unit 1
+
+open unit 1 read form name @par
+read param card flex unit 1
+close unit 1
+
+! Read PHMD input 
+!----------------
+
+stream @phstr
+
+! Read sequence
+! -------------
+open unit 1 read form name @in.pdb
+read sequ pdb unit 1 
+
+generate @segid first ACE last CT2 setup
+
+! Read coordinates
+!-----------------
+
+open unit 1 read form name @in.pdb
+read coor pdb unit 1
+
+
+ic para
+ic build
+
+! Add disulfide bonds
+!--------------------
+
+define ANY sele bynu 1 end
+set res1 = ?selresi         ! get the starting value of resid
+calc reslast = ?selresi + ?nres -1 
+
+set ires @res1
+
+label disu
+define residue sele segid @segid .and. resid @ires show end
+
+if ?selresn .eq. CYS then
+  coor mind sele resi @ires .and. type S* end sele type S* end
+  if ?MINDA1 .lt. ?MINDA2 then
+     if ?mind .lt. 2.5 then   ! <----------- Sulfer to Sulfer distance used to check for disulfide bonds.
+        define res sele segid @segid .and. bynu ?MINDA1 show end
+        set resa = ?SELIRES
+        define res sele segid @segid .and. bynu ?MINDA2 show end
+        set resb = ?SELIRES
+        patch disu @segid @resa @segid @resb
+     endif
+  endif
+endif
+incr ires
+if ires le @reslast goto disu
+
+coor print
+
+ic para
+ic build
+
+coor print
+
+! Build hydrogens
+!----------------
+
+hbuild sele hydrogen end
+
+! GB options
+!-----------
+
+set ctonnb = 16
+set ctofnb = 16
+set cutnb = 20
+
+PRNLev 0
+stream @gbradius
+PRNLev 5
+
+scalar wmain statistics select all end
+define check select (.not type H* ) .and. ( property wmain .eq. 0.0 ) show end
+if ?nsel ne 0  stop       !some heavy atom have a zero radius
+
+set para atom switch cdie vdw vswitch -
+         ctonnb @ctonnb ctofnb @ctofnb cutnb @cutnb
+
+NBOND @para
+
+! Atom Selection Definitions
+!---------------------------
+
+define heavy sele .not. type H* end
+define back sele type C .or. type O .or. type N end
+
+cons harm force 50.0 sele heavy end
+
+mini   sd nstep  50 nprint 10 step 0.005
+mini abnr nstep  10 nprint 10 step 0.005
+
+! patch dummy hydrogen atoms for ASP and GLU
+!-------------------------------------------
+
+define ANY sele bynu 1 end
+set res1 = ?selresi         ! get the starting value of resid
+calc reslast = ?selresi + ?nres -1
+
+set ires @res1
+
+!prnlev -1 !turn off printing
+
+label patch
+ define residue sele segid @segid .and. resid @ires show end
+ if ?selresn eq asp patch aspp2 @segid @ires
+ !if ?selresn eq glu patch glup2 @segid @ires
+ incr ires
+if ires le @reslast goto patch
+
+autogen angles dihed
+
+prnlev 5
+
+hbuild sele segi @segid .and. resn asp .and. type hd* end
+!hbuild sele segi @segid .and. resn glu .and. type he* end 
+
+! Edit Dihedrals for Glupp2 and Aspp2, to maintain syn conformation
+!------------------------------------------------------------------
+
+define ANY sele bynu 1 end
+set res1 = ?selresi         ! get the starting value of resid
+calc reslast = ?selresi + ?nres -1
+
+ic gene
+ic fill
+
+set ires @res1
+
+!prnlev -1
+label edit
+ define residue sele segid @segid .and. resid @ires show end
+ if ?selresn eq asp then
+    IC EDIT
+       DIHE @segid @ires CB @segid @ires CG @segid @ires OD1 @segid @ires HD1 180.0
+       DIHE @segid @ires CB @segid @ires CG @segid @ires OD2 @segid @ires HD2 180.0
+    END
+ endif
+ !if ?selresn eq glu then
+!    IC EDIT
+!       DIHE @segid @ires CG @segid @ires CD @segid @ires OE1 @segid @ires HE1 180.0
+!       DIHE @segid @ires CG @segid @ires CD @segid @ires OE2 @segid @ires HE2 180.0
+!    END
+ !endif
+ incr ires
+if ires le @reslast goto edit
+
+prnlev 5
+
+coor init sele segi @segid .and. resn asp .and. type hd* end
+!coor init sele segi @segid .and. resn glu .and. type he* end
+
+ic build
+
+! GB options
+!------------
+set ctonnb = 16
+set ctofnb = 16
+set cutnb = 20
+
+PRNLev 0
+stream @gbradius
+PRNLev 5
+
+scalar wmain statistics select all end
+define check select (.not type H* ) .and. ( property wmain .eq. 0.0 ) show end
+if ?nsel ne 0  stop       !some heavy atom have a zero radius
+
+set para atom switch cdie vdw vswitch -
+         ctonnb @ctonnb ctofnb @ctofnb cutnb @cutnb
+
+NBOND @para
+
+! Heavy Atom Restraint Hydrogen Position Minimization
+!----------------------------------------------------
+
+cons harm clear
+cons harm force 50.0 sele heavy end
+
+mini   sd nstep  50 nprint 10 step 0.005
+mini abnr nstep  10 nprint 10 step 0.005
+
+
+! Write coordinate file
+!----------------------
+
+open unit 1 write card name @nameout.pdb
+write coor pdb unit 1
+close unit 1
+
+open unit 1 card write name @nameout.psf
+write psf card unit 1
+close unit 1
+
+open unit 1 card write name @nameout.crd
+write coor card unit 1
+close unit 1
+
+stop
+

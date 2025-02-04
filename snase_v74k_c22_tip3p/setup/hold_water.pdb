@@ -1,0 +1,5 @@
+REMARK  PDB COORDS                                                                    
+REMARK   DATE:     5/10/24     15:37:44      CREATED BY USER: craigp                  
+ATOM      1  OH2 TIP3    1      12.812 -21.565   1.623  1.00  0.00      TIP3
+ATOM      2  H1  TIP3    1      12.876 -20.865   0.973  1.00  0.00      TIP3
+ATOM      3  H2  TIP3    1      13.096 -22.352   1.158  1.00  0.00      TIP3

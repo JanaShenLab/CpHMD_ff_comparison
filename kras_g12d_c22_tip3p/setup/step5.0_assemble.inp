@@ -1,0 +1,197 @@
+* Assemble solute, water, and ions
+*
+
+!!!!!!!!!!!!!!!!!!!!!
+!! Global settings !!
+!!!!!!!!!!!!!!!!!!!!!
+
+! Set variables
+! -------------
+set TOPPAR   = /home/craigp/software/c36b2/toppar
+set top      = @TOPPAR/top_all22_prot.rtf    ! C27 protein topology file
+set par      = @TOPPAR/par_all22_prot.prm    ! C27 protein parameter file
+set wation   = @TOPPAR/toppar_water_ions.str      ! C27 water & ions top & par files
+set phmdtp   = @TOPPAR/toppar_phmd_c22_foramber.str   ! C27 CpHMD top & par files
+
+set in       = prot_xwat                            ! segment ID
+set name     = @{in}
+set segi     = PROT
+set boxshape = cubic                                 ! box shape
+set struc    = @{name}                               ! input  *.psf/crd         for solute
+set watbox   = @{struc}_waterbox                    ! input  *.str/crd/prm     for water
+set ion      = @{struc}_ions                        !  input  *.prm/crd         for ion
+set out      = @{struc}_solv_ion_mini               ! output *.psf/crd/pdb/str
+set images   = crystal_image
+
+! NBond options
+! -------------
+! Recommended values for PME-EpHMD, better not change
+! -------------
+set ctonnb = 10.0 ! the radius at which switch function begins to take effect
+set ctofnb = 12.0 ! cut-off radius beyond which interactions are ignored
+set cutnb  = 16.0 ! cut-off radius for non-bonded list
+set cutim  = 16.0 ! cut-off radius for image list
+
+! PME options
+! -----------
+! Grid spacing in each direction should be approximately 1 Angstromg (0.8-1.2)
+! Only powers of 2, 3 and 5 are allowed for grid numbers. More powers of 2, the better
+! -----------
+set fftx = 72
+set ffty = 72
+set fftz = 72
+
+! Read topology and parameter files
+! ---------------------------------
+open unit 1 read card name @top
+read rtf  card unit 1
+close unit 1
+
+open unit 1 read card name @par
+read para card unit 1 flex ! must use flex here
+close unit 1
+
+stream @wation
+
+stream @phmdtp
+
+!!!!!!!!!!!!!!!!!!!!!
+!! Assemble system !!
+!!!!!!!!!!!!!!!!!!!!!
+
+! Read solute
+! -----------
+open unit 1 read card name @struc.psf
+read psf  card unit 1
+close unit 1
+
+open unit 1 read card name @struc.crd
+read coor card unit 1
+close unit 1
+
+! Reorient Solute  - Needed because the water box was recetred at the origin
+!-----------------
+coor orient 
+coor stat sele all end 
+
+! Read water
+! ----------
+stream @watbox.str
+
+open unit 1 read card name @watbox.crd
+read coor card unit 1 append
+close unit 1
+
+! Read ion
+! --------
+stream @ion.prm
+
+if @nposcoion .GT. 0 then
+  read sequ @poscoionid @nposcoion
+  gene @poscoionid setu warn noan nodi
+endif
+
+if @nnegcoion .GT. 0 then
+  read sequ @negcoionid @nnegcoion
+  gene @negcoionid setu warn noan nodi
+
+endif
+
+if @npos .GT. 0 then
+  read sequ @posid @npos
+  gene @posid setu warn noan nodi
+
+endif
+
+if @nneg .GT. 0 then
+  read sequ @negid @nneg
+  gene @negid setu warn noan nodi
+
+endif
+
+open unit 1 read card name @{struc}_ions.crd
+read coor card unit 1 append
+close unit 1
+
+! Delete overlapping waters
+! -------------------------
+delete atom sele .byres. ( ( type OH2 .and. segi SOLV ) -
+                   .and. ( ( .not. hydrogen .and. .not. segi SOLV ) .around. 2.6 ) ) end
+
+! Renumber waters - Including Crystal Waters
+! ------------------------------------------
+join SOLV renumber
+join TIP3 SOLV renumber
+
+! Rename the Segid XWAT
+!----------------------
+RENAME SEGID SOLV sele segid TIP3 end
+
+! Define selections
+! -----------------
+define WAT  sele resn TIP3 end
+define ION  sele resn @posid .or. resn @negid .or. resn @poscoionid .or. resn @negcoionid end
+define SOLV sele WAT .or. ION end
+define SOLU sele .not. SOLV end
+define HEAV sele SOLU .and. .not. hydrogen end
+
+!!!!!!!!!!!!!!!!!!
+!! Set up image !!
+!!!!!!!!!!!!!!!!!!
+
+! Image setup
+! -----------
+stream @watbox.prm ! read lattice parameters
+open unit 1 read card name @images.str
+crystal define @XTLTYPE @A @B @C @ALPHA @BETA @GAMMA
+crystal read card unit 1
+close unit 1
+
+! Image centering
+! ---------------
+image byse xcen 0.0 ycen 0.0 zcen 0.0 sele SOLU end ! center solute  by segment
+image byre xcen 0.0 ycen 0.0 zcen 0.0 sele SOLV end ! center solvent by residue
+
+
+! Write psf, crd, and pdb
+! -----------------------
+open unit 90 write card name @out.psf
+write psf card unit 90
+* Final PSF for @out
+*
+
+open unit 90 write card name @out.crd
+write coor card unit 90
+* Final CRD for @out
+*
+
+open unit 90 write card name @out.pdb
+write coor pdb unit 90
+* Final PDB for @out
+*
+
+! Write system information
+! ------------------------
+coor stat sele WAT .and. type OH2 end
+set Nwater = ?nsel ! number of waters
+open write unit 90 card name @out.str
+write title unit 90
+* set XTLTYPE   = @XTLTYPE
+* set A         = @A
+* set B         = @B
+* set C         = @C
+* set ALPHA     = @ALPHA
+* set BETA      = @BETA
+* set GAMMA     = @GAMMA
+* set Nwater    = @Nwater
+* set nposcoion = @nposcoion
+* set nnegcoion = @nnegcoion
+* set npos      = @npos
+* set nneg      = @nneg
+* set poscoion  = @poscoionid
+* set negcoion  = @negcoionid
+* set posion    = @posid
+* set negion    = @negid
+*
+
+stop

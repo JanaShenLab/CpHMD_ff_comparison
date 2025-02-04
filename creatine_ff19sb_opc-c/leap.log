@@ -1,0 +1,2148 @@
+log started: Mon Jan  6 12:43:57 2025
+
+Log file: ./leap.log
+>> #
+>> # ----- leaprc for loading the ff19SB force field
+>> # ----- NOTE: this is designed for PDB format 3!
+>> #
+>> #	load atom type hybridizations
+>> #
+>> addAtomTypes {
+>> 	{ "H"   "H" "sp3" }
+>> 	{ "HO"  "H" "sp3" }
+>> 	{ "HS"  "H" "sp3" }
+>> 	{ "H1"  "H" "sp3" }
+>> 	{ "H2"  "H" "sp3" }
+>> 	{ "H3"  "H" "sp3" }
+>> 	{ "H4"  "H" "sp3" }
+>> 	{ "H5"  "H" "sp3" }
+>> 	{ "HW"  "H" "sp3" }
+>> 	{ "HC"  "H" "sp3" }
+>> 	{ "HA"  "H" "sp3" }
+>> 	{ "HP"  "H" "sp3" }
+>> 	{ "HZ"  "H" "sp3" }
+>> 	{ "OH"  "O" "sp3" }
+>> 	{ "OS"  "O" "sp3" }
+>> 	{ "O"   "O" "sp2" }
+>> 	{ "O2"  "O" "sp2" }
+>> 	{ "OP"  "O" "sp2" }
+>> 	{ "OW"  "O" "sp3" }
+>> 	{ "CT"  "C" "sp3" }
+>> 	{ "CX"  "C" "sp3" }
+>> 	{ "XC"  "C" "sp3" }
+>> 	{ "C8"  "C" "sp3" }
+>> 	{ "2C"  "C" "sp3" }
+>> 	{ "3C"  "C" "sp3" }
+>> 	{ "CH"  "C" "sp3" }
+>> 	{ "CS"  "C" "sp2" }
+>> 	{ "C"   "C" "sp2" }
+>> 	{ "CO"   "C" "sp2" }
+>> 	{ "C*"  "C" "sp2" }
+>> 	{ "CA"  "C" "sp2" }
+>> 	{ "CB"  "C" "sp2" }
+>> 	{ "CC"  "C" "sp2" }
+>> 	{ "CN"  "C" "sp2" }
+>> 	{ "CM"  "C" "sp2" }
+>> 	{ "CK"  "C" "sp2" }
+>> 	{ "CQ"  "C" "sp2" }
+>> 	{ "CD"  "C" "sp2" }
+>> 	{ "C5"  "C" "sp2" }
+>> 	{ "C4"  "C" "sp2" }
+>> 	{ "CP"  "C" "sp2" }
+>> 	{ "CI"  "C" "sp3" }
+>> 	{ "CJ"  "C" "sp2" }
+>> 	{ "CW"  "C" "sp2" }
+>> 	{ "CV"  "C" "sp2" }
+>> 	{ "CR"  "C" "sp2" }
+>> 	{ "CA"  "C" "sp2" }
+>> 	{ "CY"  "C" "sp2" }
+>> 	{ "C0"  "Ca" "sp3" }
+>> 	{ "MG"  "Mg" "sp3" }
+>> 	{ "N"   "N" "sp2" }
+>> 	{ "NA"  "N" "sp2" }
+>> 	{ "N2"  "N" "sp2" }
+>> 	{ "N*"  "N" "sp2" }
+>> 	{ "NP"  "N" "sp2" }
+>> 	{ "NQ"  "N" "sp2" }
+>> 	{ "NB"  "N" "sp2" }
+>> 	{ "NC"  "N" "sp2" }
+>> 	{ "NT"  "N" "sp3" }
+>> 	{ "NY"  "N" "sp2" }
+>> 	{ "N3"  "N" "sp3" }
+>> 	{ "S"   "S" "sp3" }
+>> 	{ "SH"  "S" "sp3" }
+>> 	{ "P"   "P" "sp3" }
+>> 	{ "LP"  ""  "sp3" }
+>> 	{ "EP"  ""  "sp3" }
+>> 	{ "F"   "F" "sp3" }
+>> 	{ "Cl"  "Cl" "sp3" }
+>> 	{ "Br"  "Br" "sp3" }
+>> 	{ "I"   "I"  "sp3" }
+>> }
+>> #
+>> #	Load the main parameter set.
+>> #
+>> set default cmap on
+>> parm19 = loadamberparams parm19.dat
+Loading parameters: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/parm/parm19.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA + ff19SB
+(UNKNOWN ATOM TYPE: Zn)
+(UNKNOWN ATOM TYPE: EP)
+>> frcmod19SB = loadamberparams frcmod.ff19SB
+Loading parameters: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/parm/frcmod.ff19SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff19SB AA-specific backbone CMAPs for protein 07/25/2019
+>> #
+>> #	Load main chain and terminating amino acid libraries
+>> #
+>> loadOff amino19.lib
+Loading library: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/lib/amino19.lib
+Loading: ALA
+Loading: ARG
+Loading: ASH
+Loading: ASN
+Loading: ASP
+Loading: CYM
+Loading: CYS
+Loading: CYX
+Loading: GLH
+Loading: GLN
+Loading: GLU
+Loading: GLY
+Loading: HID
+Loading: HIE
+Loading: HIP
+Loading: HYP
+Loading: ILE
+Loading: LEU
+Loading: LYN
+Loading: LYS
+Loading: MET
+Loading: PHE
+Loading: PRO
+Loading: SER
+Loading: THR
+Loading: TRP
+Loading: TYR
+Loading: VAL
+>> loadOff aminoct12.lib
+Loading library: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/lib/aminoct12.lib
+Loading: CALA
+Loading: CARG
+Loading: CASN
+Loading: CASP
+Loading: CCYS
+Loading: CCYX
+Loading: CGLN
+Loading: CGLU
+Loading: CGLY
+Loading: CHID
+Loading: CHIE
+Loading: CHIP
+Loading: CHYP
+Loading: CILE
+Loading: CLEU
+Loading: CLYS
+Loading: CMET
+Loading: CPHE
+Loading: CPRO
+Loading: CSER
+Loading: CTHR
+Loading: CTRP
+Loading: CTYR
+Loading: CVAL
+Loading: NHE
+Loading: NME
+>> loadOff aminont12.lib
+Loading library: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/lib/aminont12.lib
+Loading: ACE
+Loading: NALA
+Loading: NARG
+Loading: NASN
+Loading: NASP
+Loading: NCYS
+Loading: NCYX
+Loading: NGLN
+Loading: NGLU
+Loading: NGLY
+Loading: NHID
+Loading: NHIE
+Loading: NHIP
+Loading: NILE
+Loading: NLEU
+Loading: NLYS
+Loading: NMET
+Loading: NPHE
+Loading: NPRO
+Loading: NSER
+Loading: NTHR
+Loading: NTRP
+Loading: NTYR
+Loading: NVAL
+>> 
+>> #
+>> #	Define the PDB name map for the amino acids
+>> #
+>> addPdbResMap {
+>>   { 0 "HYP" "NHYP" } { 1 "HYP" "CHYP" }
+>>   { 0 "ALA" "NALA" } { 1 "ALA" "CALA" }
+>>   { 0 "ARG" "NARG" } { 1 "ARG" "CARG" }
+>>   { 0 "ASN" "NASN" } { 1 "ASN" "CASN" }
+>>   { 0 "ASP" "NASP" } { 1 "ASP" "CASP" }
+>>   { 0 "CYS" "NCYS" } { 1 "CYS" "CCYS" }
+>>   { 0 "CYX" "NCYX" } { 1 "CYX" "CCYX" }
+>>   { 0 "GLN" "NGLN" } { 1 "GLN" "CGLN" }
+>>   { 0 "GLU" "NGLU" } { 1 "GLU" "CGLU" }
+>>   { 0 "GLY" "NGLY" } { 1 "GLY" "CGLY" }
+>>   { 0 "HID" "NHID" } { 1 "HID" "CHID" }
+>>   { 0 "HIE" "NHIE" } { 1 "HIE" "CHIE" }
+>>   { 0 "HIP" "NHIP" } { 1 "HIP" "CHIP" }
+>>   { 0 "ILE" "NILE" } { 1 "ILE" "CILE" }
+>>   { 0 "LEU" "NLEU" } { 1 "LEU" "CLEU" }
+>>   { 0 "LYS" "NLYS" } { 1 "LYS" "CLYS" }
+>>   { 0 "MET" "NMET" } { 1 "MET" "CMET" }
+>>   { 0 "PHE" "NPHE" } { 1 "PHE" "CPHE" }
+>>   { 0 "PRO" "NPRO" } { 1 "PRO" "CPRO" }
+>>   { 0 "SER" "NSER" } { 1 "SER" "CSER" }
+>>   { 0 "THR" "NTHR" } { 1 "THR" "CTHR" }
+>>   { 0 "TRP" "NTRP" } { 1 "TRP" "CTRP" }
+>>   { 0 "TYR" "NTYR" } { 1 "TYR" "CTYR" }
+>>   { 0 "VAL" "NVAL" } { 1 "VAL" "CVAL" }
+>>   { 0 "HIS" "NHIS" } { 1 "HIS" "CHIS" }
+>> }
+>> 
+>> #
+>> # assume that most often proteins use HIE
+>> #
+>> NHIS = NHIE
+>> HIS = HIE
+>> CHIS = CHIE
+> 
+> source leaprc.water.opc
+----- Source: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/cmd/leaprc.water.opc
+----- Source of /home/craigp/anaconda3/envs/AmberTools23/dat/leap/cmd/leaprc.water.opc done
+>> #
+>> #  Load OPC water model and ions for OPC + Li/Merz ion parameters
+>> #  (-1 to +4, 12-6 normal usage set)
+>> # 
+>> addAtomTypes {
+>> 	{ "F-"   "F" "sp3" }
+>> 	{ "Cl-"  "Cl" "sp3" }
+>> 	{ "Br-"  "Br" "sp3" }
+>> 	{ "I-"   "I"  "sp3" }
+>> 	{ "Li+"  "Li"  "sp3" }
+>> 	{ "Na+"  "Na"  "sp3" }
+>> 	{ "K+"  "K"  "sp3" }
+>> 	{ "Rb+"  "Rb"  "sp3" }
+>> 	{ "Cs+"  "Cs"  "sp3" }
+>> 	{ "Mg+"  "Mg"  "sp3" }
+>>     { "Tl+"  "Tl"  "sp3" }
+>>     { "Cu+"  "Cu"  "sp3" }
+>>     { "Ag+"  "Ag"  "sp3" }
+>>     { "Be2+" "Be"  "sp3" }
+>>     { "Cu2+" "Cu"  "sp3" }
+>>     { "Ni2+" "Ni"  "sp3" }
+>>     { "Pt2+" "Pt"  "sp3" }
+>>     { "Zn2+" "Zn"  "sp3" }
+>>     { "Co2+" "Co"  "sp3" }
+>>     { "Pd2+" "Pd"  "sp3" }
+>>     { "Ag2+" "Ag"  "sp3" }
+>>     { "Cr2+" "Cr"  "sp3" }
+>>     { "Fe2+" "Fe"  "sp3" }
+>>     { "Mg2+" "Mg"  "sp3" }
+>>     { "V2+"  "V"   "sp3" }
+>>     { "Mn2+" "Mn"  "sp3" }
+>>     { "Hg2+" "Hg"  "sp3" }
+>>     { "Cd2+" "Cd"  "sp3" }
+>>     { "Yb2+" "Yb"  "sp3" }
+>>     { "Ca2+" "Ca"  "sp3" }
+>>     { "Sn2+" "Sn"  "sp3" }
+>>     { "Pb2+" "Pb"  "sp3" }
+>>     { "Eu2+" "Eu"  "sp3" }
+>>     { "Sr2+" "Sr"  "sp3" }
+>>     { "Sm2+" "Sm"  "sp3" }
+>>     { "Ba2+" "Ba"  "sp3" }
+>>     { "Ra2+" "Ra"  "sp3" }
+>>     { "Al3+" "Al"  "sp3" }
+>>     { "Fe3+" "Fe"  "sp3" }
+>>     { "Cr3+" "Cr"  "sp3" }
+>>     { "In3+" "In"  "sp3" }
+>>     { "Tl3+" "Tl"  "sp3" }
+>>     { "Y3+"  "Y"   "sp3" }
+>>     { "La3+" "La"  "sp3" }
+>>     { "Ce3+" "Ce"  "sp3" }
+>>     { "Pr3+" "Pr"  "sp3" }
+>>     { "Nd3+" "Nd"  "sp3" }
+>>     { "Sm3+" "Sm"  "sp3" }
+>>     { "Eu3+" "Eu"  "sp3" }
+>>     { "Gd3+" "Gd"  "sp3" }
+>>     { "Tb3+" "Tb"  "sp3" }
+>>     { "Dy3+" "Dy"  "sp3" }
+>>     { "Er3+" "Er"  "sp3" }
+>>     { "Tm3+" "Tm"  "sp3" }
+>>     { "Lu3+" "Lu"  "sp3" }
+>>     { "Hf4+" "Hf"  "sp3" }
+>>     { "Zr4+" "Zr"  "sp3" }
+>>     { "Ce4+" "Ce"  "sp3" }
+>>     { "U4+"  "U"   "sp3" }
+>>     { "Pu4+" "Pu"  "sp3" }
+>>     { "Th4+" "Th"  "sp3" }
+>>     { "OW"   "O"   "sp3" }
+>>     { "HW"   "H"   "sp3" }
+>>     { "EP"   ""    "sp3" }
+>> }
+>> loadOff atomic_ions.lib
+Loading library: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/lib/atomic_ions.lib
+Loading: AG
+Loading: AL
+Loading: Ag
+Loading: BA
+Loading: BR
+Loading: Be
+Loading: CA
+Loading: CD
+Loading: CE
+Loading: CL
+Loading: CO
+Loading: CR
+Loading: CS
+Loading: CU
+Loading: CU1
+Loading: Ce
+Loading: Cl-
+Loading: Cr
+Loading: Dy
+Loading: EU
+Loading: EU3
+Loading: Er
+Loading: F
+Loading: FE
+Loading: FE2
+Loading: GD3
+Loading: H3O+
+Loading: HE+
+Loading: HG
+Loading: HZ+
+Loading: Hf
+Loading: IN
+Loading: IOD
+Loading: K
+Loading: K+
+Loading: LA
+Loading: LI
+Loading: LU
+Loading: MG
+Loading: MN
+Loading: NA
+Loading: NH4
+Loading: NI
+Loading: Na+
+Loading: Nd
+Loading: PB
+Loading: PD
+Loading: PR
+Loading: PT
+Loading: Pu
+Loading: RB
+Loading: Ra
+Loading: SM
+Loading: SR
+Loading: Sm
+Loading: Sn
+Loading: TB
+Loading: TL
+Loading: Th
+Loading: Tl
+Loading: Tm
+Loading: U4+
+Loading: V2+
+Loading: Y
+Loading: YB2
+Loading: ZN
+Loading: Zr
+>> loadOff solvents.lib
+Loading library: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/lib/solvents.lib
+Loading: CHCL3BOX
+Loading: DC4
+Loading: FB3
+Loading: FB3BOX
+Loading: FB4
+Loading: FB4BOX
+Loading: MEOHBOX
+Loading: NMABOX
+Loading: O3P
+Loading: OP3
+Loading: OPC
+Loading: OPC3BOX
+Loading: OPC3POLBOX
+Loading: OPCBOX
+Loading: PL3
+Loading: POL3BOX
+Loading: QSPCFWBOX
+Loading: SPC
+Loading: SPCBOX
+Loading: SPCFWBOX
+Loading: SPF
+Loading: SPG
+Loading: T4E
+Loading: TIP3PBOX
+Loading: TIP3PFBOX
+Loading: TIP4PBOX
+Loading: TIP4PEWBOX
+Loading: TIP5PBOX
+Loading: TP3
+Loading: TP4
+Loading: TP5
+Loading: TPF
+>> HOH = OPC
+>> WAT = OPC
+>> loadAmberParams frcmod.opc
+Loading parameters: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/parm/frcmod.opc
+Reading force field modification type file (frcmod)
+Reading title:
+Parameters for OPC water (JPCL, 2014, 5 (21), pp 3863-3871)
+(UNKNOWN ATOM TYPE: EP)
+>> loadAmberParams frcmod.ionslm_126_opc
+Loading parameters: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/parm/frcmod.ionslm_126_opc
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of atomic ions for the OPC water model (12-6 set)
+>> 
+> 
+> set default PBradii mbondi
+Using modified Bondi radii
+> loadoff CysS-.off
+Loading library: ./CysS-.off
+Loading: CY2
+> loadoff CysSO-.off
+Loading library: ./CysSO-.off
+Loading: MSO
+> loadoff CysSOH.off
+Loading library: ./CysSOH.off
+Loading: SOH
+> loadoff CysSS-.off
+Loading library: ./CysSS-.off
+Loading: MSS
+> loadoff CysSSH.off
+Loading library: ./CysSSH.off
+Loading: SSH
+> loadamberparams CysS-.frcmod
+Loading parameters: ./CysS-.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Force field parameters from trip.prmtop
+> loadamberparams CysSO-.frcmod
+Loading parameters: ./CysSO-.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Force field parameters from MSO.prmtop
+> loadamberparams CysSOH.frcmod
+Loading parameters: ./CysSOH.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Force field parameters from SOH.prmtop
+> loadamberparams CysSS-.frcmod
+Loading parameters: ./CysSS-.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Force field parameters from MSS.prmtop
+> loadamberparams CysSSH.frcmod
+Loading parameters: ./CysSSH.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Force field parameters from SSH.prmtop
+> model = loadpdb 1i0e_cphmd.pdb
+Loading PDB file: ./1i0e_cphmd.pdb
+Matching PDB residue names to LEaP variables.
+
+Warning: Unknown residue: GL2   number: 10   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 11   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 12   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 15   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 30   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 37   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 39   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 47   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 48   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 55   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 71   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 72   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 73   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 76   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 80   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 83   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 88   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 97   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 102   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 106   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 112   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 113   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 115   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 143   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 148   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 153   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 161   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 174   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 176   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 182   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 183   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 188   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 203   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 206   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 214   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 224   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 225   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 226   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 234   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 241   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 254   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 255   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 302   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 303   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 319   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 324   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 330   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 332   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 339   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 346   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 348   type: Nonterminal
+
+Warning: Unknown residue: GL2   number: 352   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 358   type: Nonterminal
+
+Warning: Unknown residue: AS2   number: 359   type: Nonterminal
+Creating new UNIT for residue: GL2 sequence: 11
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 11>
+Created a new atom named: H within residue: .R<GL2 11>
+Created a new atom named: CA within residue: .R<GL2 11>
+Created a new atom named: HA within residue: .R<GL2 11>
+Created a new atom named: CB within residue: .R<GL2 11>
+Created a new atom named: HB2 within residue: .R<GL2 11>
+Created a new atom named: HB3 within residue: .R<GL2 11>
+Created a new atom named: CG within residue: .R<GL2 11>
+Created a new atom named: HG2 within residue: .R<GL2 11>
+Created a new atom named: HG3 within residue: .R<GL2 11>
+Created a new atom named: CD within residue: .R<GL2 11>
+Created a new atom named: OE1 within residue: .R<GL2 11>
+Created a new atom named: OE2 within residue: .R<GL2 11>
+Created a new atom named: HE2 within residue: .R<GL2 11>
+Created a new atom named: C within residue: .R<GL2 11>
+Created a new atom named: O within residue: .R<GL2 11>
+Created a new atom named: HE1 within residue: .R<GL2 11>
+Creating new UNIT for residue: GL2 sequence: 12
+Starting new chain with 
+Created a new atom named: N within residue: .R<GL2 12>
+Created a new atom named: H within residue: .R<GL2 12>
+Created a new atom named: CA within residue: .R<GL2 12>
+Created a new atom named: HA within residue: .R<GL2 12>
+Created a new atom named: CB within residue: .R<GL2 12>
+Created a new atom named: HB2 within residue: .R<GL2 12>
+Created a new atom named: HB3 within residue: .R<GL2 12>
+Created a new atom named: CG within residue: .R<GL2 12>
+Created a new atom named: HG2 within residue: .R<GL2 12>
+Created a new atom named: HG3 within residue: .R<GL2 12>
+Created a new atom named: CD within residue: .R<GL2 12>
+Created a new atom named: OE1 within residue: .R<GL2 12>
+Created a new atom named: OE2 within residue: .R<GL2 12>
+Created a new atom named: HE2 within residue: .R<GL2 12>
+Created a new atom named: C within residue: .R<GL2 12>
+Created a new atom named: O within residue: .R<GL2 12>
+Created a new atom named: HE1 within residue: .R<GL2 12>
+Creating new UNIT for residue: GL2 sequence: 13
+Starting new chain with 
+Created a new atom named: N within residue: .R<GL2 13>
+Created a new atom named: H within residue: .R<GL2 13>
+Created a new atom named: CA within residue: .R<GL2 13>
+Created a new atom named: HA within residue: .R<GL2 13>
+Created a new atom named: CB within residue: .R<GL2 13>
+Created a new atom named: HB2 within residue: .R<GL2 13>
+Created a new atom named: HB3 within residue: .R<GL2 13>
+Created a new atom named: CG within residue: .R<GL2 13>
+Created a new atom named: HG2 within residue: .R<GL2 13>
+Created a new atom named: HG3 within residue: .R<GL2 13>
+Created a new atom named: CD within residue: .R<GL2 13>
+Created a new atom named: OE1 within residue: .R<GL2 13>
+Created a new atom named: OE2 within residue: .R<GL2 13>
+Created a new atom named: HE2 within residue: .R<GL2 13>
+Created a new atom named: C within residue: .R<GL2 13>
+Created a new atom named: O within residue: .R<GL2 13>
+Created a new atom named: HE1 within residue: .R<GL2 13>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 16
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 16>
+Created a new atom named: H within residue: .R<AS2 16>
+Created a new atom named: CA within residue: .R<AS2 16>
+Created a new atom named: HA within residue: .R<AS2 16>
+Created a new atom named: CB within residue: .R<AS2 16>
+Created a new atom named: HB2 within residue: .R<AS2 16>
+Created a new atom named: HB3 within residue: .R<AS2 16>
+Created a new atom named: CG within residue: .R<AS2 16>
+Created a new atom named: OD1 within residue: .R<AS2 16>
+Created a new atom named: OD2 within residue: .R<AS2 16>
+Created a new atom named: HD2 within residue: .R<AS2 16>
+Created a new atom named: C within residue: .R<AS2 16>
+Created a new atom named: O within residue: .R<AS2 16>
+Created a new atom named: HD1 within residue: .R<AS2 16>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 31
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 31>
+Created a new atom named: H within residue: .R<GL2 31>
+Created a new atom named: CA within residue: .R<GL2 31>
+Created a new atom named: HA within residue: .R<GL2 31>
+Created a new atom named: CB within residue: .R<GL2 31>
+Created a new atom named: HB2 within residue: .R<GL2 31>
+Created a new atom named: HB3 within residue: .R<GL2 31>
+Created a new atom named: CG within residue: .R<GL2 31>
+Created a new atom named: HG2 within residue: .R<GL2 31>
+Created a new atom named: HG3 within residue: .R<GL2 31>
+Created a new atom named: CD within residue: .R<GL2 31>
+Created a new atom named: OE1 within residue: .R<GL2 31>
+Created a new atom named: OE2 within residue: .R<GL2 31>
+Created a new atom named: HE2 within residue: .R<GL2 31>
+Created a new atom named: C within residue: .R<GL2 31>
+Created a new atom named: O within residue: .R<GL2 31>
+Created a new atom named: HE1 within residue: .R<GL2 31>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 38
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 38>
+Created a new atom named: H within residue: .R<AS2 38>
+Created a new atom named: CA within residue: .R<AS2 38>
+Created a new atom named: HA within residue: .R<AS2 38>
+Created a new atom named: CB within residue: .R<AS2 38>
+Created a new atom named: HB2 within residue: .R<AS2 38>
+Created a new atom named: HB3 within residue: .R<AS2 38>
+Created a new atom named: CG within residue: .R<AS2 38>
+Created a new atom named: OD1 within residue: .R<AS2 38>
+Created a new atom named: OD2 within residue: .R<AS2 38>
+Created a new atom named: HD2 within residue: .R<AS2 38>
+Created a new atom named: C within residue: .R<AS2 38>
+Created a new atom named: O within residue: .R<AS2 38>
+Created a new atom named: HD1 within residue: .R<AS2 38>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 40
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 40>
+Created a new atom named: H within residue: .R<GL2 40>
+Created a new atom named: CA within residue: .R<GL2 40>
+Created a new atom named: HA within residue: .R<GL2 40>
+Created a new atom named: CB within residue: .R<GL2 40>
+Created a new atom named: HB2 within residue: .R<GL2 40>
+Created a new atom named: HB3 within residue: .R<GL2 40>
+Created a new atom named: CG within residue: .R<GL2 40>
+Created a new atom named: HG2 within residue: .R<GL2 40>
+Created a new atom named: HG3 within residue: .R<GL2 40>
+Created a new atom named: CD within residue: .R<GL2 40>
+Created a new atom named: OE1 within residue: .R<GL2 40>
+Created a new atom named: OE2 within residue: .R<GL2 40>
+Created a new atom named: HE2 within residue: .R<GL2 40>
+Created a new atom named: C within residue: .R<GL2 40>
+Created a new atom named: O within residue: .R<GL2 40>
+Created a new atom named: HE1 within residue: .R<GL2 40>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 48
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 48>
+Created a new atom named: H within residue: .R<AS2 48>
+Created a new atom named: CA within residue: .R<AS2 48>
+Created a new atom named: HA within residue: .R<AS2 48>
+Created a new atom named: CB within residue: .R<AS2 48>
+Created a new atom named: HB2 within residue: .R<AS2 48>
+Created a new atom named: HB3 within residue: .R<AS2 48>
+Created a new atom named: CG within residue: .R<AS2 48>
+Created a new atom named: OD1 within residue: .R<AS2 48>
+Created a new atom named: OD2 within residue: .R<AS2 48>
+Created a new atom named: HD2 within residue: .R<AS2 48>
+Created a new atom named: C within residue: .R<AS2 48>
+Created a new atom named: O within residue: .R<AS2 48>
+Created a new atom named: HD1 within residue: .R<AS2 48>
+Creating new UNIT for residue: AS2 sequence: 49
+Starting new chain with 
+Created a new atom named: N within residue: .R<AS2 49>
+Created a new atom named: H within residue: .R<AS2 49>
+Created a new atom named: CA within residue: .R<AS2 49>
+Created a new atom named: HA within residue: .R<AS2 49>
+Created a new atom named: CB within residue: .R<AS2 49>
+Created a new atom named: HB2 within residue: .R<AS2 49>
+Created a new atom named: HB3 within residue: .R<AS2 49>
+Created a new atom named: CG within residue: .R<AS2 49>
+Created a new atom named: OD1 within residue: .R<AS2 49>
+Created a new atom named: OD2 within residue: .R<AS2 49>
+Created a new atom named: HD2 within residue: .R<AS2 49>
+Created a new atom named: C within residue: .R<AS2 49>
+Created a new atom named: O within residue: .R<AS2 49>
+Created a new atom named: HD1 within residue: .R<AS2 49>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 56
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 56>
+Created a new atom named: H within residue: .R<AS2 56>
+Created a new atom named: CA within residue: .R<AS2 56>
+Created a new atom named: HA within residue: .R<AS2 56>
+Created a new atom named: CB within residue: .R<AS2 56>
+Created a new atom named: HB2 within residue: .R<AS2 56>
+Created a new atom named: HB3 within residue: .R<AS2 56>
+Created a new atom named: CG within residue: .R<AS2 56>
+Created a new atom named: OD1 within residue: .R<AS2 56>
+Created a new atom named: OD2 within residue: .R<AS2 56>
+Created a new atom named: HD2 within residue: .R<AS2 56>
+Created a new atom named: C within residue: .R<AS2 56>
+Created a new atom named: O within residue: .R<AS2 56>
+Created a new atom named: HD1 within residue: .R<AS2 56>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 72
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 72>
+Created a new atom named: H within residue: .R<AS2 72>
+Created a new atom named: CA within residue: .R<AS2 72>
+Created a new atom named: HA within residue: .R<AS2 72>
+Created a new atom named: CB within residue: .R<AS2 72>
+Created a new atom named: HB2 within residue: .R<AS2 72>
+Created a new atom named: HB3 within residue: .R<AS2 72>
+Created a new atom named: CG within residue: .R<AS2 72>
+Created a new atom named: OD1 within residue: .R<AS2 72>
+Created a new atom named: OD2 within residue: .R<AS2 72>
+Created a new atom named: HD2 within residue: .R<AS2 72>
+Created a new atom named: C within residue: .R<AS2 72>
+Created a new atom named: O within residue: .R<AS2 72>
+Created a new atom named: HD1 within residue: .R<AS2 72>
+Creating new UNIT for residue: GL2 sequence: 73
+Starting new chain with 
+Created a new atom named: N within residue: .R<GL2 73>
+Created a new atom named: H within residue: .R<GL2 73>
+Created a new atom named: CA within residue: .R<GL2 73>
+Created a new atom named: HA within residue: .R<GL2 73>
+Created a new atom named: CB within residue: .R<GL2 73>
+Created a new atom named: HB2 within residue: .R<GL2 73>
+Created a new atom named: HB3 within residue: .R<GL2 73>
+Created a new atom named: CG within residue: .R<GL2 73>
+Created a new atom named: HG2 within residue: .R<GL2 73>
+Created a new atom named: HG3 within residue: .R<GL2 73>
+Created a new atom named: CD within residue: .R<GL2 73>
+Created a new atom named: OE1 within residue: .R<GL2 73>
+Created a new atom named: OE2 within residue: .R<GL2 73>
+Created a new atom named: HE2 within residue: .R<GL2 73>
+Created a new atom named: C within residue: .R<GL2 73>
+Created a new atom named: O within residue: .R<GL2 73>
+Created a new atom named: HE1 within residue: .R<GL2 73>
+Creating new UNIT for residue: GL2 sequence: 74
+Starting new chain with 
+Created a new atom named: N within residue: .R<GL2 74>
+Created a new atom named: H within residue: .R<GL2 74>
+Created a new atom named: CA within residue: .R<GL2 74>
+Created a new atom named: HA within residue: .R<GL2 74>
+Created a new atom named: CB within residue: .R<GL2 74>
+Created a new atom named: HB2 within residue: .R<GL2 74>
+Created a new atom named: HB3 within residue: .R<GL2 74>
+Created a new atom named: CG within residue: .R<GL2 74>
+Created a new atom named: HG2 within residue: .R<GL2 74>
+Created a new atom named: HG3 within residue: .R<GL2 74>
+Created a new atom named: CD within residue: .R<GL2 74>
+Created a new atom named: OE1 within residue: .R<GL2 74>
+Created a new atom named: OE2 within residue: .R<GL2 74>
+Created a new atom named: HE2 within residue: .R<GL2 74>
+Created a new atom named: C within residue: .R<GL2 74>
+Created a new atom named: O within residue: .R<GL2 74>
+Created a new atom named: HE1 within residue: .R<GL2 74>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 77
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 77>
+Created a new atom named: H within residue: .R<GL2 77>
+Created a new atom named: CA within residue: .R<GL2 77>
+Created a new atom named: HA within residue: .R<GL2 77>
+Created a new atom named: CB within residue: .R<GL2 77>
+Created a new atom named: HB2 within residue: .R<GL2 77>
+Created a new atom named: HB3 within residue: .R<GL2 77>
+Created a new atom named: CG within residue: .R<GL2 77>
+Created a new atom named: HG2 within residue: .R<GL2 77>
+Created a new atom named: HG3 within residue: .R<GL2 77>
+Created a new atom named: CD within residue: .R<GL2 77>
+Created a new atom named: OE1 within residue: .R<GL2 77>
+Created a new atom named: OE2 within residue: .R<GL2 77>
+Created a new atom named: HE2 within residue: .R<GL2 77>
+Created a new atom named: C within residue: .R<GL2 77>
+Created a new atom named: O within residue: .R<GL2 77>
+Created a new atom named: HE1 within residue: .R<GL2 77>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 81
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 81>
+Created a new atom named: H within residue: .R<GL2 81>
+Created a new atom named: CA within residue: .R<GL2 81>
+Created a new atom named: HA within residue: .R<GL2 81>
+Created a new atom named: CB within residue: .R<GL2 81>
+Created a new atom named: HB2 within residue: .R<GL2 81>
+Created a new atom named: HB3 within residue: .R<GL2 81>
+Created a new atom named: CG within residue: .R<GL2 81>
+Created a new atom named: HG2 within residue: .R<GL2 81>
+Created a new atom named: HG3 within residue: .R<GL2 81>
+Created a new atom named: CD within residue: .R<GL2 81>
+Created a new atom named: OE1 within residue: .R<GL2 81>
+Created a new atom named: OE2 within residue: .R<GL2 81>
+Created a new atom named: HE2 within residue: .R<GL2 81>
+Created a new atom named: C within residue: .R<GL2 81>
+Created a new atom named: O within residue: .R<GL2 81>
+Created a new atom named: HE1 within residue: .R<GL2 81>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 84
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 84>
+Created a new atom named: H within residue: .R<AS2 84>
+Created a new atom named: CA within residue: .R<AS2 84>
+Created a new atom named: HA within residue: .R<AS2 84>
+Created a new atom named: CB within residue: .R<AS2 84>
+Created a new atom named: HB2 within residue: .R<AS2 84>
+Created a new atom named: HB3 within residue: .R<AS2 84>
+Created a new atom named: CG within residue: .R<AS2 84>
+Created a new atom named: OD1 within residue: .R<AS2 84>
+Created a new atom named: OD2 within residue: .R<AS2 84>
+Created a new atom named: HD2 within residue: .R<AS2 84>
+Created a new atom named: C within residue: .R<AS2 84>
+Created a new atom named: O within residue: .R<AS2 84>
+Created a new atom named: HD1 within residue: .R<AS2 84>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 89
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 89>
+Created a new atom named: H within residue: .R<AS2 89>
+Created a new atom named: CA within residue: .R<AS2 89>
+Created a new atom named: HA within residue: .R<AS2 89>
+Created a new atom named: CB within residue: .R<AS2 89>
+Created a new atom named: HB2 within residue: .R<AS2 89>
+Created a new atom named: HB3 within residue: .R<AS2 89>
+Created a new atom named: CG within residue: .R<AS2 89>
+Created a new atom named: OD1 within residue: .R<AS2 89>
+Created a new atom named: OD2 within residue: .R<AS2 89>
+Created a new atom named: HD2 within residue: .R<AS2 89>
+Created a new atom named: C within residue: .R<AS2 89>
+Created a new atom named: O within residue: .R<AS2 89>
+Created a new atom named: HD1 within residue: .R<AS2 89>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 98
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 98>
+Created a new atom named: H within residue: .R<AS2 98>
+Created a new atom named: CA within residue: .R<AS2 98>
+Created a new atom named: HA within residue: .R<AS2 98>
+Created a new atom named: CB within residue: .R<AS2 98>
+Created a new atom named: HB2 within residue: .R<AS2 98>
+Created a new atom named: HB3 within residue: .R<AS2 98>
+Created a new atom named: CG within residue: .R<AS2 98>
+Created a new atom named: OD1 within residue: .R<AS2 98>
+Created a new atom named: OD2 within residue: .R<AS2 98>
+Created a new atom named: HD2 within residue: .R<AS2 98>
+Created a new atom named: C within residue: .R<AS2 98>
+Created a new atom named: O within residue: .R<AS2 98>
+Created a new atom named: HD1 within residue: .R<AS2 98>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 103
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 103>
+Created a new atom named: H within residue: .R<AS2 103>
+Created a new atom named: CA within residue: .R<AS2 103>
+Created a new atom named: HA within residue: .R<AS2 103>
+Created a new atom named: CB within residue: .R<AS2 103>
+Created a new atom named: HB2 within residue: .R<AS2 103>
+Created a new atom named: HB3 within residue: .R<AS2 103>
+Created a new atom named: CG within residue: .R<AS2 103>
+Created a new atom named: OD1 within residue: .R<AS2 103>
+Created a new atom named: OD2 within residue: .R<AS2 103>
+Created a new atom named: HD2 within residue: .R<AS2 103>
+Created a new atom named: C within residue: .R<AS2 103>
+Created a new atom named: O within residue: .R<AS2 103>
+Created a new atom named: HD1 within residue: .R<AS2 103>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 107
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 107>
+Created a new atom named: H within residue: .R<GL2 107>
+Created a new atom named: CA within residue: .R<GL2 107>
+Created a new atom named: HA within residue: .R<GL2 107>
+Created a new atom named: CB within residue: .R<GL2 107>
+Created a new atom named: HB2 within residue: .R<GL2 107>
+Created a new atom named: HB3 within residue: .R<GL2 107>
+Created a new atom named: CG within residue: .R<GL2 107>
+Created a new atom named: HG2 within residue: .R<GL2 107>
+Created a new atom named: HG3 within residue: .R<GL2 107>
+Created a new atom named: CD within residue: .R<GL2 107>
+Created a new atom named: OE1 within residue: .R<GL2 107>
+Created a new atom named: OE2 within residue: .R<GL2 107>
+Created a new atom named: HE2 within residue: .R<GL2 107>
+Created a new atom named: C within residue: .R<GL2 107>
+Created a new atom named: O within residue: .R<GL2 107>
+Created a new atom named: HE1 within residue: .R<GL2 107>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 113
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 113>
+Created a new atom named: H within residue: .R<AS2 113>
+Created a new atom named: CA within residue: .R<AS2 113>
+Created a new atom named: HA within residue: .R<AS2 113>
+Created a new atom named: CB within residue: .R<AS2 113>
+Created a new atom named: HB2 within residue: .R<AS2 113>
+Created a new atom named: HB3 within residue: .R<AS2 113>
+Created a new atom named: CG within residue: .R<AS2 113>
+Created a new atom named: OD1 within residue: .R<AS2 113>
+Created a new atom named: OD2 within residue: .R<AS2 113>
+Created a new atom named: HD2 within residue: .R<AS2 113>
+Created a new atom named: C within residue: .R<AS2 113>
+Created a new atom named: O within residue: .R<AS2 113>
+Created a new atom named: HD1 within residue: .R<AS2 113>
+Creating new UNIT for residue: AS2 sequence: 114
+Starting new chain with 
+Created a new atom named: N within residue: .R<AS2 114>
+Created a new atom named: H within residue: .R<AS2 114>
+Created a new atom named: CA within residue: .R<AS2 114>
+Created a new atom named: HA within residue: .R<AS2 114>
+Created a new atom named: CB within residue: .R<AS2 114>
+Created a new atom named: HB2 within residue: .R<AS2 114>
+Created a new atom named: HB3 within residue: .R<AS2 114>
+Created a new atom named: CG within residue: .R<AS2 114>
+Created a new atom named: OD1 within residue: .R<AS2 114>
+Created a new atom named: OD2 within residue: .R<AS2 114>
+Created a new atom named: HD2 within residue: .R<AS2 114>
+Created a new atom named: C within residue: .R<AS2 114>
+Created a new atom named: O within residue: .R<AS2 114>
+Created a new atom named: HD1 within residue: .R<AS2 114>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 116
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 116>
+Created a new atom named: H within residue: .R<AS2 116>
+Created a new atom named: CA within residue: .R<AS2 116>
+Created a new atom named: HA within residue: .R<AS2 116>
+Created a new atom named: CB within residue: .R<AS2 116>
+Created a new atom named: HB2 within residue: .R<AS2 116>
+Created a new atom named: HB3 within residue: .R<AS2 116>
+Created a new atom named: CG within residue: .R<AS2 116>
+Created a new atom named: OD1 within residue: .R<AS2 116>
+Created a new atom named: OD2 within residue: .R<AS2 116>
+Created a new atom named: HD2 within residue: .R<AS2 116>
+Created a new atom named: C within residue: .R<AS2 116>
+Created a new atom named: O within residue: .R<AS2 116>
+Created a new atom named: HD1 within residue: .R<AS2 116>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 144
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 144>
+Created a new atom named: H within residue: .R<GL2 144>
+Created a new atom named: CA within residue: .R<GL2 144>
+Created a new atom named: HA within residue: .R<GL2 144>
+Created a new atom named: CB within residue: .R<GL2 144>
+Created a new atom named: HB2 within residue: .R<GL2 144>
+Created a new atom named: HB3 within residue: .R<GL2 144>
+Created a new atom named: CG within residue: .R<GL2 144>
+Created a new atom named: HG2 within residue: .R<GL2 144>
+Created a new atom named: HG3 within residue: .R<GL2 144>
+Created a new atom named: CD within residue: .R<GL2 144>
+Created a new atom named: OE1 within residue: .R<GL2 144>
+Created a new atom named: OE2 within residue: .R<GL2 144>
+Created a new atom named: HE2 within residue: .R<GL2 144>
+Created a new atom named: C within residue: .R<GL2 144>
+Created a new atom named: O within residue: .R<GL2 144>
+Created a new atom named: HE1 within residue: .R<GL2 144>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 149
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 149>
+Created a new atom named: H within residue: .R<GL2 149>
+Created a new atom named: CA within residue: .R<GL2 149>
+Created a new atom named: HA within residue: .R<GL2 149>
+Created a new atom named: CB within residue: .R<GL2 149>
+Created a new atom named: HB2 within residue: .R<GL2 149>
+Created a new atom named: HB3 within residue: .R<GL2 149>
+Created a new atom named: CG within residue: .R<GL2 149>
+Created a new atom named: HG2 within residue: .R<GL2 149>
+Created a new atom named: HG3 within residue: .R<GL2 149>
+Created a new atom named: CD within residue: .R<GL2 149>
+Created a new atom named: OE1 within residue: .R<GL2 149>
+Created a new atom named: OE2 within residue: .R<GL2 149>
+Created a new atom named: HE2 within residue: .R<GL2 149>
+Created a new atom named: C within residue: .R<GL2 149>
+Created a new atom named: O within residue: .R<GL2 149>
+Created a new atom named: HE1 within residue: .R<GL2 149>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 154
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 154>
+Created a new atom named: H within residue: .R<GL2 154>
+Created a new atom named: CA within residue: .R<GL2 154>
+Created a new atom named: HA within residue: .R<GL2 154>
+Created a new atom named: CB within residue: .R<GL2 154>
+Created a new atom named: HB2 within residue: .R<GL2 154>
+Created a new atom named: HB3 within residue: .R<GL2 154>
+Created a new atom named: CG within residue: .R<GL2 154>
+Created a new atom named: HG2 within residue: .R<GL2 154>
+Created a new atom named: HG3 within residue: .R<GL2 154>
+Created a new atom named: CD within residue: .R<GL2 154>
+Created a new atom named: OE1 within residue: .R<GL2 154>
+Created a new atom named: OE2 within residue: .R<GL2 154>
+Created a new atom named: HE2 within residue: .R<GL2 154>
+Created a new atom named: C within residue: .R<GL2 154>
+Created a new atom named: O within residue: .R<GL2 154>
+Created a new atom named: HE1 within residue: .R<GL2 154>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 162
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 162>
+Created a new atom named: H within residue: .R<GL2 162>
+Created a new atom named: CA within residue: .R<GL2 162>
+Created a new atom named: HA within residue: .R<GL2 162>
+Created a new atom named: CB within residue: .R<GL2 162>
+Created a new atom named: HB2 within residue: .R<GL2 162>
+Created a new atom named: HB3 within residue: .R<GL2 162>
+Created a new atom named: CG within residue: .R<GL2 162>
+Created a new atom named: HG2 within residue: .R<GL2 162>
+Created a new atom named: HG3 within residue: .R<GL2 162>
+Created a new atom named: CD within residue: .R<GL2 162>
+Created a new atom named: OE1 within residue: .R<GL2 162>
+Created a new atom named: OE2 within residue: .R<GL2 162>
+Created a new atom named: HE2 within residue: .R<GL2 162>
+Created a new atom named: C within residue: .R<GL2 162>
+Created a new atom named: O within residue: .R<GL2 162>
+Created a new atom named: HE1 within residue: .R<GL2 162>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 175
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 175>
+Created a new atom named: H within residue: .R<GL2 175>
+Created a new atom named: CA within residue: .R<GL2 175>
+Created a new atom named: HA within residue: .R<GL2 175>
+Created a new atom named: CB within residue: .R<GL2 175>
+Created a new atom named: HB2 within residue: .R<GL2 175>
+Created a new atom named: HB3 within residue: .R<GL2 175>
+Created a new atom named: CG within residue: .R<GL2 175>
+Created a new atom named: HG2 within residue: .R<GL2 175>
+Created a new atom named: HG3 within residue: .R<GL2 175>
+Created a new atom named: CD within residue: .R<GL2 175>
+Created a new atom named: OE1 within residue: .R<GL2 175>
+Created a new atom named: OE2 within residue: .R<GL2 175>
+Created a new atom named: HE2 within residue: .R<GL2 175>
+Created a new atom named: C within residue: .R<GL2 175>
+Created a new atom named: O within residue: .R<GL2 175>
+Created a new atom named: HE1 within residue: .R<GL2 175>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 177
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 177>
+Created a new atom named: H within residue: .R<GL2 177>
+Created a new atom named: CA within residue: .R<GL2 177>
+Created a new atom named: HA within residue: .R<GL2 177>
+Created a new atom named: CB within residue: .R<GL2 177>
+Created a new atom named: HB2 within residue: .R<GL2 177>
+Created a new atom named: HB3 within residue: .R<GL2 177>
+Created a new atom named: CG within residue: .R<GL2 177>
+Created a new atom named: HG2 within residue: .R<GL2 177>
+Created a new atom named: HG3 within residue: .R<GL2 177>
+Created a new atom named: CD within residue: .R<GL2 177>
+Created a new atom named: OE1 within residue: .R<GL2 177>
+Created a new atom named: OE2 within residue: .R<GL2 177>
+Created a new atom named: HE2 within residue: .R<GL2 177>
+Created a new atom named: C within residue: .R<GL2 177>
+Created a new atom named: O within residue: .R<GL2 177>
+Created a new atom named: HE1 within residue: .R<GL2 177>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 183
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 183>
+Created a new atom named: H within residue: .R<AS2 183>
+Created a new atom named: CA within residue: .R<AS2 183>
+Created a new atom named: HA within residue: .R<AS2 183>
+Created a new atom named: CB within residue: .R<AS2 183>
+Created a new atom named: HB2 within residue: .R<AS2 183>
+Created a new atom named: HB3 within residue: .R<AS2 183>
+Created a new atom named: CG within residue: .R<AS2 183>
+Created a new atom named: OD1 within residue: .R<AS2 183>
+Created a new atom named: OD2 within residue: .R<AS2 183>
+Created a new atom named: HD2 within residue: .R<AS2 183>
+Created a new atom named: C within residue: .R<AS2 183>
+Created a new atom named: O within residue: .R<AS2 183>
+Created a new atom named: HD1 within residue: .R<AS2 183>
+Creating new UNIT for residue: AS2 sequence: 184
+Starting new chain with 
+Created a new atom named: N within residue: .R<AS2 184>
+Created a new atom named: H within residue: .R<AS2 184>
+Created a new atom named: CA within residue: .R<AS2 184>
+Created a new atom named: HA within residue: .R<AS2 184>
+Created a new atom named: CB within residue: .R<AS2 184>
+Created a new atom named: HB2 within residue: .R<AS2 184>
+Created a new atom named: HB3 within residue: .R<AS2 184>
+Created a new atom named: CG within residue: .R<AS2 184>
+Created a new atom named: OD1 within residue: .R<AS2 184>
+Created a new atom named: OD2 within residue: .R<AS2 184>
+Created a new atom named: HD2 within residue: .R<AS2 184>
+Created a new atom named: C within residue: .R<AS2 184>
+Created a new atom named: O within residue: .R<AS2 184>
+Created a new atom named: HD1 within residue: .R<AS2 184>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 189
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 189>
+Created a new atom named: H within residue: .R<AS2 189>
+Created a new atom named: CA within residue: .R<AS2 189>
+Created a new atom named: HA within residue: .R<AS2 189>
+Created a new atom named: CB within residue: .R<AS2 189>
+Created a new atom named: HB2 within residue: .R<AS2 189>
+Created a new atom named: HB3 within residue: .R<AS2 189>
+Created a new atom named: CG within residue: .R<AS2 189>
+Created a new atom named: OD1 within residue: .R<AS2 189>
+Created a new atom named: OD2 within residue: .R<AS2 189>
+Created a new atom named: HD2 within residue: .R<AS2 189>
+Created a new atom named: C within residue: .R<AS2 189>
+Created a new atom named: O within residue: .R<AS2 189>
+Created a new atom named: HD1 within residue: .R<AS2 189>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 204
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 204>
+Created a new atom named: H within residue: .R<AS2 204>
+Created a new atom named: CA within residue: .R<AS2 204>
+Created a new atom named: HA within residue: .R<AS2 204>
+Created a new atom named: CB within residue: .R<AS2 204>
+Created a new atom named: HB2 within residue: .R<AS2 204>
+Created a new atom named: HB3 within residue: .R<AS2 204>
+Created a new atom named: CG within residue: .R<AS2 204>
+Created a new atom named: OD1 within residue: .R<AS2 204>
+Created a new atom named: OD2 within residue: .R<AS2 204>
+Created a new atom named: HD2 within residue: .R<AS2 204>
+Created a new atom named: C within residue: .R<AS2 204>
+Created a new atom named: O within residue: .R<AS2 204>
+Created a new atom named: HD1 within residue: .R<AS2 204>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 207
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 207>
+Created a new atom named: H within residue: .R<AS2 207>
+Created a new atom named: CA within residue: .R<AS2 207>
+Created a new atom named: HA within residue: .R<AS2 207>
+Created a new atom named: CB within residue: .R<AS2 207>
+Created a new atom named: HB2 within residue: .R<AS2 207>
+Created a new atom named: HB3 within residue: .R<AS2 207>
+Created a new atom named: CG within residue: .R<AS2 207>
+Created a new atom named: OD1 within residue: .R<AS2 207>
+Created a new atom named: OD2 within residue: .R<AS2 207>
+Created a new atom named: HD2 within residue: .R<AS2 207>
+Created a new atom named: C within residue: .R<AS2 207>
+Created a new atom named: O within residue: .R<AS2 207>
+Created a new atom named: HD1 within residue: .R<AS2 207>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 215
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 215>
+Created a new atom named: H within residue: .R<AS2 215>
+Created a new atom named: CA within residue: .R<AS2 215>
+Created a new atom named: HA within residue: .R<AS2 215>
+Created a new atom named: CB within residue: .R<AS2 215>
+Created a new atom named: HB2 within residue: .R<AS2 215>
+Created a new atom named: HB3 within residue: .R<AS2 215>
+Created a new atom named: CG within residue: .R<AS2 215>
+Created a new atom named: OD1 within residue: .R<AS2 215>
+Created a new atom named: OD2 within residue: .R<AS2 215>
+Created a new atom named: HD2 within residue: .R<AS2 215>
+Created a new atom named: C within residue: .R<AS2 215>
+Created a new atom named: O within residue: .R<AS2 215>
+Created a new atom named: HD1 within residue: .R<AS2 215>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 225
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 225>
+Created a new atom named: H within residue: .R<GL2 225>
+Created a new atom named: CA within residue: .R<GL2 225>
+Created a new atom named: HA within residue: .R<GL2 225>
+Created a new atom named: CB within residue: .R<GL2 225>
+Created a new atom named: HB2 within residue: .R<GL2 225>
+Created a new atom named: HB3 within residue: .R<GL2 225>
+Created a new atom named: CG within residue: .R<GL2 225>
+Created a new atom named: HG2 within residue: .R<GL2 225>
+Created a new atom named: HG3 within residue: .R<GL2 225>
+Created a new atom named: CD within residue: .R<GL2 225>
+Created a new atom named: OE1 within residue: .R<GL2 225>
+Created a new atom named: OE2 within residue: .R<GL2 225>
+Created a new atom named: HE2 within residue: .R<GL2 225>
+Created a new atom named: C within residue: .R<GL2 225>
+Created a new atom named: O within residue: .R<GL2 225>
+Created a new atom named: HE1 within residue: .R<GL2 225>
+Creating new UNIT for residue: GL2 sequence: 226
+Starting new chain with 
+Created a new atom named: N within residue: .R<GL2 226>
+Created a new atom named: H within residue: .R<GL2 226>
+Created a new atom named: CA within residue: .R<GL2 226>
+Created a new atom named: HA within residue: .R<GL2 226>
+Created a new atom named: CB within residue: .R<GL2 226>
+Created a new atom named: HB2 within residue: .R<GL2 226>
+Created a new atom named: HB3 within residue: .R<GL2 226>
+Created a new atom named: CG within residue: .R<GL2 226>
+Created a new atom named: HG2 within residue: .R<GL2 226>
+Created a new atom named: HG3 within residue: .R<GL2 226>
+Created a new atom named: CD within residue: .R<GL2 226>
+Created a new atom named: OE1 within residue: .R<GL2 226>
+Created a new atom named: OE2 within residue: .R<GL2 226>
+Created a new atom named: HE2 within residue: .R<GL2 226>
+Created a new atom named: C within residue: .R<GL2 226>
+Created a new atom named: O within residue: .R<GL2 226>
+Created a new atom named: HE1 within residue: .R<GL2 226>
+Creating new UNIT for residue: AS2 sequence: 227
+Starting new chain with 
+Created a new atom named: N within residue: .R<AS2 227>
+Created a new atom named: H within residue: .R<AS2 227>
+Created a new atom named: CA within residue: .R<AS2 227>
+Created a new atom named: HA within residue: .R<AS2 227>
+Created a new atom named: CB within residue: .R<AS2 227>
+Created a new atom named: HB2 within residue: .R<AS2 227>
+Created a new atom named: HB3 within residue: .R<AS2 227>
+Created a new atom named: CG within residue: .R<AS2 227>
+Created a new atom named: OD1 within residue: .R<AS2 227>
+Created a new atom named: OD2 within residue: .R<AS2 227>
+Created a new atom named: HD2 within residue: .R<AS2 227>
+Created a new atom named: C within residue: .R<AS2 227>
+Created a new atom named: O within residue: .R<AS2 227>
+Created a new atom named: HD1 within residue: .R<AS2 227>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 235
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 235>
+Created a new atom named: H within residue: .R<GL2 235>
+Created a new atom named: CA within residue: .R<GL2 235>
+Created a new atom named: HA within residue: .R<GL2 235>
+Created a new atom named: CB within residue: .R<GL2 235>
+Created a new atom named: HB2 within residue: .R<GL2 235>
+Created a new atom named: HB3 within residue: .R<GL2 235>
+Created a new atom named: CG within residue: .R<GL2 235>
+Created a new atom named: HG2 within residue: .R<GL2 235>
+Created a new atom named: HG3 within residue: .R<GL2 235>
+Created a new atom named: CD within residue: .R<GL2 235>
+Created a new atom named: OE1 within residue: .R<GL2 235>
+Created a new atom named: OE2 within residue: .R<GL2 235>
+Created a new atom named: HE2 within residue: .R<GL2 235>
+Created a new atom named: C within residue: .R<GL2 235>
+Created a new atom named: O within residue: .R<GL2 235>
+Created a new atom named: HE1 within residue: .R<GL2 235>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 242
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 242>
+Created a new atom named: H within residue: .R<GL2 242>
+Created a new atom named: CA within residue: .R<GL2 242>
+Created a new atom named: HA within residue: .R<GL2 242>
+Created a new atom named: CB within residue: .R<GL2 242>
+Created a new atom named: HB2 within residue: .R<GL2 242>
+Created a new atom named: HB3 within residue: .R<GL2 242>
+Created a new atom named: CG within residue: .R<GL2 242>
+Created a new atom named: HG2 within residue: .R<GL2 242>
+Created a new atom named: HG3 within residue: .R<GL2 242>
+Created a new atom named: CD within residue: .R<GL2 242>
+Created a new atom named: OE1 within residue: .R<GL2 242>
+Created a new atom named: OE2 within residue: .R<GL2 242>
+Created a new atom named: HE2 within residue: .R<GL2 242>
+Created a new atom named: C within residue: .R<GL2 242>
+Created a new atom named: O within residue: .R<GL2 242>
+Created a new atom named: HE1 within residue: .R<GL2 242>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 255
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 255>
+Created a new atom named: H within residue: .R<GL2 255>
+Created a new atom named: CA within residue: .R<GL2 255>
+Created a new atom named: HA within residue: .R<GL2 255>
+Created a new atom named: CB within residue: .R<GL2 255>
+Created a new atom named: HB2 within residue: .R<GL2 255>
+Created a new atom named: HB3 within residue: .R<GL2 255>
+Created a new atom named: CG within residue: .R<GL2 255>
+Created a new atom named: HG2 within residue: .R<GL2 255>
+Created a new atom named: HG3 within residue: .R<GL2 255>
+Created a new atom named: CD within residue: .R<GL2 255>
+Created a new atom named: OE1 within residue: .R<GL2 255>
+Created a new atom named: OE2 within residue: .R<GL2 255>
+Created a new atom named: HE2 within residue: .R<GL2 255>
+Created a new atom named: C within residue: .R<GL2 255>
+Created a new atom named: O within residue: .R<GL2 255>
+Created a new atom named: HE1 within residue: .R<GL2 255>
+Creating new UNIT for residue: GL2 sequence: 256
+Starting new chain with 
+Created a new atom named: N within residue: .R<GL2 256>
+Created a new atom named: H within residue: .R<GL2 256>
+Created a new atom named: CA within residue: .R<GL2 256>
+Created a new atom named: HA within residue: .R<GL2 256>
+Created a new atom named: CB within residue: .R<GL2 256>
+Created a new atom named: HB2 within residue: .R<GL2 256>
+Created a new atom named: HB3 within residue: .R<GL2 256>
+Created a new atom named: CG within residue: .R<GL2 256>
+Created a new atom named: HG2 within residue: .R<GL2 256>
+Created a new atom named: HG3 within residue: .R<GL2 256>
+Created a new atom named: CD within residue: .R<GL2 256>
+Created a new atom named: OE1 within residue: .R<GL2 256>
+Created a new atom named: OE2 within residue: .R<GL2 256>
+Created a new atom named: HE2 within residue: .R<GL2 256>
+Created a new atom named: C within residue: .R<GL2 256>
+Created a new atom named: O within residue: .R<GL2 256>
+Created a new atom named: HE1 within residue: .R<GL2 256>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 303
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 303>
+Created a new atom named: H within residue: .R<GL2 303>
+Created a new atom named: CA within residue: .R<GL2 303>
+Created a new atom named: HA within residue: .R<GL2 303>
+Created a new atom named: CB within residue: .R<GL2 303>
+Created a new atom named: HB2 within residue: .R<GL2 303>
+Created a new atom named: HB3 within residue: .R<GL2 303>
+Created a new atom named: CG within residue: .R<GL2 303>
+Created a new atom named: HG2 within residue: .R<GL2 303>
+Created a new atom named: HG3 within residue: .R<GL2 303>
+Created a new atom named: CD within residue: .R<GL2 303>
+Created a new atom named: OE1 within residue: .R<GL2 303>
+Created a new atom named: OE2 within residue: .R<GL2 303>
+Created a new atom named: HE2 within residue: .R<GL2 303>
+Created a new atom named: C within residue: .R<GL2 303>
+Created a new atom named: O within residue: .R<GL2 303>
+Created a new atom named: HE1 within residue: .R<GL2 303>
+Creating new UNIT for residue: GL2 sequence: 304
+Starting new chain with 
+Created a new atom named: N within residue: .R<GL2 304>
+Created a new atom named: H within residue: .R<GL2 304>
+Created a new atom named: CA within residue: .R<GL2 304>
+Created a new atom named: HA within residue: .R<GL2 304>
+Created a new atom named: CB within residue: .R<GL2 304>
+Created a new atom named: HB2 within residue: .R<GL2 304>
+Created a new atom named: HB3 within residue: .R<GL2 304>
+Created a new atom named: CG within residue: .R<GL2 304>
+Created a new atom named: HG2 within residue: .R<GL2 304>
+Created a new atom named: HG3 within residue: .R<GL2 304>
+Created a new atom named: CD within residue: .R<GL2 304>
+Created a new atom named: OE1 within residue: .R<GL2 304>
+Created a new atom named: OE2 within residue: .R<GL2 304>
+Created a new atom named: HE2 within residue: .R<GL2 304>
+Created a new atom named: C within residue: .R<GL2 304>
+Created a new atom named: O within residue: .R<GL2 304>
+Created a new atom named: HE1 within residue: .R<GL2 304>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 320
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 320>
+Created a new atom named: H within residue: .R<AS2 320>
+Created a new atom named: CA within residue: .R<AS2 320>
+Created a new atom named: HA within residue: .R<AS2 320>
+Created a new atom named: CB within residue: .R<AS2 320>
+Created a new atom named: HB2 within residue: .R<AS2 320>
+Created a new atom named: HB3 within residue: .R<AS2 320>
+Created a new atom named: CG within residue: .R<AS2 320>
+Created a new atom named: OD1 within residue: .R<AS2 320>
+Created a new atom named: OD2 within residue: .R<AS2 320>
+Created a new atom named: HD2 within residue: .R<AS2 320>
+Created a new atom named: C within residue: .R<AS2 320>
+Created a new atom named: O within residue: .R<AS2 320>
+Created a new atom named: HD1 within residue: .R<AS2 320>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 325
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 325>
+Created a new atom named: H within residue: .R<AS2 325>
+Created a new atom named: CA within residue: .R<AS2 325>
+Created a new atom named: HA within residue: .R<AS2 325>
+Created a new atom named: CB within residue: .R<AS2 325>
+Created a new atom named: HB2 within residue: .R<AS2 325>
+Created a new atom named: HB3 within residue: .R<AS2 325>
+Created a new atom named: CG within residue: .R<AS2 325>
+Created a new atom named: OD1 within residue: .R<AS2 325>
+Created a new atom named: OD2 within residue: .R<AS2 325>
+Created a new atom named: HD2 within residue: .R<AS2 325>
+Created a new atom named: C within residue: .R<AS2 325>
+Created a new atom named: O within residue: .R<AS2 325>
+Created a new atom named: HD1 within residue: .R<AS2 325>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 331
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 331>
+Created a new atom named: H within residue: .R<GL2 331>
+Created a new atom named: CA within residue: .R<GL2 331>
+Created a new atom named: HA within residue: .R<GL2 331>
+Created a new atom named: CB within residue: .R<GL2 331>
+Created a new atom named: HB2 within residue: .R<GL2 331>
+Created a new atom named: HB3 within residue: .R<GL2 331>
+Created a new atom named: CG within residue: .R<GL2 331>
+Created a new atom named: HG2 within residue: .R<GL2 331>
+Created a new atom named: HG3 within residue: .R<GL2 331>
+Created a new atom named: CD within residue: .R<GL2 331>
+Created a new atom named: OE1 within residue: .R<GL2 331>
+Created a new atom named: OE2 within residue: .R<GL2 331>
+Created a new atom named: HE2 within residue: .R<GL2 331>
+Created a new atom named: C within residue: .R<GL2 331>
+Created a new atom named: O within residue: .R<GL2 331>
+Created a new atom named: HE1 within residue: .R<GL2 331>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 333
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 333>
+Created a new atom named: H within residue: .R<GL2 333>
+Created a new atom named: CA within residue: .R<GL2 333>
+Created a new atom named: HA within residue: .R<GL2 333>
+Created a new atom named: CB within residue: .R<GL2 333>
+Created a new atom named: HB2 within residue: .R<GL2 333>
+Created a new atom named: HB3 within residue: .R<GL2 333>
+Created a new atom named: CG within residue: .R<GL2 333>
+Created a new atom named: HG2 within residue: .R<GL2 333>
+Created a new atom named: HG3 within residue: .R<GL2 333>
+Created a new atom named: CD within residue: .R<GL2 333>
+Created a new atom named: OE1 within residue: .R<GL2 333>
+Created a new atom named: OE2 within residue: .R<GL2 333>
+Created a new atom named: HE2 within residue: .R<GL2 333>
+Created a new atom named: C within residue: .R<GL2 333>
+Created a new atom named: O within residue: .R<GL2 333>
+Created a new atom named: HE1 within residue: .R<GL2 333>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 340
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 340>
+Created a new atom named: H within residue: .R<AS2 340>
+Created a new atom named: CA within residue: .R<AS2 340>
+Created a new atom named: HA within residue: .R<AS2 340>
+Created a new atom named: CB within residue: .R<AS2 340>
+Created a new atom named: HB2 within residue: .R<AS2 340>
+Created a new atom named: HB3 within residue: .R<AS2 340>
+Created a new atom named: CG within residue: .R<AS2 340>
+Created a new atom named: OD1 within residue: .R<AS2 340>
+Created a new atom named: OD2 within residue: .R<AS2 340>
+Created a new atom named: HD2 within residue: .R<AS2 340>
+Created a new atom named: C within residue: .R<AS2 340>
+Created a new atom named: O within residue: .R<AS2 340>
+Created a new atom named: HD1 within residue: .R<AS2 340>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 347
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 347>
+Created a new atom named: H within residue: .R<GL2 347>
+Created a new atom named: CA within residue: .R<GL2 347>
+Created a new atom named: HA within residue: .R<GL2 347>
+Created a new atom named: CB within residue: .R<GL2 347>
+Created a new atom named: HB2 within residue: .R<GL2 347>
+Created a new atom named: HB3 within residue: .R<GL2 347>
+Created a new atom named: CG within residue: .R<GL2 347>
+Created a new atom named: HG2 within residue: .R<GL2 347>
+Created a new atom named: HG3 within residue: .R<GL2 347>
+Created a new atom named: CD within residue: .R<GL2 347>
+Created a new atom named: OE1 within residue: .R<GL2 347>
+Created a new atom named: OE2 within residue: .R<GL2 347>
+Created a new atom named: HE2 within residue: .R<GL2 347>
+Created a new atom named: C within residue: .R<GL2 347>
+Created a new atom named: O within residue: .R<GL2 347>
+Created a new atom named: HE1 within residue: .R<GL2 347>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 349
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 349>
+Created a new atom named: H within residue: .R<GL2 349>
+Created a new atom named: CA within residue: .R<GL2 349>
+Created a new atom named: HA within residue: .R<GL2 349>
+Created a new atom named: CB within residue: .R<GL2 349>
+Created a new atom named: HB2 within residue: .R<GL2 349>
+Created a new atom named: HB3 within residue: .R<GL2 349>
+Created a new atom named: CG within residue: .R<GL2 349>
+Created a new atom named: HG2 within residue: .R<GL2 349>
+Created a new atom named: HG3 within residue: .R<GL2 349>
+Created a new atom named: CD within residue: .R<GL2 349>
+Created a new atom named: OE1 within residue: .R<GL2 349>
+Created a new atom named: OE2 within residue: .R<GL2 349>
+Created a new atom named: HE2 within residue: .R<GL2 349>
+Created a new atom named: C within residue: .R<GL2 349>
+Created a new atom named: O within residue: .R<GL2 349>
+Created a new atom named: HE1 within residue: .R<GL2 349>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: GL2 sequence: 353
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<GL2 353>
+Created a new atom named: H within residue: .R<GL2 353>
+Created a new atom named: CA within residue: .R<GL2 353>
+Created a new atom named: HA within residue: .R<GL2 353>
+Created a new atom named: CB within residue: .R<GL2 353>
+Created a new atom named: HB2 within residue: .R<GL2 353>
+Created a new atom named: HB3 within residue: .R<GL2 353>
+Created a new atom named: CG within residue: .R<GL2 353>
+Created a new atom named: HG2 within residue: .R<GL2 353>
+Created a new atom named: HG3 within residue: .R<GL2 353>
+Created a new atom named: CD within residue: .R<GL2 353>
+Created a new atom named: OE1 within residue: .R<GL2 353>
+Created a new atom named: OE2 within residue: .R<GL2 353>
+Created a new atom named: HE2 within residue: .R<GL2 353>
+Created a new atom named: C within residue: .R<GL2 353>
+Created a new atom named: O within residue: .R<GL2 353>
+Created a new atom named: HE1 within residue: .R<GL2 353>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+Creating new UNIT for residue: AS2 sequence: 359
+
+Warning: One sided connection. Residue () missing connect0 atom.
+Created a new atom named: N within residue: .R<AS2 359>
+Created a new atom named: H within residue: .R<AS2 359>
+Created a new atom named: CA within residue: .R<AS2 359>
+Created a new atom named: HA within residue: .R<AS2 359>
+Created a new atom named: CB within residue: .R<AS2 359>
+Created a new atom named: HB2 within residue: .R<AS2 359>
+Created a new atom named: HB3 within residue: .R<AS2 359>
+Created a new atom named: CG within residue: .R<AS2 359>
+Created a new atom named: OD1 within residue: .R<AS2 359>
+Created a new atom named: OD2 within residue: .R<AS2 359>
+Created a new atom named: HD2 within residue: .R<AS2 359>
+Created a new atom named: C within residue: .R<AS2 359>
+Created a new atom named: O within residue: .R<AS2 359>
+Created a new atom named: HD1 within residue: .R<AS2 359>
+Creating new UNIT for residue: AS2 sequence: 360
+Starting new chain with 
+Created a new atom named: N within residue: .R<AS2 360>
+Created a new atom named: H within residue: .R<AS2 360>
+Created a new atom named: CA within residue: .R<AS2 360>
+Created a new atom named: HA within residue: .R<AS2 360>
+Created a new atom named: CB within residue: .R<AS2 360>
+Created a new atom named: HB2 within residue: .R<AS2 360>
+Created a new atom named: HB3 within residue: .R<AS2 360>
+Created a new atom named: CG within residue: .R<AS2 360>
+Created a new atom named: OD1 within residue: .R<AS2 360>
+Created a new atom named: OD2 within residue: .R<AS2 360>
+Created a new atom named: HD2 within residue: .R<AS2 360>
+Created a new atom named: C within residue: .R<AS2 360>
+Created a new atom named: O within residue: .R<AS2 360>
+Created a new atom named: HD1 within residue: .R<AS2 360>
+
+Warning: One sided connection. Residue (default_name) missing connect1 atom.
+  total atoms in file: 99299
+  The file contained 843 atoms not in residue templates
+log started: Mon Jan  6 12:45:23 2025
+
+Log file: ./leap.log
+>> #
+>> # ----- leaprc for loading the ff19SB force field
+>> # ----- NOTE: this is designed for PDB format 3!
+>> #
+>> #	load atom type hybridizations
+>> #
+>> addAtomTypes {
+>> 	{ "H"   "H" "sp3" }
+>> 	{ "HO"  "H" "sp3" }
+>> 	{ "HS"  "H" "sp3" }
+>> 	{ "H1"  "H" "sp3" }
+>> 	{ "H2"  "H" "sp3" }
+>> 	{ "H3"  "H" "sp3" }
+>> 	{ "H4"  "H" "sp3" }
+>> 	{ "H5"  "H" "sp3" }
+>> 	{ "HW"  "H" "sp3" }
+>> 	{ "HC"  "H" "sp3" }
+>> 	{ "HA"  "H" "sp3" }
+>> 	{ "HP"  "H" "sp3" }
+>> 	{ "HZ"  "H" "sp3" }
+>> 	{ "OH"  "O" "sp3" }
+>> 	{ "OS"  "O" "sp3" }
+>> 	{ "O"   "O" "sp2" }
+>> 	{ "O2"  "O" "sp2" }
+>> 	{ "OP"  "O" "sp2" }
+>> 	{ "OW"  "O" "sp3" }
+>> 	{ "CT"  "C" "sp3" }
+>> 	{ "CX"  "C" "sp3" }
+>> 	{ "XC"  "C" "sp3" }
+>> 	{ "C8"  "C" "sp3" }
+>> 	{ "2C"  "C" "sp3" }
+>> 	{ "3C"  "C" "sp3" }
+>> 	{ "CH"  "C" "sp3" }
+>> 	{ "CS"  "C" "sp2" }
+>> 	{ "C"   "C" "sp2" }
+>> 	{ "CO"   "C" "sp2" }
+>> 	{ "C*"  "C" "sp2" }
+>> 	{ "CA"  "C" "sp2" }
+>> 	{ "CB"  "C" "sp2" }
+>> 	{ "CC"  "C" "sp2" }
+>> 	{ "CN"  "C" "sp2" }
+>> 	{ "CM"  "C" "sp2" }
+>> 	{ "CK"  "C" "sp2" }
+>> 	{ "CQ"  "C" "sp2" }
+>> 	{ "CD"  "C" "sp2" }
+>> 	{ "C5"  "C" "sp2" }
+>> 	{ "C4"  "C" "sp2" }
+>> 	{ "CP"  "C" "sp2" }
+>> 	{ "CI"  "C" "sp3" }
+>> 	{ "CJ"  "C" "sp2" }
+>> 	{ "CW"  "C" "sp2" }
+>> 	{ "CV"  "C" "sp2" }
+>> 	{ "CR"  "C" "sp2" }
+>> 	{ "CA"  "C" "sp2" }
+>> 	{ "CY"  "C" "sp2" }
+>> 	{ "C0"  "Ca" "sp3" }
+>> 	{ "MG"  "Mg" "sp3" }
+>> 	{ "N"   "N" "sp2" }
+>> 	{ "NA"  "N" "sp2" }
+>> 	{ "N2"  "N" "sp2" }
+>> 	{ "N*"  "N" "sp2" }
+>> 	{ "NP"  "N" "sp2" }
+>> 	{ "NQ"  "N" "sp2" }
+>> 	{ "NB"  "N" "sp2" }
+>> 	{ "NC"  "N" "sp2" }
+>> 	{ "NT"  "N" "sp3" }
+>> 	{ "NY"  "N" "sp2" }
+>> 	{ "N3"  "N" "sp3" }
+>> 	{ "S"   "S" "sp3" }
+>> 	{ "SH"  "S" "sp3" }
+>> 	{ "P"   "P" "sp3" }
+>> 	{ "LP"  ""  "sp3" }
+>> 	{ "EP"  ""  "sp3" }
+>> 	{ "F"   "F" "sp3" }
+>> 	{ "Cl"  "Cl" "sp3" }
+>> 	{ "Br"  "Br" "sp3" }
+>> 	{ "I"   "I"  "sp3" }
+>> }
+>> #
+>> #	Load the main parameter set.
+>> #
+>> set default cmap on
+>> parm19 = loadamberparams parm19.dat
+Loading parameters: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/parm/parm19.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA + ff19SB
+(UNKNOWN ATOM TYPE: Zn)
+(UNKNOWN ATOM TYPE: EP)
+>> frcmod19SB = loadamberparams frcmod.ff19SB
+Loading parameters: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/parm/frcmod.ff19SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff19SB AA-specific backbone CMAPs for protein 07/25/2019
+>> #
+>> #	Load main chain and terminating amino acid libraries
+>> #
+>> loadOff amino19.lib
+Loading library: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/lib/amino19.lib
+Loading: ALA
+Loading: ARG
+Loading: ASH
+Loading: ASN
+Loading: ASP
+Loading: CYM
+Loading: CYS
+Loading: CYX
+Loading: GLH
+Loading: GLN
+Loading: GLU
+Loading: GLY
+Loading: HID
+Loading: HIE
+Loading: HIP
+Loading: HYP
+Loading: ILE
+Loading: LEU
+Loading: LYN
+Loading: LYS
+Loading: MET
+Loading: PHE
+Loading: PRO
+Loading: SER
+Loading: THR
+Loading: TRP
+Loading: TYR
+Loading: VAL
+>> loadOff aminoct12.lib
+Loading library: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/lib/aminoct12.lib
+Loading: CALA
+Loading: CARG
+Loading: CASN
+Loading: CASP
+Loading: CCYS
+Loading: CCYX
+Loading: CGLN
+Loading: CGLU
+Loading: CGLY
+Loading: CHID
+Loading: CHIE
+Loading: CHIP
+Loading: CHYP
+Loading: CILE
+Loading: CLEU
+Loading: CLYS
+Loading: CMET
+Loading: CPHE
+Loading: CPRO
+Loading: CSER
+Loading: CTHR
+Loading: CTRP
+Loading: CTYR
+Loading: CVAL
+Loading: NHE
+Loading: NME
+>> loadOff aminont12.lib
+Loading library: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/lib/aminont12.lib
+Loading: ACE
+Loading: NALA
+Loading: NARG
+Loading: NASN
+Loading: NASP
+Loading: NCYS
+Loading: NCYX
+Loading: NGLN
+Loading: NGLU
+Loading: NGLY
+Loading: NHID
+Loading: NHIE
+Loading: NHIP
+Loading: NILE
+Loading: NLEU
+Loading: NLYS
+Loading: NMET
+Loading: NPHE
+Loading: NPRO
+Loading: NSER
+Loading: NTHR
+Loading: NTRP
+Loading: NTYR
+Loading: NVAL
+>> 
+>> #
+>> #	Define the PDB name map for the amino acids
+>> #
+>> addPdbResMap {
+>>   { 0 "HYP" "NHYP" } { 1 "HYP" "CHYP" }
+>>   { 0 "ALA" "NALA" } { 1 "ALA" "CALA" }
+>>   { 0 "ARG" "NARG" } { 1 "ARG" "CARG" }
+>>   { 0 "ASN" "NASN" } { 1 "ASN" "CASN" }
+>>   { 0 "ASP" "NASP" } { 1 "ASP" "CASP" }
+>>   { 0 "CYS" "NCYS" } { 1 "CYS" "CCYS" }
+>>   { 0 "CYX" "NCYX" } { 1 "CYX" "CCYX" }
+>>   { 0 "GLN" "NGLN" } { 1 "GLN" "CGLN" }
+>>   { 0 "GLU" "NGLU" } { 1 "GLU" "CGLU" }
+>>   { 0 "GLY" "NGLY" } { 1 "GLY" "CGLY" }
+>>   { 0 "HID" "NHID" } { 1 "HID" "CHID" }
+>>   { 0 "HIE" "NHIE" } { 1 "HIE" "CHIE" }
+>>   { 0 "HIP" "NHIP" } { 1 "HIP" "CHIP" }
+>>   { 0 "ILE" "NILE" } { 1 "ILE" "CILE" }
+>>   { 0 "LEU" "NLEU" } { 1 "LEU" "CLEU" }
+>>   { 0 "LYS" "NLYS" } { 1 "LYS" "CLYS" }
+>>   { 0 "MET" "NMET" } { 1 "MET" "CMET" }
+>>   { 0 "PHE" "NPHE" } { 1 "PHE" "CPHE" }
+>>   { 0 "PRO" "NPRO" } { 1 "PRO" "CPRO" }
+>>   { 0 "SER" "NSER" } { 1 "SER" "CSER" }
+>>   { 0 "THR" "NTHR" } { 1 "THR" "CTHR" }
+>>   { 0 "TRP" "NTRP" } { 1 "TRP" "CTRP" }
+>>   { 0 "TYR" "NTYR" } { 1 "TYR" "CTYR" }
+>>   { 0 "VAL" "NVAL" } { 1 "VAL" "CVAL" }
+>>   { 0 "HIS" "NHIS" } { 1 "HIS" "CHIS" }
+>> }
+>> 
+>> #
+>> # assume that most often proteins use HIE
+>> #
+>> NHIS = NHIE
+>> HIS = HIE
+>> CHIS = CHIE
+> 
+> source leaprc.water.opc
+----- Source: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/cmd/leaprc.water.opc
+----- Source of /home/craigp/anaconda3/envs/AmberTools23/dat/leap/cmd/leaprc.water.opc done
+>> #
+>> #  Load OPC water model and ions for OPC + Li/Merz ion parameters
+>> #  (-1 to +4, 12-6 normal usage set)
+>> # 
+>> addAtomTypes {
+>> 	{ "F-"   "F" "sp3" }
+>> 	{ "Cl-"  "Cl" "sp3" }
+>> 	{ "Br-"  "Br" "sp3" }
+>> 	{ "I-"   "I"  "sp3" }
+>> 	{ "Li+"  "Li"  "sp3" }
+>> 	{ "Na+"  "Na"  "sp3" }
+>> 	{ "K+"  "K"  "sp3" }
+>> 	{ "Rb+"  "Rb"  "sp3" }
+>> 	{ "Cs+"  "Cs"  "sp3" }
+>> 	{ "Mg+"  "Mg"  "sp3" }
+>>     { "Tl+"  "Tl"  "sp3" }
+>>     { "Cu+"  "Cu"  "sp3" }
+>>     { "Ag+"  "Ag"  "sp3" }
+>>     { "Be2+" "Be"  "sp3" }
+>>     { "Cu2+" "Cu"  "sp3" }
+>>     { "Ni2+" "Ni"  "sp3" }
+>>     { "Pt2+" "Pt"  "sp3" }
+>>     { "Zn2+" "Zn"  "sp3" }
+>>     { "Co2+" "Co"  "sp3" }
+>>     { "Pd2+" "Pd"  "sp3" }
+>>     { "Ag2+" "Ag"  "sp3" }
+>>     { "Cr2+" "Cr"  "sp3" }
+>>     { "Fe2+" "Fe"  "sp3" }
+>>     { "Mg2+" "Mg"  "sp3" }
+>>     { "V2+"  "V"   "sp3" }
+>>     { "Mn2+" "Mn"  "sp3" }
+>>     { "Hg2+" "Hg"  "sp3" }
+>>     { "Cd2+" "Cd"  "sp3" }
+>>     { "Yb2+" "Yb"  "sp3" }
+>>     { "Ca2+" "Ca"  "sp3" }
+>>     { "Sn2+" "Sn"  "sp3" }
+>>     { "Pb2+" "Pb"  "sp3" }
+>>     { "Eu2+" "Eu"  "sp3" }
+>>     { "Sr2+" "Sr"  "sp3" }
+>>     { "Sm2+" "Sm"  "sp3" }
+>>     { "Ba2+" "Ba"  "sp3" }
+>>     { "Ra2+" "Ra"  "sp3" }
+>>     { "Al3+" "Al"  "sp3" }
+>>     { "Fe3+" "Fe"  "sp3" }
+>>     { "Cr3+" "Cr"  "sp3" }
+>>     { "In3+" "In"  "sp3" }
+>>     { "Tl3+" "Tl"  "sp3" }
+>>     { "Y3+"  "Y"   "sp3" }
+>>     { "La3+" "La"  "sp3" }
+>>     { "Ce3+" "Ce"  "sp3" }
+>>     { "Pr3+" "Pr"  "sp3" }
+>>     { "Nd3+" "Nd"  "sp3" }
+>>     { "Sm3+" "Sm"  "sp3" }
+>>     { "Eu3+" "Eu"  "sp3" }
+>>     { "Gd3+" "Gd"  "sp3" }
+>>     { "Tb3+" "Tb"  "sp3" }
+>>     { "Dy3+" "Dy"  "sp3" }
+>>     { "Er3+" "Er"  "sp3" }
+>>     { "Tm3+" "Tm"  "sp3" }
+>>     { "Lu3+" "Lu"  "sp3" }
+>>     { "Hf4+" "Hf"  "sp3" }
+>>     { "Zr4+" "Zr"  "sp3" }
+>>     { "Ce4+" "Ce"  "sp3" }
+>>     { "U4+"  "U"   "sp3" }
+>>     { "Pu4+" "Pu"  "sp3" }
+>>     { "Th4+" "Th"  "sp3" }
+>>     { "OW"   "O"   "sp3" }
+>>     { "HW"   "H"   "sp3" }
+>>     { "EP"   ""    "sp3" }
+>> }
+>> loadOff atomic_ions.lib
+Loading library: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/lib/atomic_ions.lib
+Loading: AG
+Loading: AL
+Loading: Ag
+Loading: BA
+Loading: BR
+Loading: Be
+Loading: CA
+Loading: CD
+Loading: CE
+Loading: CL
+Loading: CO
+Loading: CR
+Loading: CS
+Loading: CU
+Loading: CU1
+Loading: Ce
+Loading: Cl-
+Loading: Cr
+Loading: Dy
+Loading: EU
+Loading: EU3
+Loading: Er
+Loading: F
+Loading: FE
+Loading: FE2
+Loading: GD3
+Loading: H3O+
+Loading: HE+
+Loading: HG
+Loading: HZ+
+Loading: Hf
+Loading: IN
+Loading: IOD
+Loading: K
+Loading: K+
+Loading: LA
+Loading: LI
+Loading: LU
+Loading: MG
+Loading: MN
+Loading: NA
+Loading: NH4
+Loading: NI
+Loading: Na+
+Loading: Nd
+Loading: PB
+Loading: PD
+Loading: PR
+Loading: PT
+Loading: Pu
+Loading: RB
+Loading: Ra
+Loading: SM
+Loading: SR
+Loading: Sm
+Loading: Sn
+Loading: TB
+Loading: TL
+Loading: Th
+Loading: Tl
+Loading: Tm
+Loading: U4+
+Loading: V2+
+Loading: Y
+Loading: YB2
+Loading: ZN
+Loading: Zr
+>> loadOff solvents.lib
+Loading library: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/lib/solvents.lib
+Loading: CHCL3BOX
+Loading: DC4
+Loading: FB3
+Loading: FB3BOX
+Loading: FB4
+Loading: FB4BOX
+Loading: MEOHBOX
+Loading: NMABOX
+Loading: O3P
+Loading: OP3
+Loading: OPC
+Loading: OPC3BOX
+Loading: OPC3POLBOX
+Loading: OPCBOX
+Loading: PL3
+Loading: POL3BOX
+Loading: QSPCFWBOX
+Loading: SPC
+Loading: SPCBOX
+Loading: SPCFWBOX
+Loading: SPF
+Loading: SPG
+Loading: T4E
+Loading: TIP3PBOX
+Loading: TIP3PFBOX
+Loading: TIP4PBOX
+Loading: TIP4PEWBOX
+Loading: TIP5PBOX
+Loading: TP3
+Loading: TP4
+Loading: TP5
+Loading: TPF
+>> HOH = OPC
+>> WAT = OPC
+>> loadAmberParams frcmod.opc
+Loading parameters: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/parm/frcmod.opc
+Reading force field modification type file (frcmod)
+Reading title:
+Parameters for OPC water (JPCL, 2014, 5 (21), pp 3863-3871)
+(UNKNOWN ATOM TYPE: EP)
+>> loadAmberParams frcmod.ionslm_126_opc
+Loading parameters: /home/craigp/anaconda3/envs/AmberTools23/dat/leap/parm/frcmod.ionslm_126_opc
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of atomic ions for the OPC water model (12-6 set)
+>> 
+> 
+> set default PBradii mbondi
+Using modified Bondi radii
+> loadoff CysS-.off
+Loading library: ./CysS-.off
+Loading: CY2
+> loadoff CysSO-.off
+Loading library: ./CysSO-.off
+Loading: MSO
+> loadoff CysSOH.off
+Loading library: ./CysSOH.off
+Loading: SOH
+> loadoff CysSS-.off
+Loading library: ./CysSS-.off
+Loading: MSS
+> loadoff CysSSH.off
+Loading library: ./CysSSH.off
+Loading: SSH
+> loadoff phmd.lib
+Loading library: ./phmd.lib
+Loading: AS2
+Loading: GL2
+> loadamberparams CysS-.frcmod
+Loading parameters: ./CysS-.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Force field parameters from trip.prmtop
+> loadamberparams CysSO-.frcmod
+Loading parameters: ./CysSO-.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Force field parameters from MSO.prmtop
+> loadamberparams CysSOH.frcmod
+Loading parameters: ./CysSOH.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Force field parameters from SOH.prmtop
+> loadamberparams CysSS-.frcmod
+Loading parameters: ./CysSS-.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Force field parameters from MSS.prmtop
+> loadamberparams CysSSH.frcmod
+Loading parameters: ./CysSSH.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Force field parameters from SSH.prmtop
+> loadamberparams frcmod.phmd
+Loading parameters: ./frcmod.phmd
+Reading force field modification type file (frcmod)
+Reading title:
+!Force field modifications for continuous phmd simulations (Feb 2018)
+> model = loadpdb 1i0e_cphmd.pdb
+Loading PDB file: ./1i0e_cphmd.pdb
+Matching PDB residue names to LEaP variables.
+  total atoms in file: 99299
+> charge model
+Total unperturbed charge:  69.000000
+Total perturbed charge:    69.000000
+> savepdb model 1i0e_cphmd.pdb
+Writing pdb file: 1i0e_cphmd.pdb
+> saveamberparm model 1i0e_cphmd.prmtop 1i0e_cphmd.rst7
+Checking Unit.
+
+Warning: The unperturbed charge of the unit (69.000000) is not zero.
+
+Note: Ignoring the warnings from Unit Checking.
+
+Building topology.
+Building atom parameters.
+Building bond parameters.
+Building angle parameters.
+Building proper torsion parameters.
+Building improper torsion parameters.
+ total 1173 improper torsions applied
+Building H-Bond parameters.
+Incorporating Non-Bonded adjustments.
+Not Marking per-residue atom chain types.
+Marking per-residue atom chain types.
+  (Residues lacking connect0/connect1 - 
+   these don't have chain types marked:
+
+	res	total affected
+
+	WAT	23301
+  )
+ (no restraints)
+> quit
+	Quit
+
+Exiting LEaP: Errors = 0; Warnings = 1; Notes = 1.

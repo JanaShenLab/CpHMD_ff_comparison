@@ -1,0 +1,1637 @@
+1
+                 Chemistry at HARvard Macromolecular Mechanics
+           (CHARMM) - Developmental Version 36b2   February 15, 2012            
+       Copyright(c) 1984-2001  President and Fellows of Harvard College
+                              All Rights Reserved
+     Current operating system: Linux-5.15.0-113-generic(x86_64)@aura.umaryl     
+                 Created on  9/20/24 at 16:15:18 by user: craigp      
+
+            Maximum number of ATOMS:    360720, and RESidues:      120240
+ RDTITL> * GENERATE STRUCTURE FOR RNASEA BLOCKED STRUCTURE IN VACUUM
+ RDTITL> *
+  
+ CHARMM>    set input chaina.pdb
+ Parameter: INPUT <- "CHAINA.PDB"
+  
+ CHARMM>    set outname chaina_h
+ Parameter: OUTNAME <- "CHAINA_H"
+  
+ CHARMM>    set segid PROA
+ Parameter: SEGID <- "PROA"
+  
+ CHARMM>    ! read in modified top and par files
+ CHARMM>    set TOPPAR = /home/craigp/software/c36b2/toppar
+ Parameter: TOPPAR <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+  
+ CHARMM>    set top = @TOPPAR/top_all22_prot.rtf
+ Parameter: TOPPAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+ Parameter: TOP <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOP_ALL22_PROT.RTF"
+  
+ CHARMM>    set par = @TOPPAR/par_all22_prot.prm
+ Parameter: TOPPAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+ Parameter: PAR <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/PAR_ALL22_PROT.PRM"
+  
+ CHARMM>    set watstr = @TOPPAR/toppar_water_ions.str
+ Parameter: TOPPAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+ Parameter: WATSTR <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOPPAR_WATER_IONS.STR"
+  
+ CHARMM>    set phstr = @TOPPAR/toppar_phmd_c22_foramber.str
+ Parameter: TOPPAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+ Parameter: PHSTR <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOPPAR_PHMD_C22_FORAMBER.STR"
+  
+ CHARMM>     
+  
+ CHARMM>    open unit 1 read form name @top
+ Parameter: TOP -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOP_ALL22_PROT.RTF"
+ VOPEN> Attempting to open::/home/craigp/software/c36b2/toppar/top_all22_prot.rtf::
+ OPNLGU> Unit  1 opened for READONLY access to /home/craigp/software/c36b2/toppar/top_all22_prot.rtf
+  
+ CHARMM>    read rtf card unit 1
+ MAINIO> Residue topology file being read from unit   1.
+ TITLE> *>>>>>>>>CHARMM22 ALL-HYDROGEN TOPOLOGY FILE FOR PROTEINS <<<<<<
+ TITLE> *>>>>> INCLUDES PHI, PSI CROSS TERM MAP (CMAP) CORRECTION <<<<<<<
+ TITLE> *>>>>>>>>>>>>>>>>>>>>>> DECEMBER, 2003 <<<<<<<<<<<<<<<<<<<<<<<<<<
+ TITLE> * ALL COMMENTS TO ADM JR. VIA THE CHARMM WEB SITE: WWW.CHARMM.ORG
+ TITLE> *               PARAMETER SET DISCUSSION FORUM
+ TITLE> *
+  
+ CHARMM>    close unit 1
+ VCLOSE: Closing unit    1 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    open unit 1 read form name @par
+ Parameter: PAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/PAR_ALL22_PROT.PRM"
+ VOPEN> Attempting to open::/home/craigp/software/c36b2/toppar/par_all22_prot.prm::
+ OPNLGU> Unit  1 opened for READONLY access to /home/craigp/software/c36b2/toppar/par_all22_prot.prm
+  
+ CHARMM>    read param card unit 1 flex
+
+          PARAMETER FILE BEING READ FROM UNIT  1
+ TITLE> *>>>>> CHARMM22 ALL-HYDROGEN PARAMETER FILE FOR PROTEINS <<<<<<<<
+ TITLE> *>>>>> INCLUDES PHI, PSI CROSS TERM MAP (CMAP) CORRECTION <<<<<<<
+ TITLE> *>>>>>>>>>>>>>>>>>>>>>> DECEMBER, 2003 <<<<<<<<<<<<<<<<<<<<<<<<<<
+ TITLE> * ALL COMMENTS TO ADM JR. VIA THE CHARMM WEB SITE: WWW.CHARMM.ORG
+ TITLE> *               PARAMETER SET DISCUSSION FORUM
+ TITLE> *
+ PARMIO> NONBOND, HBOND lists and IMAGE atoms cleared.
+  
+ CHARMM>    close unit 1
+ VCLOSE: Closing unit    1 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    stream @phstr
+ Parameter: PHSTR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOPPAR_PHMD_C22_FORAMBER.STR"
+ VOPEN> Attempting to open::/home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str::
+ OPNLGU> Unit 99 opened for READONLY access to /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str
+
+                    INPUT STREAM SWITCHING TO UNIT    99
+ RDTITL> * TOPOLOGY AND PARAMETER INFORMATION FOR PHMD USED WITH C22 FF
+ RDTITL> * FOR BUILDING CHARMM FILES FOR AMBER
+ RDTITL> *
+ Parameter: IN1 <- "" <empty>
+  
+ CHARMM>     
+  
+ CHARMM>    !Robert Harris, 4/13/2020
+ CHARMM>    !
+ CHARMM>    !Removed bonds between hydrogens in TIPP and TIPU so that Amber treats them as not water
+ CHARMM>     
+  
+ CHARMM>    !Wei Chen, 3/30/2015
+ CHARMM>    !
+ CHARMM>    !Topology and parameters were copied from top_all22_prot_cmap_ephmd.inp & par_all22_prot_cmap_ephmd.inp
+ CHARMM>    !
+ CHARMM>    !Hydronium
+ CHARMM>    ! added by Jason Wallace
+ CHARMM>    ! Sagnella and Voth Biophys. J. (1996) 70:2043-2051
+ CHARMM>    !
+ CHARMM>    !Hydroxide
+ CHARMM>    ! added by Wei Chen
+ CHARMM>    ! copy from TIP3
+ CHARMM>    !
+ CHARMM>     
+  
+ CHARMM>    !test "append" to determine if previous toppar files have been read and
+ CHARMM>    !add append to "read rtf card" if true
+ CHARMM>    set nat ?NATC
+ RDCMND substituted energy or value "?NATC" to "87"
+ Parameter: NAT <- "87"
+  
+ CHARMM>    set app append
+ Parameter: APP <- "APPEND"
+  
+ CHARMM>    !We're exploiting what is arguably a bug in the parser. On the left hand side,
+ CHARMM>    !the quotes have priority, so NAT is correctly substituted. On the right hand
+ CHARMM>    !side, the ? has priority and NATC" (sic) is not a valid substitution...
+ CHARMM>    if "@NAT" eq "?NATC" stop
+ Parameter: NAT -> "87"
+ RDCMND: can not substitute energy "?NATC""
+ Comparing ""87"" and ""?NATC"".
+ IF test evaluated as false.  Skipping command
+  
+ CHARMM>     
+  
+ CHARMM>    read rtf card @app
+ Parameter: APP -> "APPEND"
+ MAINIO> Residue topology file being read from unit  99.
+ RDTITL> * TOPOLOGY FOR PHMD
+ RDTITL> *
+  
+ CHARMM>     
+  
+ CHARMM>    read para card flex @app
+ Parameter: APP -> "APPEND"
+
+          PARAMETER FILE BEING READ FROM UNIT 99
+ RDTITL> * PARAMETERS FOR PHMD
+ RDTITL> *
+ PARMIO> NONBOND, HBOND lists and IMAGE atoms cleared.
+  
+ VCLOSE: Closing unit   99 with status "KEEP"
+
+                    RETURNING TO INPUT STREAM     5
+  
+ CHARMM>    stream @watstr
+ Parameter: WATSTR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOPPAR_WATER_IONS.STR"
+ VOPEN> Attempting to open::/home/craigp/software/c36b2/toppar/toppar_water_ions.str::
+ OPNLGU> Unit 99 opened for READONLY access to /home/craigp/software/c36b2/toppar/toppar_water_ions.str
+
+                    INPUT STREAM SWITCHING TO UNIT    99
+ RDTITL> * TOPLOGY AND PARAMETER INFORMATION FOR WATER AND IONS.
+ RDTITL> *
+ Parameter: IN1 <- "" <empty>
+  
+ CHARMM>     
+  
+ CHARMM>    !Testcase
+ CHARMM>    !test_water_ions.inp
+ CHARMM>     
+  
+ CHARMM>    ! IMPORTANT NOTE: this file contains NBFixes between carboxylates and sodium,
+ CHARMM>    ! which will only apply if the main files containing carboxylate atom types
+ CHARMM>    ! have been read in first!
+ CHARMM>     
+  
+ CHARMM>    !references
+ CHARMM>    !
+ CHARMM>    !TIP3P water model
+ CHARMM>    !
+ CHARMM>    !W.L. Jorgensen; J.Chandrasekhar; J.D. Madura; R.W. Impey;
+ CHARMM>    !M.L. Klein; "Comparison of simple potential functions for
+ CHARMM>    !simulating liquid water", J. Chem. Phys. 79 926-935 (1983).
+ CHARMM>    !
+ CHARMM>    !IONS
+ CHARMM>    !
+ CHARMM>    !Ions from Roux and coworkers
+ CHARMM>    !
+ CHARMM>    !Beglov, D. and Roux, B., Finite Representation of an Infinite
+ CHARMM>    !Bulk System: Solvent Boundary Potential for Computer Simulations,
+ CHARMM>    !Journal of Chemical Physics, 1994, 100: 9050-9063
+ CHARMM>    !
+ CHARMM>    !ZINC
+ CHARMM>    !
+ CHARMM>    !Stote, R.H. and Karplus, M. Zinc Binding in Proteins and
+ CHARMM>    !Solution: A Simple but Accurate Nonbonded Representation, PROTEINS:
+ CHARMM>    !Structure, Function, and Genetics 23:12-31 (1995)
+ CHARMM>    !
+ CHARMM>    !NBFIX for sodium-carbonyl oxygen (SOD-O) - added by Wei Chen, Feb. 2013.
+ CHARMM>    !Noskov,J. Mol. Biol. (2008). 377: 804-818.
+ CHARMM>    !
+ CHARMM>     
+  
+ CHARMM>    !test "append" to determine if previous toppar files have been read and
+ CHARMM>    !add append to "read rtf card" if true
+ CHARMM>    set nat ?NATC
+ RDCMND substituted energy or value "?NATC" to "87"
+ Parameter: NAT <- "87"
+  
+ CHARMM>    set app
+ Parameter: APP <- "" <empty>
+  
+ CHARMM>    !We're exploiting what is arguably a bug in the parser. On the left hand side,
+ CHARMM>    !the quotes have priority, so NAT is correctly substituted. On the right hand
+ CHARMM>    !side, the ? has priority and NATC" (sic) is not a valid substitution...
+ CHARMM>    if "@NAT" ne "?NATC" if @nat ne 0 set app append
+ Parameter: NAT -> "87"
+ Parameter: NAT -> "87"
+ RDCMND: can not substitute energy "?NATC""
+ Comparing ""87"" and ""?NATC"".
+ IF test evaluated as true.  Performing command
+ Comparing "87" and "0".
+ IF test evaluated as true.  Performing command
+ Parameter: APP <- "APPEND"
+  
+ CHARMM>     
+  
+ CHARMM>    read rtf card @app
+ Parameter: APP -> "APPEND"
+ MAINIO> Residue topology file being read from unit  99.
+ RDTITL> * TOPOLOGY FOR WATER AND IONS
+ RDTITL> *
+  
+ CHARMM>     
+  
+ CHARMM>    read para card flex @app
+ Parameter: APP -> "APPEND"
+
+          PARAMETER FILE BEING READ FROM UNIT 99
+ RDTITL> * PARAMETERS FOR WATER AND IONS
+ RDTITL> *
+ PARMIO> NONBOND, HBOND lists and IMAGE atoms cleared.
+  
+ CHARMM>     
+  
+ CHARMM>    ! The following section contains NBFixes for sodium interacting with
+ CHARMM>    ! carboxylate oxygens of various CHARMM force fields. It will generate
+ CHARMM>    ! level -1 warnings whenever any of these force fields have not been
+ CHARMM>    ! read prior to the current stream file. Since we don't want to force
+ CHARMM>    ! the user to always read all the force fields, we're suppressing the
+ CHARMM>    ! warnings. The only side effect is that you will have "most severe
+ CHARMM>    ! warning was at level 0" at the end of your output. Also note that
+ CHARMM>    ! the user is responsible for reading the current file last if they
+ CHARMM>    ! want the NBFixes to apply. A more elegant solution would require new
+ CHARMM>    ! features to be added to CHARMM.
+ CHARMM>    ! parallel fix, to avoid duplicated messages in the log
+ CHARMM>    set para
+ Parameter: PARA <- "" <empty>
+  
+ CHARMM>    if ?NUMNODE gt 1 set para node 0
+ RDCMND substituted energy or value "?NUMNODE" to "1"
+ Comparing "1" and "1".
+ IF test evaluated as false.  Skipping command
+  
+ CHARMM>     
+  
+ CHARMM>    set wrn ?WRNLEV
+ RDCMND: can not substitute energy "?WRNLEV"
+ Parameter: WRN <- "?WRNLEV"
+  
+ CHARMM>    ! Some versions of CHARMM don't seem to initialize wrnlev...
+ CHARMM>    if "@WRN" eq "?WRNLEV" set wrn 5
+ Parameter: WRN -> "?WRNLEV"
+ RDCMND: can not substitute energy "?WRNLEV""
+ Comparing ""?WRNLEV"" and ""?WRNLEV"".
+ IF test evaluated as true.  Performing command
+ Parameter: WRN <- "5"
+  
+ CHARMM>    set bom ?bomlev
+ RDCMND substituted energy or value "?BOMLEV" to "0"
+ Parameter: BOM <- "0"
+  
+ CHARMM>    WRNLEV -1 @PARA
+ Parameter: PARA -> "" <empty>
+  
+ CHARMM>    BOMLEV -1 @PARA
+ Parameter: PARA -> "" <empty>
+  
+ CHARMM>    read para card flex append
+
+          PARAMETER FILE BEING READ FROM UNIT 99
+ RDTITL> * NBFIX BETWEEN CARBOXYLATE AND SODIUM
+ RDTITL> *
+ PARMIO> NONBOND, HBOND lists and IMAGE atoms cleared.
+  
+ CHARMM>    BOMLEV @bom @PARA
+ Parameter: BOM -> "0"
+ Parameter: PARA -> "" <empty>
+  
+ CHARMM>    WRNLEV @wrn @PARA
+ Parameter: WRN -> "5"
+ Parameter: PARA -> "" <empty>
+  
+ CHARMM>     
+  
+ CHARMM>    return
+ VCLOSE: Closing unit   99 with status "KEEP"
+
+                    RETURNING TO INPUT STREAM     5
+  
+ CHARMM>     
+  
+ CHARMM>    ! read in sequence
+ CHARMM>    open unit 1 read form name @input
+ Parameter: INPUT -> "CHAINA.PDB"
+ VOPEN> Attempting to open::chaina.pdb::
+ OPNLGU> Unit  1 opened for READONLY access to chaina.pdb
+  
+ CHARMM>    read sequ pdb unit 1
+ MAINIO> Sequence information being read from unit   1.
+ TITLE>  *
+
+          RESIDUE SEQUENCE --   129 RESIDUES
+          LEU HSD LYS GLU PRO ALA THR LEU ILE LYS ALA ILE ASP GLY ASP THR VAL LYS LEU MET 
+          TYR LYS GLY GLN PRO MET THR PHE ARG LEU LEU LEU VAL ASP THR PRO GLU PHE ASN GLU 
+          LYS TYR GLY PRO GLU ALA SER ALA PHE THR LYS LYS MET VAL GLU ASN ALA LYS LYS ILE 
+          GLU LYS GLU PHE ASP LYS GLY GLN ARG THR ASP LYS TYR GLY ARG GLY LEU ALA TYR ILE 
+          TYR ALA ASP GLY LYS MET VAL ASN GLU ALA LEU VAL ARG GLN GLY LEU ALA LYS VAL ALA 
+          TYR VAL TYR LYS GLY ASN ASN THR HSD GLU GLN LEU LEU ARG LYS ALA GLU ALA GLN ALA 
+          LYS LYS GLU LYS LEU ASN ILE TRP SER 
+ ***** Message from SEQRDR ***** THE SYSTEM CONTAINS 43 TITRATABLE GROUPS
+ THE USER MUST PREDETERMINE THE PROTONATION STATE THROUGH THE SEQUENCE AND RTF
+ HIS -  0  ASP -  6  GLU - 11  LYS - 19  TYR -  7
+  
+ CHARMM>     
+  
+ CHARMM>    ! generate psf
+ CHARMM>    generate @segid first ACE last CT2 setup
+ Parameter: SEGID -> "PROA"
+ THE PATCH 'ACE' WILL BE USED FOR THE FIRST RESIDUE
+ THE PATCH 'CT2' WILL BE USED FOR THE LAST  RESIDUE
+ GENPSF> Segment   1 has been generated. Its identifier is PROA.
+ PSFSUM> PSF modified: NONBOND lists and IMAGE atoms cleared.
+ PSFSUM> Summary of the structure file counters :
+         Number of segments      =        1   Number of residues   =      129
+         Number of atoms         =     2110   Number of groups     =      639
+         Number of bonds         =     2128   Number of angles     =     3868
+         Number of dihedrals     =     5639   Number of impropers  =      340
+         Number of cross-terms   =      128
+         Number of HB acceptors  =      193   Number of HB donors  =      250
+         Number of NB exclusions =        0   Total charge =    7.00000
+  
+ CHARMM>     
+  
+ CHARMM>    !patch disu @segid 6 @segid 127
+ CHARMM>    !patch disu @segid 30 @segid 115
+ CHARMM>    !patch disu @segid 64 @segid 80
+ CHARMM>    !patch disu @segid 76 @segid 94
+ CHARMM>     
+  
+ CHARMM>    ! read in coordinates
+ CHARMM>    open unit 1 read form name @input
+ Parameter: INPUT -> "CHAINA.PDB"
+ OPNLGU> Unit already open. The old file will be closed first.
+ VCLOSE: Closing unit    1 with status "KEEP"
+ VOPEN> Attempting to open::chaina.pdb::
+ OPNLGU> Unit  1 opened for READONLY access to chaina.pdb
+  
+ CHARMM>    read coor pdb unit 1
+  read CHARMM-pdb format
+          SPATIAL COORDINATES BEING READ FROM UNIT  1
+ TITLE>  *
+ ** WARNING ** After reading, there are no coordinates for selected atom:     1     1 LEU  CAY 
+ ** WARNING ** After reading, there are no coordinates for selected atom:     2     1 LEU  HY1 
+ ** WARNING ** After reading, there are no coordinates for selected atom:     3     1 LEU  HY2 
+ ** WARNING ** After reading, there are no coordinates for selected atom:     4     1 LEU  HY3 
+ ** WARNING ** After reading, there are no coordinates for selected atom:     5     1 LEU  CY  
+ ** WARNING ** After reading, there are no coordinates for selected atom:     6     1 LEU  OY  
+ ** WARNING ** After reading, there are no coordinates for selected atom:     8     1 LEU  HN  
+ ** WARNING ** After reading, there are no coordinates for selected atom:    10     1 LEU  HA  
+ ** WARNING ** After reading, there are no coordinates for selected atom:    12     1 LEU  HB1 
+ ** WARNING ** After reading, there are no coordinates for selected atom:    13     1 LEU  HB2 
+
+ ** A total of  1075 selected atoms have no coordinates
+ *** LEVEL  2 WARNING *** BOMLEV IS    0
+  
+ CHARMM>     
+  
+ CHARMM>    ic para
+  
+ CHARMM>    ic build
+  
+ CHARMM>     
+  
+ CHARMM>    hbuild sele hydrogen end
+ SELRPN>   1071 atoms have been selected out of   2110
+ PRNHBD: CUToff Hydrogen Bond  distance =    0.5000   Angle =   90.0000
+         CuT switching ON HB dist. =     3.5000  OFf HB dist. =    4.0000
+         CuT switching ON Hb Angle =    50.0000  OFf Hb Angle =   70.0000
+         ACCEptor antecedents included
+         All hydrogen bonds for each hydrogen will be found
+         Hydrogen bonds between excluded atoms will be kept
+
+
+ NONBOND OPTION FLAGS: 
+     ELEC     VDW      ATOMs    CDIElec  SHIFt    VATOm    VSWItch 
+     BYGRoup  NOEXtnd  NOEWald 
+ CUTNB  = 14.000 CTEXNB =999.000 CTONNB = 10.000 CTOFNB = 12.000
+ CGONNB =  0.000 CGOFNB = 10.000
+ WMIN   =  1.500 WRNMXD =  0.500 E14FAC =  1.000 EPS    =  1.000
+ NBXMOD =      5
+ There are        0 atom  pairs and        0 atom  exclusions.
+ There are        0 group pairs and        0 group exclusions.
+ <MAKINB> with mode   5 found   5996 exclusions and   5568 interactions(1-4)
+ <MAKGRP> found   1869 group exclusions.
+
+ CUToff Hydrogen Bond  distance =    0.5000           Angle =   90.0000
+ CuT switching ON HB dist. =     3.5000 OFf HB dist. =    4.0000
+ CuT switching ON Hb Angle =    50.0000 OFf Hb Angle =   70.0000
+ ACCEptor antecedents included
+ dihedral PHI STePs for spin =   10.0000
+ cutoff for water acceptor search CUTWat=    7.5000
+
+ Place: HN  ,    ,    , constructed for donor PROA 1    LEU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 1    LEU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 1    LEU  CB  .
+ Place: HG  ,    ,    , constructed for donor PROA 1    LEU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 2    HSD  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 2    HSD  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 2    HSD  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 2    HSD  ND1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 2    HSD  CE1 .
+ Place: HD2 ,    ,    , constructed for donor PROA 2    HSD  CD2 .
+ Place: HN  ,    ,    , constructed for donor PROA 3    LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 3    LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 3    LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 3    LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 3    LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 3    LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 4    GLU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 4    GLU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 4    GLU  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 4    GLU  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 5    PRO  CD  .
+ Place: HA  ,    ,    , constructed for donor PROA 5    PRO  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 5    PRO  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 5    PRO  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 6    ALA  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 6    ALA  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 7    THR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 7    THR  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 7    THR  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 8    LEU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 8    LEU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 8    LEU  CB  .
+ Place: HG  ,    ,    , constructed for donor PROA 8    LEU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 9    ILE  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 9    ILE  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 9    ILE  CB  .
+ Place: HG11,HG12,    , constructed for donor PROA 9    ILE  CG1 .
+ Place: HN  ,    ,    , constructed for donor PROA 10   LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 10   LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 10   LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 10   LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 10   LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 10   LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 11   ALA  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 11   ALA  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 12   ILE  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 12   ILE  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 12   ILE  CB  .
+ Place: HG11,HG12,    , constructed for donor PROA 12   ILE  CG1 .
+ Place: HN  ,    ,    , constructed for donor PROA 13   ASP  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 13   ASP  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 13   ASP  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 14   GLY  N   .
+ Place: HA1 ,HA2 ,    , constructed for donor PROA 14   GLY  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 15   ASP  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 15   ASP  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 15   ASP  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 16   THR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 16   THR  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 16   THR  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 17   VAL  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 17   VAL  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 17   VAL  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 18   LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 18   LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 18   LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 18   LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 18   LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 18   LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 19   LEU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 19   LEU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 19   LEU  CB  .
+ Place: HG  ,    ,    , constructed for donor PROA 19   LEU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 20   MET  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 20   MET  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 20   MET  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 20   MET  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 21   TYR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 21   TYR  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 21   TYR  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 21   TYR  CD1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 21   TYR  CE1 .
+ Place: HD2 ,    ,    , constructed for donor PROA 21   TYR  CD2 .
+ Place: HE2 ,    ,    , constructed for donor PROA 21   TYR  CE2 .
+ Place: HN  ,    ,    , constructed for donor PROA 22   LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 22   LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 22   LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 22   LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 22   LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 22   LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 23   GLY  N   .
+ Place: HA1 ,HA2 ,    , constructed for donor PROA 23   GLY  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 24   GLN  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 24   GLN  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 24   GLN  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 24   GLN  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 25   PRO  CD  .
+ Place: HA  ,    ,    , constructed for donor PROA 25   PRO  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 25   PRO  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 25   PRO  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 26   MET  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 26   MET  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 26   MET  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 26   MET  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 27   THR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 27   THR  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 27   THR  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 28   PHE  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 28   PHE  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 28   PHE  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 28   PHE  CD1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 28   PHE  CE1 .
+ Place: HZ  ,    ,    , constructed for donor PROA 28   PHE  CZ  .
+ Place: HD2 ,    ,    , constructed for donor PROA 28   PHE  CD2 .
+ Place: HE2 ,    ,    , constructed for donor PROA 28   PHE  CE2 .
+ Place: HN  ,    ,    , constructed for donor PROA 29   ARG  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 29   ARG  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 29   ARG  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 29   ARG  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 29   ARG  CD  .
+ Place: HE  ,    ,    , constructed for donor PROA 29   ARG  NE  .
+ Place: HN  ,    ,    , constructed for donor PROA 30   LEU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 30   LEU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 30   LEU  CB  .
+ Place: HG  ,    ,    , constructed for donor PROA 30   LEU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 31   LEU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 31   LEU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 31   LEU  CB  .
+ Place: HG  ,    ,    , constructed for donor PROA 31   LEU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 32   LEU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 32   LEU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 32   LEU  CB  .
+ Place: HG  ,    ,    , constructed for donor PROA 32   LEU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 33   VAL  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 33   VAL  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 33   VAL  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 34   ASP  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 34   ASP  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 34   ASP  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 35   THR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 35   THR  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 35   THR  CB  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 36   PRO  CD  .
+ Place: HA  ,    ,    , constructed for donor PROA 36   PRO  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 36   PRO  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 36   PRO  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 37   GLU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 37   GLU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 37   GLU  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 37   GLU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 38   PHE  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 38   PHE  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 38   PHE  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 38   PHE  CD1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 38   PHE  CE1 .
+ Place: HZ  ,    ,    , constructed for donor PROA 38   PHE  CZ  .
+ Place: HD2 ,    ,    , constructed for donor PROA 38   PHE  CD2 .
+ Place: HE2 ,    ,    , constructed for donor PROA 38   PHE  CE2 .
+ Place: HN  ,    ,    , constructed for donor PROA 39   ASN  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 39   ASN  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 39   ASN  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 40   GLU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 40   GLU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 40   GLU  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 40   GLU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 41   LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 41   LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 41   LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 41   LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 41   LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 41   LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 42   TYR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 42   TYR  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 42   TYR  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 42   TYR  CD1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 42   TYR  CE1 .
+ Place: HD2 ,    ,    , constructed for donor PROA 42   TYR  CD2 .
+ Place: HE2 ,    ,    , constructed for donor PROA 42   TYR  CE2 .
+ Place: HN  ,    ,    , constructed for donor PROA 43   GLY  N   .
+ Place: HA1 ,HA2 ,    , constructed for donor PROA 43   GLY  CA  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 44   PRO  CD  .
+ Place: HA  ,    ,    , constructed for donor PROA 44   PRO  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 44   PRO  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 44   PRO  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 45   GLU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 45   GLU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 45   GLU  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 45   GLU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 46   ALA  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 46   ALA  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 47   SER  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 47   SER  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 47   SER  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 48   ALA  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 48   ALA  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 49   PHE  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 49   PHE  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 49   PHE  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 49   PHE  CD1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 49   PHE  CE1 .
+ Place: HZ  ,    ,    , constructed for donor PROA 49   PHE  CZ  .
+ Place: HD2 ,    ,    , constructed for donor PROA 49   PHE  CD2 .
+ Place: HE2 ,    ,    , constructed for donor PROA 49   PHE  CE2 .
+ Place: HN  ,    ,    , constructed for donor PROA 50   THR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 50   THR  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 50   THR  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 51   LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 51   LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 51   LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 51   LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 51   LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 51   LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 52   LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 52   LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 52   LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 52   LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 52   LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 52   LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 53   MET  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 53   MET  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 53   MET  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 53   MET  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 54   VAL  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 54   VAL  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 54   VAL  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 55   GLU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 55   GLU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 55   GLU  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 55   GLU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 56   ASN  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 56   ASN  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 56   ASN  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 57   ALA  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 57   ALA  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 58   LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 58   LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 58   LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 58   LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 58   LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 58   LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 59   LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 59   LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 59   LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 59   LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 59   LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 59   LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 60   ILE  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 60   ILE  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 60   ILE  CB  .
+ Place: HG11,HG12,    , constructed for donor PROA 60   ILE  CG1 .
+ Place: HN  ,    ,    , constructed for donor PROA 61   GLU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 61   GLU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 61   GLU  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 61   GLU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 62   LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 62   LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 62   LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 62   LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 62   LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 62   LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 63   GLU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 63   GLU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 63   GLU  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 63   GLU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 64   PHE  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 64   PHE  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 64   PHE  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 64   PHE  CD1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 64   PHE  CE1 .
+ Place: HZ  ,    ,    , constructed for donor PROA 64   PHE  CZ  .
+ Place: HD2 ,    ,    , constructed for donor PROA 64   PHE  CD2 .
+ Place: HE2 ,    ,    , constructed for donor PROA 64   PHE  CE2 .
+ Place: HN  ,    ,    , constructed for donor PROA 65   ASP  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 65   ASP  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 65   ASP  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 66   LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 66   LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 66   LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 66   LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 66   LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 66   LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 67   GLY  N   .
+ Place: HA1 ,HA2 ,    , constructed for donor PROA 67   GLY  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 68   GLN  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 68   GLN  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 68   GLN  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 68   GLN  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 69   ARG  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 69   ARG  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 69   ARG  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 69   ARG  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 69   ARG  CD  .
+ Place: HE  ,    ,    , constructed for donor PROA 69   ARG  NE  .
+ Place: HN  ,    ,    , constructed for donor PROA 70   THR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 70   THR  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 70   THR  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 71   ASP  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 71   ASP  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 71   ASP  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 72   LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 72   LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 72   LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 72   LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 72   LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 72   LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 73   TYR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 73   TYR  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 73   TYR  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 73   TYR  CD1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 73   TYR  CE1 .
+ Place: HD2 ,    ,    , constructed for donor PROA 73   TYR  CD2 .
+ Place: HE2 ,    ,    , constructed for donor PROA 73   TYR  CE2 .
+ Place: HN  ,    ,    , constructed for donor PROA 74   GLY  N   .
+ Place: HA1 ,HA2 ,    , constructed for donor PROA 74   GLY  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 75   ARG  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 75   ARG  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 75   ARG  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 75   ARG  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 75   ARG  CD  .
+ Place: HE  ,    ,    , constructed for donor PROA 75   ARG  NE  .
+ Place: HN  ,    ,    , constructed for donor PROA 76   GLY  N   .
+ Place: HA1 ,HA2 ,    , constructed for donor PROA 76   GLY  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 77   LEU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 77   LEU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 77   LEU  CB  .
+ Place: HG  ,    ,    , constructed for donor PROA 77   LEU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 78   ALA  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 78   ALA  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 79   TYR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 79   TYR  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 79   TYR  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 79   TYR  CD1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 79   TYR  CE1 .
+ Place: HD2 ,    ,    , constructed for donor PROA 79   TYR  CD2 .
+ Place: HE2 ,    ,    , constructed for donor PROA 79   TYR  CE2 .
+ Place: HN  ,    ,    , constructed for donor PROA 80   ILE  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 80   ILE  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 80   ILE  CB  .
+ Place: HG11,HG12,    , constructed for donor PROA 80   ILE  CG1 .
+ Place: HN  ,    ,    , constructed for donor PROA 81   TYR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 81   TYR  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 81   TYR  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 81   TYR  CD1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 81   TYR  CE1 .
+ Place: HD2 ,    ,    , constructed for donor PROA 81   TYR  CD2 .
+ Place: HE2 ,    ,    , constructed for donor PROA 81   TYR  CE2 .
+ Place: HN  ,    ,    , constructed for donor PROA 82   ALA  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 82   ALA  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 83   ASP  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 83   ASP  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 83   ASP  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 84   GLY  N   .
+ Place: HA1 ,HA2 ,    , constructed for donor PROA 84   GLY  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 85   LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 85   LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 85   LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 85   LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 85   LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 85   LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 86   MET  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 86   MET  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 86   MET  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 86   MET  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 87   VAL  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 87   VAL  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 87   VAL  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 88   ASN  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 88   ASN  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 88   ASN  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 89   GLU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 89   GLU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 89   GLU  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 89   GLU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 90   ALA  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 90   ALA  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 91   LEU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 91   LEU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 91   LEU  CB  .
+ Place: HG  ,    ,    , constructed for donor PROA 91   LEU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 92   VAL  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 92   VAL  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 92   VAL  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 93   ARG  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 93   ARG  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 93   ARG  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 93   ARG  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 93   ARG  CD  .
+ Place: HE  ,    ,    , constructed for donor PROA 93   ARG  NE  .
+ Place: HN  ,    ,    , constructed for donor PROA 94   GLN  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 94   GLN  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 94   GLN  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 94   GLN  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 95   GLY  N   .
+ Place: HA1 ,HA2 ,    , constructed for donor PROA 95   GLY  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 96   LEU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 96   LEU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 96   LEU  CB  .
+ Place: HG  ,    ,    , constructed for donor PROA 96   LEU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 97   ALA  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 97   ALA  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 98   LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 98   LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 98   LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 98   LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 98   LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 98   LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 99   VAL  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 99   VAL  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 99   VAL  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 100  ALA  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 100  ALA  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 101  TYR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 101  TYR  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 101  TYR  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 101  TYR  CD1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 101  TYR  CE1 .
+ Place: HD2 ,    ,    , constructed for donor PROA 101  TYR  CD2 .
+ Place: HE2 ,    ,    , constructed for donor PROA 101  TYR  CE2 .
+ Place: HN  ,    ,    , constructed for donor PROA 102  VAL  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 102  VAL  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 102  VAL  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 103  TYR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 103  TYR  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 103  TYR  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 103  TYR  CD1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 103  TYR  CE1 .
+ Place: HD2 ,    ,    , constructed for donor PROA 103  TYR  CD2 .
+ Place: HE2 ,    ,    , constructed for donor PROA 103  TYR  CE2 .
+ Place: HN  ,    ,    , constructed for donor PROA 104  LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 104  LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 104  LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 104  LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 104  LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 104  LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 105  GLY  N   .
+ Place: HA1 ,HA2 ,    , constructed for donor PROA 105  GLY  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 106  ASN  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 106  ASN  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 106  ASN  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 107  ASN  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 107  ASN  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 107  ASN  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 108  THR  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 108  THR  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 108  THR  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 109  HSD  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 109  HSD  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 109  HSD  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 109  HSD  ND1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 109  HSD  CE1 .
+ Place: HD2 ,    ,    , constructed for donor PROA 109  HSD  CD2 .
+ Place: HN  ,    ,    , constructed for donor PROA 110  GLU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 110  GLU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 110  GLU  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 110  GLU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 111  GLN  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 111  GLN  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 111  GLN  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 111  GLN  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 112  LEU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 112  LEU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 112  LEU  CB  .
+ Place: HG  ,    ,    , constructed for donor PROA 112  LEU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 113  LEU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 113  LEU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 113  LEU  CB  .
+ Place: HG  ,    ,    , constructed for donor PROA 113  LEU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 114  ARG  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 114  ARG  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 114  ARG  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 114  ARG  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 114  ARG  CD  .
+ Place: HE  ,    ,    , constructed for donor PROA 114  ARG  NE  .
+ Place: HN  ,    ,    , constructed for donor PROA 115  LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 115  LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 115  LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 115  LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 115  LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 115  LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 116  ALA  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 116  ALA  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 117  GLU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 117  GLU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 117  GLU  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 117  GLU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 118  ALA  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 118  ALA  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 119  GLN  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 119  GLN  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 119  GLN  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 119  GLN  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 120  ALA  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 120  ALA  CA  .
+ Place: HN  ,    ,    , constructed for donor PROA 121  LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 121  LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 121  LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 121  LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 121  LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 121  LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 122  LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 122  LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 122  LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 122  LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 122  LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 122  LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 123  GLU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 123  GLU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 123  GLU  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 123  GLU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 124  LYS  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 124  LYS  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 124  LYS  CB  .
+ Place: HG1 ,HG2 ,    , constructed for donor PROA 124  LYS  CG  .
+ Place: HD1 ,HD2 ,    , constructed for donor PROA 124  LYS  CD  .
+ Place: HE1 ,HE2 ,    , constructed for donor PROA 124  LYS  CE  .
+ Place: HN  ,    ,    , constructed for donor PROA 125  LEU  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 125  LEU  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 125  LEU  CB  .
+ Place: HG  ,    ,    , constructed for donor PROA 125  LEU  CG  .
+ Place: HN  ,    ,    , constructed for donor PROA 126  ASN  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 126  ASN  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 126  ASN  CB  .
+ Place: HN  ,    ,    , constructed for donor PROA 127  ILE  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 127  ILE  CA  .
+ Place: HB  ,    ,    , constructed for donor PROA 127  ILE  CB  .
+ Place: HG11,HG12,    , constructed for donor PROA 127  ILE  CG1 .
+ Place: HN  ,    ,    , constructed for donor PROA 128  TRP  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 128  TRP  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 128  TRP  CB  .
+ Place: HD1 ,    ,    , constructed for donor PROA 128  TRP  CD1 .
+ Place: HE1 ,    ,    , constructed for donor PROA 128  TRP  NE1 .
+ Place: HE3 ,    ,    , constructed for donor PROA 128  TRP  CE3 .
+ Place: HZ3 ,    ,    , constructed for donor PROA 128  TRP  CZ3 .
+ Place: HZ2 ,    ,    , constructed for donor PROA 128  TRP  CZ2 .
+ Place: HH2 ,    ,    , constructed for donor PROA 128  TRP  CH2 .
+ Place: HN  ,    ,    , constructed for donor PROA 129  SER  N   .
+ Place: HA  ,    ,    , constructed for donor PROA 129  SER  CA  .
+ Place: HB1 ,HB2 ,    , constructed for donor PROA 129  SER  CB  .
+
+ NBONDX:       813 atom and      0 group interactions within 14.00 A.
+ Spin: HY1 ,HY2 ,HY3 , constructed for donor PROA 1    LEU  CAY .
+
+ NBONDX:      1827 atom and      0 group interactions within 14.00 A.
+ Spin: HD11,HD12,HD13, constructed for donor PROA 1    LEU  CD1 .
+
+ NBONDX:      1506 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,HD23, constructed for donor PROA 1    LEU  CD2 .
+
+ NBONDX:      1383 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 3    LYS  NZ  .
+
+ NBONDX:      2358 atom and      0 group interactions within 14.00 A.
+ Spin: HB1 ,HB2 ,HB3 , constructed for donor PROA 6    ALA  CB  .
+
+ NBONDX:       489 atom and      0 group interactions within 14.00 A.
+ Spin: HG1 ,    ,    , constructed for donor PROA 7    THR  OG1 .
+
+ NBONDX:      1488 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 7    THR  CG2 .
+
+ NBONDX:      2241 atom and      0 group interactions within 14.00 A.
+ Spin: HD11,HD12,HD13, constructed for donor PROA 8    LEU  CD1 .
+
+ NBONDX:      1959 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,HD23, constructed for donor PROA 8    LEU  CD2 .
+
+ NBONDX:      1260 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 9    ILE  CG2 .
+
+ NBONDX:      1326 atom and      0 group interactions within 14.00 A.
+ Spin: HD1 ,HD2 ,HD3 , constructed for donor PROA 9    ILE  CD  .
+
+ NBONDX:      1038 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 10   LYS  NZ  .
+
+ NBONDX:      2061 atom and      0 group interactions within 14.00 A.
+ Spin: HB1 ,HB2 ,HB3 , constructed for donor PROA 11   ALA  CB  .
+
+ NBONDX:      1845 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 12   ILE  CG2 .
+
+ NBONDX:      1986 atom and      0 group interactions within 14.00 A.
+ Spin: HD1 ,HD2 ,HD3 , constructed for donor PROA 12   ILE  CD  .
+
+ NBONDX:       786 atom and      0 group interactions within 14.00 A.
+ Spin: HG1 ,    ,    , constructed for donor PROA 16   THR  OG1 .
+
+ NBONDX:      2424 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 16   THR  CG2 .
+
+ NBONDX:      2778 atom and      0 group interactions within 14.00 A.
+ Spin: HG11,HG12,HG13, constructed for donor PROA 17   VAL  CG1 .
+
+ NBONDX:      2835 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 17   VAL  CG2 .
+
+ NBONDX:      1431 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 18   LYS  NZ  .
+
+ NBONDX:      2694 atom and      0 group interactions within 14.00 A.
+ Spin: HD11,HD12,HD13, constructed for donor PROA 19   LEU  CD1 .
+
+ NBONDX:      2556 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,HD23, constructed for donor PROA 19   LEU  CD2 .
+
+ NBONDX:       960 atom and      0 group interactions within 14.00 A.
+ Spin: HE1 ,HE2 ,HE3 , constructed for donor PROA 20   MET  CE  .
+
+ NBONDX:       535 atom and      0 group interactions within 14.00 A.
+ Spin: HH  ,    ,    , constructed for donor PROA 21   TYR  OH  .
+
+ NBONDX:       957 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 22   LYS  NZ  .
+
+ NBONDX:       438 atom and      0 group interactions within 14.00 A.
+ Spin: HE21,HE22,    , constructed for donor PROA 24   GLN  NE2 .
+
+ NBONDX:      1812 atom and      0 group interactions within 14.00 A.
+ Spin: HE1 ,HE2 ,HE3 , constructed for donor PROA 26   MET  CE  .
+
+ NBONDX:       563 atom and      0 group interactions within 14.00 A.
+ Spin: HG1 ,    ,    , constructed for donor PROA 27   THR  OG1 .
+
+ NBONDX:      2073 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 27   THR  CG2 .
+
+ NBONDX:      1802 atom and      0 group interactions within 14.00 A.
+ Spin: HH11,HH12,    , constructed for donor PROA 29   ARG  NH1 .
+
+ NBONDX:      1522 atom and      0 group interactions within 14.00 A.
+ Spin: HH21,HH22,    , constructed for donor PROA 29   ARG  NH2 .
+
+ NBONDX:      3246 atom and      0 group interactions within 14.00 A.
+ Spin: HD11,HD12,HD13, constructed for donor PROA 30   LEU  CD1 .
+
+ NBONDX:      3330 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,HD23, constructed for donor PROA 30   LEU  CD2 .
+
+ NBONDX:      2715 atom and      0 group interactions within 14.00 A.
+ Spin: HD11,HD12,HD13, constructed for donor PROA 31   LEU  CD1 .
+
+ NBONDX:      2595 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,HD23, constructed for donor PROA 31   LEU  CD2 .
+
+ NBONDX:      2316 atom and      0 group interactions within 14.00 A.
+ Spin: HD11,HD12,HD13, constructed for donor PROA 32   LEU  CD1 .
+
+ NBONDX:      2274 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,HD23, constructed for donor PROA 32   LEU  CD2 .
+
+ NBONDX:      2976 atom and      0 group interactions within 14.00 A.
+ Spin: HG11,HG12,HG13, constructed for donor PROA 33   VAL  CG1 .
+
+ NBONDX:      3105 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 33   VAL  CG2 .
+
+ NBONDX:       837 atom and      0 group interactions within 14.00 A.
+ Spin: HG1 ,    ,    , constructed for donor PROA 35   THR  OG1 .
+
+ NBONDX:      2697 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 35   THR  CG2 .
+
+ NBONDX:       380 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,    , constructed for donor PROA 39   ASN  ND2 .
+
+ NBONDX:       849 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 41   LYS  NZ  .
+
+ NBONDX:       394 atom and      0 group interactions within 14.00 A.
+ Spin: HH  ,    ,    , constructed for donor PROA 42   TYR  OH  .
+
+ NBONDX:      2280 atom and      0 group interactions within 14.00 A.
+ Spin: HB1 ,HB2 ,HB3 , constructed for donor PROA 46   ALA  CB  .
+
+ NBONDX:       620 atom and      0 group interactions within 14.00 A.
+ Spin: HG1 ,    ,    , constructed for donor PROA 47   SER  OG  .
+
+ NBONDX:      1506 atom and      0 group interactions within 14.00 A.
+ Spin: HB1 ,HB2 ,HB3 , constructed for donor PROA 48   ALA  CB  .
+
+ NBONDX:       924 atom and      0 group interactions within 14.00 A.
+ Spin: HG1 ,    ,    , constructed for donor PROA 50   THR  OG1 .
+
+ NBONDX:      2826 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 50   THR  CG2 .
+
+ NBONDX:      1137 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 51   LYS  NZ  .
+
+ NBONDX:       693 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 52   LYS  NZ  .
+
+ NBONDX:      2274 atom and      0 group interactions within 14.00 A.
+ Spin: HE1 ,HE2 ,HE3 , constructed for donor PROA 53   MET  CE  .
+
+ NBONDX:      2595 atom and      0 group interactions within 14.00 A.
+ Spin: HG11,HG12,HG13, constructed for donor PROA 54   VAL  CG1 .
+
+ NBONDX:      2316 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 54   VAL  CG2 .
+
+ NBONDX:       692 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,    , constructed for donor PROA 56   ASN  ND2 .
+
+ NBONDX:      1647 atom and      0 group interactions within 14.00 A.
+ Spin: HB1 ,HB2 ,HB3 , constructed for donor PROA 57   ALA  CB  .
+
+ NBONDX:       552 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 58   LYS  NZ  .
+
+ NBONDX:      1014 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 59   LYS  NZ  .
+
+ NBONDX:      2265 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 60   ILE  CG2 .
+
+ NBONDX:      2481 atom and      0 group interactions within 14.00 A.
+ Spin: HD1 ,HD2 ,HD3 , constructed for donor PROA 60   ILE  CD  .
+
+ NBONDX:      2136 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 62   LYS  NZ  .
+
+ NBONDX:       921 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 66   LYS  NZ  .
+
+ NBONDX:       970 atom and      0 group interactions within 14.00 A.
+ Spin: HE21,HE22,    , constructed for donor PROA 68   GLN  NE2 .
+
+ NBONDX:       990 atom and      0 group interactions within 14.00 A.
+ Spin: HH11,HH12,    , constructed for donor PROA 69   ARG  NH1 .
+
+ NBONDX:       916 atom and      0 group interactions within 14.00 A.
+ Spin: HH21,HH22,    , constructed for donor PROA 69   ARG  NH2 .
+
+ NBONDX:       446 atom and      0 group interactions within 14.00 A.
+ Spin: HG1 ,    ,    , constructed for donor PROA 70   THR  OG1 .
+
+ NBONDX:      1584 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 70   THR  CG2 .
+
+ NBONDX:       804 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 72   LYS  NZ  .
+
+ NBONDX:       226 atom and      0 group interactions within 14.00 A.
+ Spin: HH  ,    ,    , constructed for donor PROA 73   TYR  OH  .
+
+ NBONDX:      1206 atom and      0 group interactions within 14.00 A.
+ Spin: HH11,HH12,    , constructed for donor PROA 75   ARG  NH1 .
+
+ NBONDX:      1162 atom and      0 group interactions within 14.00 A.
+ Spin: HH21,HH22,    , constructed for donor PROA 75   ARG  NH2 .
+
+ NBONDX:      2037 atom and      0 group interactions within 14.00 A.
+ Spin: HD11,HD12,HD13, constructed for donor PROA 77   LEU  CD1 .
+
+ NBONDX:      2331 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,HD23, constructed for donor PROA 77   LEU  CD2 .
+
+ NBONDX:      2928 atom and      0 group interactions within 14.00 A.
+ Spin: HB1 ,HB2 ,HB3 , constructed for donor PROA 78   ALA  CB  .
+
+ NBONDX:       800 atom and      0 group interactions within 14.00 A.
+ Spin: HH  ,    ,    , constructed for donor PROA 79   TYR  OH  .
+
+ NBONDX:      2994 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 80   ILE  CG2 .
+
+ NBONDX:      3165 atom and      0 group interactions within 14.00 A.
+ Spin: HD1 ,HD2 ,HD3 , constructed for donor PROA 80   ILE  CD  .
+
+ NBONDX:       707 atom and      0 group interactions within 14.00 A.
+ Spin: HH  ,    ,    , constructed for donor PROA 81   TYR  OH  .
+
+ NBONDX:      2133 atom and      0 group interactions within 14.00 A.
+ Spin: HB1 ,HB2 ,HB3 , constructed for donor PROA 82   ALA  CB  .
+
+ NBONDX:      1014 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 85   LYS  NZ  .
+
+ NBONDX:      2358 atom and      0 group interactions within 14.00 A.
+ Spin: HE1 ,HE2 ,HE3 , constructed for donor PROA 86   MET  CE  .
+
+ NBONDX:      3006 atom and      0 group interactions within 14.00 A.
+ Spin: HG11,HG12,HG13, constructed for donor PROA 87   VAL  CG1 .
+
+ NBONDX:      2844 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 87   VAL  CG2 .
+
+ NBONDX:      2192 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,    , constructed for donor PROA 88   ASN  ND2 .
+
+ NBONDX:      2406 atom and      0 group interactions within 14.00 A.
+ Spin: HB1 ,HB2 ,HB3 , constructed for donor PROA 90   ALA  CB  .
+
+ NBONDX:      3036 atom and      0 group interactions within 14.00 A.
+ Spin: HD11,HD12,HD13, constructed for donor PROA 91   LEU  CD1 .
+
+ NBONDX:      2805 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,HD23, constructed for donor PROA 91   LEU  CD2 .
+
+ NBONDX:      2466 atom and      0 group interactions within 14.00 A.
+ Spin: HG11,HG12,HG13, constructed for donor PROA 92   VAL  CG1 .
+
+ NBONDX:      2733 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 92   VAL  CG2 .
+
+ NBONDX:      1020 atom and      0 group interactions within 14.00 A.
+ Spin: HH11,HH12,    , constructed for donor PROA 93   ARG  NH1 .
+
+ NBONDX:       826 atom and      0 group interactions within 14.00 A.
+ Spin: HH21,HH22,    , constructed for donor PROA 93   ARG  NH2 .
+
+ NBONDX:      1148 atom and      0 group interactions within 14.00 A.
+ Spin: HE21,HE22,    , constructed for donor PROA 94   GLN  NE2 .
+
+ NBONDX:      2247 atom and      0 group interactions within 14.00 A.
+ Spin: HD11,HD12,HD13, constructed for donor PROA 96   LEU  CD1 .
+
+ NBONDX:      2091 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,HD23, constructed for donor PROA 96   LEU  CD2 .
+
+ NBONDX:      2862 atom and      0 group interactions within 14.00 A.
+ Spin: HB1 ,HB2 ,HB3 , constructed for donor PROA 97   ALA  CB  .
+
+ NBONDX:      1377 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 98   LYS  NZ  .
+
+ NBONDX:      2079 atom and      0 group interactions within 14.00 A.
+ Spin: HG11,HG12,HG13, constructed for donor PROA 99   VAL  CG1 .
+
+ NBONDX:      2280 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 99   VAL  CG2 .
+
+ NBONDX:      1998 atom and      0 group interactions within 14.00 A.
+ Spin: HB1 ,HB2 ,HB3 , constructed for donor PROA 100  ALA  CB  .
+
+ NBONDX:       446 atom and      0 group interactions within 14.00 A.
+ Spin: HH  ,    ,    , constructed for donor PROA 101  TYR  OH  .
+
+ NBONDX:      1614 atom and      0 group interactions within 14.00 A.
+ Spin: HG11,HG12,HG13, constructed for donor PROA 102  VAL  CG1 .
+
+ NBONDX:      1797 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 102  VAL  CG2 .
+
+ NBONDX:       434 atom and      0 group interactions within 14.00 A.
+ Spin: HH  ,    ,    , constructed for donor PROA 103  TYR  OH  .
+
+ NBONDX:       393 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 104  LYS  NZ  .
+
+ NBONDX:      1334 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,    , constructed for donor PROA 106  ASN  ND2 .
+
+ NBONDX:       864 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,    , constructed for donor PROA 107  ASN  ND2 .
+
+ NBONDX:       543 atom and      0 group interactions within 14.00 A.
+ Spin: HG1 ,    ,    , constructed for donor PROA 108  THR  OG1 .
+
+ NBONDX:      1584 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 108  THR  CG2 .
+
+ NBONDX:       764 atom and      0 group interactions within 14.00 A.
+ Spin: HE21,HE22,    , constructed for donor PROA 111  GLN  NE2 .
+
+ NBONDX:      1683 atom and      0 group interactions within 14.00 A.
+ Spin: HD11,HD12,HD13, constructed for donor PROA 112  LEU  CD1 .
+
+ NBONDX:      2055 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,HD23, constructed for donor PROA 112  LEU  CD2 .
+
+ NBONDX:      2487 atom and      0 group interactions within 14.00 A.
+ Spin: HD11,HD12,HD13, constructed for donor PROA 113  LEU  CD1 .
+
+ NBONDX:      2607 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,HD23, constructed for donor PROA 113  LEU  CD2 .
+
+ NBONDX:      1044 atom and      0 group interactions within 14.00 A.
+ Spin: HH11,HH12,    , constructed for donor PROA 114  ARG  NH1 .
+
+ NBONDX:       984 atom and      0 group interactions within 14.00 A.
+ Spin: HH21,HH22,    , constructed for donor PROA 114  ARG  NH2 .
+
+ NBONDX:       795 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 115  LYS  NZ  .
+
+ NBONDX:      2142 atom and      0 group interactions within 14.00 A.
+ Spin: HB1 ,HB2 ,HB3 , constructed for donor PROA 116  ALA  CB  .
+
+ NBONDX:      1389 atom and      0 group interactions within 14.00 A.
+ Spin: HB1 ,HB2 ,HB3 , constructed for donor PROA 118  ALA  CB  .
+
+ NBONDX:       640 atom and      0 group interactions within 14.00 A.
+ Spin: HE21,HE22,    , constructed for donor PROA 119  GLN  NE2 .
+
+ NBONDX:      1833 atom and      0 group interactions within 14.00 A.
+ Spin: HB1 ,HB2 ,HB3 , constructed for donor PROA 120  ALA  CB  .
+
+ NBONDX:      1320 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 121  LYS  NZ  .
+
+ NBONDX:       585 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 122  LYS  NZ  .
+
+ NBONDX:       627 atom and      0 group interactions within 14.00 A.
+ Spin: HZ1 ,HZ2 ,HZ3 , constructed for donor PROA 124  LYS  NZ  .
+
+ NBONDX:      1551 atom and      0 group interactions within 14.00 A.
+ Spin: HD11,HD12,HD13, constructed for donor PROA 125  LEU  CD1 .
+
+ NBONDX:      1311 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,HD23, constructed for donor PROA 125  LEU  CD2 .
+
+ NBONDX:      1174 atom and      0 group interactions within 14.00 A.
+ Spin: HD21,HD22,    , constructed for donor PROA 126  ASN  ND2 .
+
+ NBONDX:      1824 atom and      0 group interactions within 14.00 A.
+ Spin: HG21,HG22,HG23, constructed for donor PROA 127  ILE  CG2 .
+
+ NBONDX:      2202 atom and      0 group interactions within 14.00 A.
+ Spin: HD1 ,HD2 ,HD3 , constructed for donor PROA 127  ILE  CD  .
+
+ NBONDX:       358 atom and      0 group interactions within 14.00 A.
+ Spin: HG1 ,    ,    , constructed for donor PROA 129  SER  OG  .
+
+ NBONDX:       516 atom and      0 group interactions within 14.00 A.
+ Spin: HT1 ,HT2 ,    , constructed for donor PROA 129  SER  NT  .
+  
+ CHARMM>     
+  
+ CHARMM>    ! patch dummy atoms for ASP and GLU
+ CHARMM>    ! ---------------------------------
+ CHARMM>    !define ANY sele bynu 1 end
+ CHARMM>    !set res1 = ?selresi         ! get the starting value of resid
+ CHARMM>    !calc reslast = ?selresi + ?nres -1
+ CHARMM>     
+  
+ CHARMM>    !set ires @res1
+ CHARMM>     
+  
+ CHARMM>    !prnlev -1 !turn off printing
+ CHARMM>     
+  
+ CHARMM>    !label patch
+ CHARMM>    ! define residue sele segid @segid .and. resid @ires show end
+ CHARMM>    ! if ?selresn eq asp patch aspp2 @segid @ires
+ CHARMM>    ! if ?selresn eq glu patch glup2 @segid @ires
+ CHARMM>    ! incr ires
+ CHARMM>    !if ires le @reslast goto patch
+ CHARMM>     
+  
+ CHARMM>    !autogen angles dihed
+ CHARMM>     
+  
+ CHARMM>    !prnlev 5
+ CHARMM>     
+  
+ CHARMM>    !hbuild sele segi @segid .and. resn asp .and. type hd* end
+ CHARMM>    !hbuild sele segi @segid .and. resn glu .and. type he* end
+ CHARMM>     
+  
+ CHARMM>    ! Edit Dihedrals for Glupp2 and Aspp2
+ CHARMM>    !------------------------------------
+ CHARMM>     
+  
+ CHARMM>    !define ANY sele bynu 1 end
+ CHARMM>    !set res1 = ?selresi         ! get the starting value of resid
+ CHARMM>    !calc reslast = ?selresi + ?nres -1
+ CHARMM>     
+  
+ CHARMM>    !ic gene
+ CHARMM>    !ic fill
+ CHARMM>     
+  
+ CHARMM>    !set ires @res1
+ CHARMM>     
+  
+ CHARMM>    !prnlev -1
+ CHARMM>    !label edit
+ CHARMM>    ! define residue sele segid @segid .and. resid @ires show end
+ CHARMM>    ! if ?selresn eq asp then
+ CHARMM>    !    IC EDIT
+ CHARMM>    !       DIHE @segid @ires CB @segid @ires CG @segid @ires OD1 @segid @ires HD1 180.0
+ CHARMM>    !       DIHE @segid @ires CB @segid @ires CG @segid @ires OD2 @segid @ires HD2 180.0
+ CHARMM>    !    END
+ CHARMM>    ! endif
+ CHARMM>    ! if ?selresn eq glu then
+ CHARMM>    !    IC EDIT
+ CHARMM>    !       DIHE @segid @ires CG @segid @ires CD @segid @ires OE1 @segid @ires HE1 180.0
+ CHARMM>    !       DIHE @segid @ires CG @segid @ires CD @segid @ires OE2 @segid @ires HE2 180.0
+ CHARMM>    !    END
+ CHARMM>    ! endif
+ CHARMM>    ! incr ires
+ CHARMM>    !if ires le @reslast goto edit
+ CHARMM>     
+  
+ CHARMM>    !prnlev 5
+ CHARMM>     
+  
+ CHARMM>    !coor init sele segi @segid .and. resn asp .and. type hd* end
+ CHARMM>    !coor init sele segi @segid .and. resn glu .and. type he* end
+ CHARMM>     
+  
+ CHARMM>    ic build
+  
+ CHARMM>     
+  
+ CHARMM>    ! Fast minimization
+ CHARMM>    ! ------------------------
+ CHARMM>     
+  
+ CHARMM>    define heavy sele .not. type H* end
+ SELRPN>   1039 atoms have been selected out of   2110
+  
+ CHARMM>     
+  
+ CHARMM>    cons harm clear
+  
+ CHARMM>    cons harm force 50.0 sele heavy end
+ SELRPN>   1039 atoms have been selected out of   2110
+ CSTRAN: Harmonic Restraints
+          ABSOlute type as set number  1.  Number of selected atoms:   1039
+          Reference coordinates set to main coordinates.
+          Mass weighting will NOT be used for new restraints.
+          The force constant of      50.00000 will be used.
+          An exponent of  2 will be used.
+          The XYZ scale factors are:       1.00000       1.00000       1.00000
+          A total of   1039 atoms are restrained.
+  
+ CHARMM>     
+  
+ CHARMM>    mini   sd nstep  10 nprint 10 step 0.005
+
+ NONBOND OPTION FLAGS: 
+     ELEC     VDW      ATOMs    CDIElec  SHIFt    VATOm    VSWItch 
+     BYGRoup  NOEXtnd  NOEWald 
+ CUTNB  = 14.000 CTEXNB =999.000 CTONNB = 10.000 CTOFNB = 12.000
+ CGONNB =  0.000 CGOFNB = 10.000
+ WMIN   =  1.500 WRNMXD =  0.500 E14FAC =  1.000 EPS    =  1.000
+ NBXMOD =      5
+ There are        0 atom  pairs and        0 atom  exclusions.
+ There are        0 group pairs and        0 group exclusions.
+ <MAKINB> with mode   5 found   5996 exclusions and   5568 interactions(1-4)
+ <MAKGRP> found   1869 group exclusions.
+ Generating nonbond list with Exclusion mode = 5
+ == PRIMARY == SPACE FOR   606312 ATOM PAIRS AND        0 GROUP PAIRS
+ == PRIMARY == SPACE FOR   909488 ATOM PAIRS AND        0 GROUP PAIRS
+
+ General atom nonbond list generation found:
+   628315 ATOM PAIRS WERE FOUND FOR ATOM LIST
+    31408 GROUP PAIRS REQUIRED ATOM SEARCHES
+
+
+
+ STEEPD> An energy minimization has been requested.
+
+ NSTEP  =           10   NPRINT =           10
+ STEP   =    0.0050000   TOLFUN =    0.0000000
+ TOLGRD =    0.0000000   TOLSTP =    0.0000000
+
+MINI MIN: Cycle      ENERgy      Delta-E         GRMS    Step-size
+MINI INTERN:          BONDs       ANGLes       UREY-b    DIHEdrals    IMPRopers
+MINI CROSS:           CMAPs        PMF1D        PMF2D        PRIMO
+MINI EXTERN:        VDWaals         ELEC       HBONds          ASP         USER
+ ----------       ---------    ---------    ---------    ---------    ---------
+MINI>        0  -1613.04649      0.00000     10.38550      0.00500
+MINI INTERN>      186.72127    238.63296     42.48622    589.61229     28.43338
+MINI CROSS>      -172.38282      0.00000      0.00000      0.00000
+MINI EXTERN>     -352.87320  -2173.67659      0.00000      0.00000      0.00000
+ ----------       ---------    ---------    ---------    ---------    ---------
+MINI>       10  -1987.70308    374.65659      3.94486      0.00224
+MINI INTERN>       87.05615    254.03486     25.53668    576.36778     14.79870
+MINI CROSS>      -182.63786      0.00000      0.00000      0.00000
+MINI EXTERN>     -477.39237  -2327.59571      0.00000      0.00000      0.00000
+MINI CONSTR>       42.12871      0.00000      0.00000      0.00000      0.00000
+ ----------       ---------    ---------    ---------    ---------    ---------
+
+ STEEPD> Minimization exiting with number of steps limit (        10) exceeded.
+
+STPD MIN: Cycle      ENERgy      Delta-E         GRMS    Step-size
+STPD INTERN:          BONDs       ANGLes       UREY-b    DIHEdrals    IMPRopers
+STPD CROSS:           CMAPs        PMF1D        PMF2D        PRIMO
+STPD EXTERN:        VDWaals         ELEC       HBONds          ASP         USER
+STPD CONSTR:       HARMonic    CDIHedral          CIC     RESDistance       NOE
+ ----------       ---------    ---------    ---------    ---------    ---------
+STPD>       10  -1987.70308    374.65659      3.94486      0.00112
+STPD INTERN>       87.05615    254.03486     25.53668    576.36778     14.79870
+STPD CROSS>      -182.63786      0.00000      0.00000      0.00000
+STPD EXTERN>     -477.39237  -2327.59571      0.00000      0.00000      0.00000
+STPD CONSTR>       42.12871      0.00000      0.00000      0.00000      0.00000
+ ----------       ---------    ---------    ---------    ---------    ---------
+  
+ CHARMM>    mini abnr nstep  10 nprint 10 step 0.005
+
+ NONBOND OPTION FLAGS: 
+     ELEC     VDW      ATOMs    CDIElec  SHIFt    VATOm    VSWItch 
+     BYGRoup  NOEXtnd  NOEWald 
+ CUTNB  = 14.000 CTEXNB =999.000 CTONNB = 10.000 CTOFNB = 12.000
+ CGONNB =  0.000 CGOFNB = 10.000
+ WMIN   =  1.500 WRNMXD =  0.500 E14FAC =  1.000 EPS    =  1.000
+ NBXMOD =      5
+ There are   628315 atom  pairs and    11564 atom  exclusions.
+ There are        0 group pairs and     1869 group exclusions.
+ Generating nonbond list with Exclusion mode = 5
+ == PRIMARY == SPACE FOR   909488 ATOM PAIRS AND        0 GROUP PAIRS
+
+ General atom nonbond list generation found:
+   628171 ATOM PAIRS WERE FOUND FOR ATOM LIST
+    31341 GROUP PAIRS REQUIRED ATOM SEARCHES
+
+
+
+ ABNER> An energy minimization has been requested.
+
+ EIGRNG =    0.0005000   MINDIM =            5
+ NPRINT =           10   NSTEP  =           10
+ PSTRCT =    0.0000000   SDSTP  =    0.0050000
+ STPLIM =    1.0000000   STRICT =    0.1000000
+ TOLFUN =    0.0000000   TOLGRD =    0.0000000
+ TOLITR =          100   TOLSTP =    0.0000000
+ FMEM   =    0.0000000
+MINI MIN: Cycle      ENERgy      Delta-E         GRMS    Step-size
+MINI INTERN:          BONDs       ANGLes       UREY-b    DIHEdrals    IMPRopers
+MINI CROSS:           CMAPs        PMF1D        PMF2D        PRIMO
+MINI EXTERN:        VDWaals         ELEC       HBONds          ASP         USER
+MINI CONSTR:       HARMonic    CDIHedral          CIC     RESDistance       NOE
+ ----------       ---------    ---------    ---------    ---------    ---------
+MINI>        0  -1989.00125      1.29816      2.48173      0.00000
+MINI INTERN>       82.93369    236.71816     26.33625    576.74289     14.43653
+MINI CROSS>      -182.10807      0.00000      0.00000      0.00000
+MINI EXTERN>     -468.59579  -2312.07800      0.00000      0.00000      0.00000
+MINI CONSTR>       36.61309      0.00000      0.00000      0.00000      0.00000
+ ----------       ---------    ---------    ---------    ---------    ---------
+MINI>       10  -2083.61865     94.61740      2.05616      0.09226
+MINI INTERN>       87.73958    271.71328     28.77951    566.41912     17.70226
+MINI CROSS>      -184.46717      0.00000      0.00000      0.00000
+MINI EXTERN>     -520.08747  -2438.05903      0.00000      0.00000      0.00000
+MINI CONSTR>       86.64127      0.00000      0.00000      0.00000      0.00000
+ ----------       ---------    ---------    ---------    ---------    ---------
+
+ ABNER> Minimization exiting with number of steps limit (   10) exceeded.
+
+ABNR MIN: Cycle      ENERgy      Delta-E         GRMS    Step-size
+ABNR INTERN:          BONDs       ANGLes       UREY-b    DIHEdrals    IMPRopers
+ABNR CROSS:           CMAPs        PMF1D        PMF2D        PRIMO
+ABNR EXTERN:        VDWaals         ELEC       HBONds          ASP         USER
+ABNR CONSTR:       HARMonic    CDIHedral          CIC     RESDistance       NOE
+ ----------       ---------    ---------    ---------    ---------    ---------
+ABNR>       10  -2083.61865     94.61740      2.05616      0.08304
+ABNR INTERN>       87.73958    271.71328     28.77951    566.41912     17.70226
+ABNR CROSS>      -184.46717      0.00000      0.00000      0.00000
+ABNR EXTERN>     -520.08747  -2438.05903      0.00000      0.00000      0.00000
+ABNR CONSTR>       86.64127      0.00000      0.00000      0.00000      0.00000
+ ----------       ---------    ---------    ---------    ---------    ---------
+  
+ CHARMM>     
+  
+ CHARMM>    !mini sd nstep 300
+ CHARMM>    !mini abnr nstep 1200
+ CHARMM>     
+  
+ CHARMM>    !print structure and coordinates
+ CHARMM>     
+  
+ CHARMM>    open unit 1 write card name @{outname}.psf
+ Parameter: OUTNAME -> "CHAINA_H"
+ OPNLGU> Unit already open. The old file will be closed first.
+ VCLOSE: Closing unit    1 with status "KEEP"
+ VOPEN> Attempting to open::chaina_h.psf::
+ OPNLGU> Unit  1 opened for WRITE access to chaina_h.psf
+  
+ CHARMM>    write psf card unit 1
+ RDTITL> CLOSE UNIT 1
+ RDTITL> No title read.
+  
+ CHARMM>    close unit 1
+ VCLOSE: Closing unit    1 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    open unit 1 write card name @{outname}.crd
+ Parameter: OUTNAME -> "CHAINA_H"
+ VOPEN> Attempting to open::chaina_h.crd::
+ OPNLGU> Unit  1 opened for WRITE access to chaina_h.crd
+  
+ CHARMM>    write coor card unit 1
+ RDTITL> CLOSE UNIT 1
+ RDTITL> No title read.
+ VCLOSE: Closing unit    1 with status "KEEP"
+  
+ CHARMM>    close unit 1
+ CLOLGU>  *****  WARNING  ***** Attempt to close unit that was not open.
+  
+ CHARMM>     
+  
+ CHARMM>    stop
+$$$$$$  New timer profile $$$$$
+         Electrostatic & VDW             0.23 Other:            0.00
+      Nonbond force                   0.23 Other:            0.00
+         Bond energy                     0.00 Other:            0.00
+         Angle energy                    0.00 Other:            0.00
+         Dihedral energy                 0.01 Other:            0.00
+         Restraints energy               0.00 Other:            0.00
+      INTRNL energy                   0.01 Other:            0.00
+   Energy time                     0.24 Other:            0.00
+ Total time                      0.46 Other:            0.22
+
+                    NORMAL TERMINATION BY NORMAL STOP
+                    MOST SEVERE WARNING WAS AT LEVEL  0
+
+                    $$$$$ JOB ACCOUNTING INFORMATION $$$$$
+                     ELAPSED TIME:     0.46  SECONDS 
+                         CPU TIME:     0.46  SECONDS 

@@ -1,0 +1,6 @@
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd -box 115,115,115,90,90,90 
+outparm 6xfp_apo.parm7
+writeCoordinates 6xfp_apo.rst7
+
+quit
+

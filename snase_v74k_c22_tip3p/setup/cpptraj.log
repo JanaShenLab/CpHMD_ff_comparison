@@ -1,0 +1,6 @@
+# 09/20/24 16:24:53
+parm 3ruz_charmm.prmtop
+trajin 3ruz_charmm.rst7
+trajout test.pdb
+run
+quit

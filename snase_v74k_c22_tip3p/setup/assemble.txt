@@ -1,0 +1,931 @@
+1
+                 Chemistry at HARvard Macromolecular Mechanics
+           (CHARMM) - Developmental Version 36b2   February 15, 2012            
+       Copyright(c) 1984-2001  President and Fellows of Harvard College
+                              All Rights Reserved
+     Current operating system: Linux-5.15.0-113-generic(x86_64)@aura.umaryl     
+                 Created on  9/20/24 at 16:22:11 by user: craigp      
+
+            Maximum number of ATOMS:    360720, and RESidues:      120240
+ RDTITL> * ASSEMBLE SOLUTE, WATER, AND IONS
+ RDTITL> *
+  
+ CHARMM>     
+  
+ CHARMM>    !!!!!!!!!!!!!!!!!!!!!
+ CHARMM>    !! Global settings !!
+ CHARMM>    !!!!!!!!!!!!!!!!!!!!!
+ CHARMM>     
+  
+ CHARMM>    ! Set variables
+ CHARMM>    ! -------------
+ CHARMM>    set TOPPAR   = /home/craigp/software/c36b2/toppar
+ Parameter: TOPPAR <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+  
+ CHARMM>    set top      = @TOPPAR/top_all22_prot.rtf    ! C27 protein topology file
+ Parameter: TOPPAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+ Parameter: TOP <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOP_ALL22_PROT.RTF"
+  
+ CHARMM>    set par      = @TOPPAR/par_all22_prot.prm    ! C27 protein parameter file
+ Parameter: TOPPAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+ Parameter: PAR <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/PAR_ALL22_PROT.PRM"
+  
+ CHARMM>    set wation   = @TOPPAR/toppar_water_ions.str      ! C27 water & ions top & par files
+ Parameter: TOPPAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+ Parameter: WATION <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOPPAR_WATER_IONS.STR"
+  
+ CHARMM>    set phmdtp   = @TOPPAR/toppar_phmd_c22_foramber.str   ! C27 CpHMD top & par files
+ Parameter: TOPPAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR"
+ Parameter: PHMDTP <- "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOPPAR_PHMD_C22_FORAMBER.STR"
+  
+ CHARMM>     
+  
+ CHARMM>    set in       = prot_xwat                            ! segment ID
+ Parameter: IN <- "PROT_XWAT"
+  
+ CHARMM>    set name     = @{in}
+ Parameter: IN -> "PROT_XWAT"
+ Parameter: NAME <- "PROT_XWAT"
+  
+ CHARMM>    set segi     = PROT
+ Parameter: SEGI <- "PROT"
+  
+ CHARMM>    set boxshape = cubic                                 ! box shape
+ Parameter: BOXSHAPE <- "CUBIC"
+  
+ CHARMM>    set struc    = @{name}                               ! input  *.psf/crd         for solute
+ Parameter: NAME -> "PROT_XWAT"
+ Parameter: STRUC <- "PROT_XWAT"
+  
+ CHARMM>    set watbox   = @{struc}_waterbox                    ! input  *.str/crd/prm     for water
+ Parameter: STRUC -> "PROT_XWAT"
+ Parameter: WATBOX <- "PROT_XWAT_WATERBOX"
+  
+ CHARMM>    set ion      = @{struc}_ions                        !  input  *.prm/crd         for ion
+ Parameter: STRUC -> "PROT_XWAT"
+ Parameter: ION <- "PROT_XWAT_IONS"
+  
+ CHARMM>    set out      = @{struc}_solv_ion_mini               ! output *.psf/crd/pdb/str
+ Parameter: STRUC -> "PROT_XWAT"
+ Parameter: OUT <- "PROT_XWAT_SOLV_ION_MINI"
+  
+ CHARMM>    set images   = crystal_image
+ Parameter: IMAGES <- "CRYSTAL_IMAGE"
+  
+ CHARMM>     
+  
+ CHARMM>    ! NBond options
+ CHARMM>    ! -------------
+ CHARMM>    ! Recommended values for PME-EpHMD, better not change
+ CHARMM>    ! -------------
+ CHARMM>    set ctonnb = 10.0 ! the radius at which switch function begins to take effect
+ Parameter: CTONNB <- "10.0"
+  
+ CHARMM>    set ctofnb = 12.0 ! cut-off radius beyond which interactions are ignored
+ Parameter: CTOFNB <- "12.0"
+  
+ CHARMM>    set cutnb  = 16.0 ! cut-off radius for non-bonded list
+ Parameter: CUTNB <- "16.0"
+  
+ CHARMM>    set cutim  = 16.0 ! cut-off radius for image list
+ Parameter: CUTIM <- "16.0"
+  
+ CHARMM>     
+  
+ CHARMM>    ! PME options
+ CHARMM>    ! -----------
+ CHARMM>    ! Grid spacing in each direction should be approximately 1 Angstromg (0.8-1.2)
+ CHARMM>    ! Only powers of 2, 3 and 5 are allowed for grid numbers. More powers of 2, the better
+ CHARMM>    ! -----------
+ CHARMM>    set fftx = 72
+ Parameter: FFTX <- "72"
+  
+ CHARMM>    set ffty = 72
+ Parameter: FFTY <- "72"
+  
+ CHARMM>    set fftz = 72
+ Parameter: FFTZ <- "72"
+  
+ CHARMM>     
+  
+ CHARMM>    ! Read topology and parameter files
+ CHARMM>    ! ---------------------------------
+ CHARMM>    open unit 1 read card name @top
+ Parameter: TOP -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOP_ALL22_PROT.RTF"
+ VOPEN> Attempting to open::/home/craigp/software/c36b2/toppar/top_all22_prot.rtf::
+ OPNLGU> Unit  1 opened for READONLY access to /home/craigp/software/c36b2/toppar/top_all22_prot.rtf
+  
+ CHARMM>    read rtf  card unit 1
+ MAINIO> Residue topology file being read from unit   1.
+ TITLE> *>>>>>>>>CHARMM22 ALL-HYDROGEN TOPOLOGY FILE FOR PROTEINS <<<<<<
+ TITLE> *>>>>> INCLUDES PHI, PSI CROSS TERM MAP (CMAP) CORRECTION <<<<<<<
+ TITLE> *>>>>>>>>>>>>>>>>>>>>>> DECEMBER, 2003 <<<<<<<<<<<<<<<<<<<<<<<<<<
+ TITLE> * ALL COMMENTS TO ADM JR. VIA THE CHARMM WEB SITE: WWW.CHARMM.ORG
+ TITLE> *               PARAMETER SET DISCUSSION FORUM
+ TITLE> *
+  
+ CHARMM>    close unit 1
+ VCLOSE: Closing unit    1 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    open unit 1 read card name @par
+ Parameter: PAR -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/PAR_ALL22_PROT.PRM"
+ VOPEN> Attempting to open::/home/craigp/software/c36b2/toppar/par_all22_prot.prm::
+ OPNLGU> Unit  1 opened for READONLY access to /home/craigp/software/c36b2/toppar/par_all22_prot.prm
+  
+ CHARMM>    read para card unit 1 flex ! must use flex here
+
+          PARAMETER FILE BEING READ FROM UNIT  1
+ TITLE> *>>>>> CHARMM22 ALL-HYDROGEN PARAMETER FILE FOR PROTEINS <<<<<<<<
+ TITLE> *>>>>> INCLUDES PHI, PSI CROSS TERM MAP (CMAP) CORRECTION <<<<<<<
+ TITLE> *>>>>>>>>>>>>>>>>>>>>>> DECEMBER, 2003 <<<<<<<<<<<<<<<<<<<<<<<<<<
+ TITLE> * ALL COMMENTS TO ADM JR. VIA THE CHARMM WEB SITE: WWW.CHARMM.ORG
+ TITLE> *               PARAMETER SET DISCUSSION FORUM
+ TITLE> *
+ PARMIO> NONBOND, HBOND lists and IMAGE atoms cleared.
+  
+ CHARMM>    close unit 1
+ VCLOSE: Closing unit    1 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    stream @wation
+ Parameter: WATION -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOPPAR_WATER_IONS.STR"
+ VOPEN> Attempting to open::/home/craigp/software/c36b2/toppar/toppar_water_ions.str::
+ OPNLGU> Unit 99 opened for READONLY access to /home/craigp/software/c36b2/toppar/toppar_water_ions.str
+
+                    INPUT STREAM SWITCHING TO UNIT    99
+ RDTITL> * TOPLOGY AND PARAMETER INFORMATION FOR WATER AND IONS.
+ RDTITL> *
+ Parameter: IN1 <- "" <empty>
+  
+ CHARMM>     
+  
+ CHARMM>    !Testcase
+ CHARMM>    !test_water_ions.inp
+ CHARMM>     
+  
+ CHARMM>    ! IMPORTANT NOTE: this file contains NBFixes between carboxylates and sodium,
+ CHARMM>    ! which will only apply if the main files containing carboxylate atom types
+ CHARMM>    ! have been read in first!
+ CHARMM>     
+  
+ CHARMM>    !references
+ CHARMM>    !
+ CHARMM>    !TIP3P water model
+ CHARMM>    !
+ CHARMM>    !W.L. Jorgensen; J.Chandrasekhar; J.D. Madura; R.W. Impey;
+ CHARMM>    !M.L. Klein; "Comparison of simple potential functions for
+ CHARMM>    !simulating liquid water", J. Chem. Phys. 79 926-935 (1983).
+ CHARMM>    !
+ CHARMM>    !IONS
+ CHARMM>    !
+ CHARMM>    !Ions from Roux and coworkers
+ CHARMM>    !
+ CHARMM>    !Beglov, D. and Roux, B., Finite Representation of an Infinite
+ CHARMM>    !Bulk System: Solvent Boundary Potential for Computer Simulations,
+ CHARMM>    !Journal of Chemical Physics, 1994, 100: 9050-9063
+ CHARMM>    !
+ CHARMM>    !ZINC
+ CHARMM>    !
+ CHARMM>    !Stote, R.H. and Karplus, M. Zinc Binding in Proteins and
+ CHARMM>    !Solution: A Simple but Accurate Nonbonded Representation, PROTEINS:
+ CHARMM>    !Structure, Function, and Genetics 23:12-31 (1995)
+ CHARMM>    !
+ CHARMM>    !NBFIX for sodium-carbonyl oxygen (SOD-O) - added by Wei Chen, Feb. 2013.
+ CHARMM>    !Noskov,J. Mol. Biol. (2008). 377: 804-818.
+ CHARMM>    !
+ CHARMM>     
+  
+ CHARMM>    !test "append" to determine if previous toppar files have been read and
+ CHARMM>    !add append to "read rtf card" if true
+ CHARMM>    set nat ?NATC
+ RDCMND substituted energy or value "?NATC" to "87"
+ Parameter: NAT <- "87"
+  
+ CHARMM>    set app
+ Parameter: APP <- "" <empty>
+  
+ CHARMM>    !We're exploiting what is arguably a bug in the parser. On the left hand side,
+ CHARMM>    !the quotes have priority, so NAT is correctly substituted. On the right hand
+ CHARMM>    !side, the ? has priority and NATC" (sic) is not a valid substitution...
+ CHARMM>    if "@NAT" ne "?NATC" if @nat ne 0 set app append
+ Parameter: NAT -> "87"
+ Parameter: NAT -> "87"
+ RDCMND: can not substitute energy "?NATC""
+ Comparing ""87"" and ""?NATC"".
+ IF test evaluated as true.  Performing command
+ Comparing "87" and "0".
+ IF test evaluated as true.  Performing command
+ Parameter: APP <- "APPEND"
+  
+ CHARMM>     
+  
+ CHARMM>    read rtf card @app
+ Parameter: APP -> "APPEND"
+ MAINIO> Residue topology file being read from unit  99.
+ RDTITL> * TOPOLOGY FOR WATER AND IONS
+ RDTITL> *
+  
+ CHARMM>     
+  
+ CHARMM>    read para card flex @app
+ Parameter: APP -> "APPEND"
+
+          PARAMETER FILE BEING READ FROM UNIT 99
+ RDTITL> * PARAMETERS FOR WATER AND IONS
+ RDTITL> *
+ PARMIO> NONBOND, HBOND lists and IMAGE atoms cleared.
+  
+ CHARMM>     
+  
+ CHARMM>    ! The following section contains NBFixes for sodium interacting with
+ CHARMM>    ! carboxylate oxygens of various CHARMM force fields. It will generate
+ CHARMM>    ! level -1 warnings whenever any of these force fields have not been
+ CHARMM>    ! read prior to the current stream file. Since we don't want to force
+ CHARMM>    ! the user to always read all the force fields, we're suppressing the
+ CHARMM>    ! warnings. The only side effect is that you will have "most severe
+ CHARMM>    ! warning was at level 0" at the end of your output. Also note that
+ CHARMM>    ! the user is responsible for reading the current file last if they
+ CHARMM>    ! want the NBFixes to apply. A more elegant solution would require new
+ CHARMM>    ! features to be added to CHARMM.
+ CHARMM>    ! parallel fix, to avoid duplicated messages in the log
+ CHARMM>    set para
+ Parameter: PARA <- "" <empty>
+  
+ CHARMM>    if ?NUMNODE gt 1 set para node 0
+ RDCMND substituted energy or value "?NUMNODE" to "1"
+ Comparing "1" and "1".
+ IF test evaluated as false.  Skipping command
+  
+ CHARMM>     
+  
+ CHARMM>    set wrn ?WRNLEV
+ RDCMND: can not substitute energy "?WRNLEV"
+ Parameter: WRN <- "?WRNLEV"
+  
+ CHARMM>    ! Some versions of CHARMM don't seem to initialize wrnlev...
+ CHARMM>    if "@WRN" eq "?WRNLEV" set wrn 5
+ Parameter: WRN -> "?WRNLEV"
+ RDCMND: can not substitute energy "?WRNLEV""
+ Comparing ""?WRNLEV"" and ""?WRNLEV"".
+ IF test evaluated as true.  Performing command
+ Parameter: WRN <- "5"
+  
+ CHARMM>    set bom ?bomlev
+ RDCMND substituted energy or value "?BOMLEV" to "0"
+ Parameter: BOM <- "0"
+  
+ CHARMM>    WRNLEV -1 @PARA
+ Parameter: PARA -> "" <empty>
+  
+ CHARMM>    BOMLEV -1 @PARA
+ Parameter: PARA -> "" <empty>
+  
+ CHARMM>    read para card flex append
+
+          PARAMETER FILE BEING READ FROM UNIT 99
+ RDTITL> * NBFIX BETWEEN CARBOXYLATE AND SODIUM
+ RDTITL> *
+ PARMIO> NONBOND, HBOND lists and IMAGE atoms cleared.
+  
+ CHARMM>    BOMLEV @bom @PARA
+ Parameter: BOM -> "0"
+ Parameter: PARA -> "" <empty>
+  
+ CHARMM>    WRNLEV @wrn @PARA
+ Parameter: WRN -> "5"
+ Parameter: PARA -> "" <empty>
+  
+ CHARMM>     
+  
+ CHARMM>    return
+ VCLOSE: Closing unit   99 with status "KEEP"
+
+                    RETURNING TO INPUT STREAM     5
+  
+ CHARMM>     
+  
+ CHARMM>    stream @phmdtp
+ Parameter: PHMDTP -> "/HOME/CRAIGP/SOFTWARE/C36B2/TOPPAR/TOPPAR_PHMD_C22_FORAMBER.STR"
+ VOPEN> Attempting to open::/home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str::
+ OPNLGU> Unit 99 opened for READONLY access to /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str
+
+                    INPUT STREAM SWITCHING TO UNIT    99
+ RDTITL> * TOPOLOGY AND PARAMETER INFORMATION FOR PHMD USED WITH C22 FF
+ RDTITL> * FOR BUILDING CHARMM FILES FOR AMBER
+ RDTITL> *
+ Parameter: IN1 <- "" <empty>
+  
+ CHARMM>     
+  
+ CHARMM>    !Robert Harris, 4/13/2020
+ CHARMM>    !
+ CHARMM>    !Removed bonds between hydrogens in TIPP and TIPU so that Amber treats them as not water
+ CHARMM>     
+  
+ CHARMM>    !Wei Chen, 3/30/2015
+ CHARMM>    !
+ CHARMM>    !Topology and parameters were copied from top_all22_prot_cmap_ephmd.inp & par_all22_prot_cmap_ephmd.inp
+ CHARMM>    !
+ CHARMM>    !Hydronium
+ CHARMM>    ! added by Jason Wallace
+ CHARMM>    ! Sagnella and Voth Biophys. J. (1996) 70:2043-2051
+ CHARMM>    !
+ CHARMM>    !Hydroxide
+ CHARMM>    ! added by Wei Chen
+ CHARMM>    ! copy from TIP3
+ CHARMM>    !
+ CHARMM>     
+  
+ CHARMM>    !test "append" to determine if previous toppar files have been read and
+ CHARMM>    !add append to "read rtf card" if true
+ CHARMM>    set nat ?NATC
+ RDCMND substituted energy or value "?NATC" to "87"
+ Parameter: NAT <- "87"
+  
+ CHARMM>    set app append
+ Parameter: APP <- "APPEND"
+  
+ CHARMM>    !We're exploiting what is arguably a bug in the parser. On the left hand side,
+ CHARMM>    !the quotes have priority, so NAT is correctly substituted. On the right hand
+ CHARMM>    !side, the ? has priority and NATC" (sic) is not a valid substitution...
+ CHARMM>    if "@NAT" eq "?NATC" stop
+ Parameter: NAT -> "87"
+ RDCMND: can not substitute energy "?NATC""
+ Comparing ""87"" and ""?NATC"".
+ IF test evaluated as false.  Skipping command
+  
+ CHARMM>     
+  
+ CHARMM>    read rtf card @app
+ Parameter: APP -> "APPEND"
+ MAINIO> Residue topology file being read from unit  99.
+ RDTITL> * TOPOLOGY FOR PHMD
+ RDTITL> *
+  
+ CHARMM>     
+  
+ CHARMM>    read para card flex @app
+ Parameter: APP -> "APPEND"
+
+          PARAMETER FILE BEING READ FROM UNIT 99
+ RDTITL> * PARAMETERS FOR PHMD
+ RDTITL> *
+ PARMIO> NONBOND, HBOND lists and IMAGE atoms cleared.
+  
+ VCLOSE: Closing unit   99 with status "KEEP"
+
+                    RETURNING TO INPUT STREAM     5
+  
+ CHARMM>     
+  
+ CHARMM>    !!!!!!!!!!!!!!!!!!!!!
+ CHARMM>    !! Assemble system !!
+ CHARMM>    !!!!!!!!!!!!!!!!!!!!!
+ CHARMM>     
+  
+ CHARMM>    ! Read solute
+ CHARMM>    ! -----------
+ CHARMM>    open unit 1 read card name @struc.psf
+ Parameter: STRUC -> "PROT_XWAT"
+ VOPEN> Attempting to open::prot_xwat.psf::
+ OPNLGU> Unit  1 opened for READONLY access to prot_xwat.psf
+  
+ CHARMM>    read psf  card unit 1
+ MAINIO> Protein structure file being read from unit   1.
+ TITLE>  * PSF MERGE PROTEIN AND CRYSTAL WATERS
+ TITLE>  *  DATE:     9/20/24     16:20: 5      CREATED BY USER: craigp
+ TITLE>  *
+ PSFSUM> PSF modified: NONBOND lists and IMAGE atoms cleared.
+ PSFSUM> Summary of the structure file counters :
+         Number of segments      =        2   Number of residues   =      262
+         Number of atoms         =     2509   Number of groups     =      772
+         Number of bonds         =     2527   Number of angles     =     4001
+         Number of dihedrals     =     5639   Number of impropers  =      340
+         Number of cross-terms   =      128
+         Number of HB acceptors  =      326   Number of HB donors  =      516
+         Number of NB exclusions =        0   Total charge =    7.00000
+  
+ CHARMM>    close unit 1
+ VCLOSE: Closing unit    1 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    open unit 1 read card name @struc.crd
+ Parameter: STRUC -> "PROT_XWAT"
+ VOPEN> Attempting to open::prot_xwat.crd::
+ OPNLGU> Unit  1 opened for READONLY access to prot_xwat.crd
+  
+ CHARMM>    read coor card unit 1
+          SPATIAL COORDINATES BEING READ FROM UNIT  1
+ TITLE> * CRD MERGE PROTEIN AND CRYSTAL WATERS
+ TITLE> *  DATE:     9/20/24     16:20: 5      CREATED BY USER: CRAIGP
+ TITLE> *
+  
+ CHARMM>    close unit 1
+ VCLOSE: Closing unit    1 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    ! Reorient Solute  - Needed because the water box was recetred at the origin
+ CHARMM>    !-----------------
+ CHARMM>    coor orient
+
+ ORIENT THE COORDINATES TO ALIGN WITH AXIS
+
+ MOMENTS
+ 176652.63506804 -39017.83094939   9095.84183385
+                 217025.76088367 -42217.11697279
+                                 139800.88422270
+
+ Transpose of the rotation matrix
+     0.337462   -0.827419    0.448884
+    -0.340853    0.337093    0.877603
+    -0.877461   -0.449161   -0.168273
+ CENTER OF ATOMS BEFORE TRANSLATION     7.95999   -11.79198   -13.93737
+ AXIS OF ROTATION IS  0.684569 -0.684352 -0.251053  ANGLE IS  104.29
+
+ ALL COORDINATES ORIENTED IN THE MAIN SET BASED ON SELECTED ATOMS.
+
+  
+ CHARMM>    coor stat sele all end
+ SELRPN>   2509 atoms have been selected out of   2509
+ STATISTICS FOR      2509 SELECTED ATOMS:
+    XMIN =  -22.797808 XMAX =   26.435014 XAVE =    0.000000
+    YMIN =  -22.417378 YMAX =   17.416627 YAVE =    0.000000
+    ZMIN =  -19.099000 ZMAX =   20.462053 ZAVE =    0.000000
+    WMIN =    0.000000 WMAX =    2.860000 WAVE =    0.900949
+  
+ CHARMM>     
+  
+ CHARMM>    ! Read water
+ CHARMM>    ! ----------
+ CHARMM>    stream @watbox.str
+ Parameter: WATBOX -> "PROT_XWAT_WATERBOX"
+ VOPEN> Attempting to open::prot_xwat_waterbox.str::
+ OPNLGU> Unit 99 opened for READONLY access to prot_xwat_waterbox.str
+
+                    INPUT STREAM SWITCHING TO UNIT    99
+ RDTITL> READ SEQUENCE TIP3 12968
+ RDTITL> No title read.
+ Parameter: IN1 <- "" <empty>
+  
+ CHARMM>     READ SEQUENCE TIP3 12968
+  
+ CHARMM>     GENERATE SOLV SETUP NOANGLE NODIHEDRAL
+ NO PATCHING WILL BE DONE ON THE FIRST RESIDUE
+ NO PATCHING WILL BE DONE ON THE LAST  RESIDUE
+ GENPSF> Segment   3 has been generated. Its identifier is SOLV.
+ PSFSUM> PSF modified: NONBOND lists and IMAGE atoms cleared.
+ PSFSUM> Summary of the structure file counters :
+         Number of segments      =        3   Number of residues   =    13230
+         Number of atoms         =    41413   Number of groups     =    13740
+         Number of bonds         =    41431   Number of angles     =    16969
+         Number of dihedrals     =     5639   Number of impropers  =      340
+         Number of cross-terms   =      128
+         Number of HB acceptors  =    13294   Number of HB donors  =    26452
+         Number of NB exclusions =        0   Total charge =    7.00000
+ QXFORM> Expanded format used.
+         More than 4 character RESID used.
+  
+ VCLOSE: Closing unit   99 with status "KEEP"
+
+                    RETURNING TO INPUT STREAM     5
+  
+ CHARMM>     
+  
+ CHARMM>    open unit 1 read card name @watbox.crd
+ Parameter: WATBOX -> "PROT_XWAT_WATERBOX"
+ VOPEN> Attempting to open::prot_xwat_waterbox.crd::
+ OPNLGU> Unit  1 opened for READONLY access to prot_xwat_waterbox.crd
+  
+ CHARMM>    read coor card unit 1 append
+          SPATIAL COORDINATES BEING READ FROM UNIT  1
+ A RESIDUE OFFSET OF 262 WILL BE USED.
+ INFO: A subset of total atoms will be read.
+
+ TITLE> * EQUILIBRATED WATER
+ TITLE> *  DATE:     9/20/24     16:20:55      CREATED BY USER: CRAIGP
+ TITLE> *
+  
+ CHARMM>    close unit 1
+ VCLOSE: Closing unit    1 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    ! Read ion
+ CHARMM>    ! --------
+ CHARMM>    stream @ion.prm
+ Parameter: ION -> "PROT_XWAT_IONS"
+ VOPEN> Attempting to open::prot_xwat_ions.prm::
+ OPNLGU> Unit 99 opened for READONLY access to prot_xwat_ions.prm
+
+                    INPUT STREAM SWITCHING TO UNIT    99
+ RDTITL> SET NPOSCOION = 0
+ RDTITL> No title read.
+ Parameter: IN1 <- "" <empty>
+  
+ CHARMM>     SET NPOSCOION = 0
+ Parameter: NPOSCOION <- "0"
+  
+ CHARMM>     SET NNEGCOION = 0
+ Parameter: NNEGCOION <- "0"
+  
+ CHARMM>     SET NPOS = 30
+ Parameter: NPOS <- "30"
+  
+ CHARMM>     SET NNEG = 37
+ Parameter: NNEG <- "37"
+  
+ CHARMM>     SET POSCOIONID = SOD
+ Parameter: POSCOIONID <- "SOD"
+  
+ CHARMM>     SET NEGCOIONID = CLA
+ Parameter: NEGCOIONID <- "CLA"
+  
+ CHARMM>     SET POSID = SOD
+ Parameter: POSID <- "SOD"
+  
+ CHARMM>     SET NEGID = CLA
+ Parameter: NEGID <- "CLA"
+  
+ VCLOSE: Closing unit   99 with status "KEEP"
+
+                    RETURNING TO INPUT STREAM     5
+  
+ CHARMM>     
+  
+ CHARMM>    if @nposcoion .GT. 0 then
+ Parameter: NPOSCOION -> "0"
+ Comparing "0" and "0".
+ IF test evaluated as false.  Skip to ELSE or ENDIF
+  
+ CHARMM>     
+  
+ CHARMM>    if @nnegcoion .GT. 0 then
+ Parameter: NNEGCOION -> "0"
+ Comparing "0" and "0".
+ IF test evaluated as false.  Skip to ELSE or ENDIF
+  
+ CHARMM>     
+  
+ CHARMM>    if @npos .GT. 0 then
+ Parameter: NPOS -> "30"
+ Comparing "30" and "0".
+ IF test evaluated as true.  Performing command
+  
+ CHARMM>      read sequ @posid @npos
+ Parameter: POSID -> "SOD"
+ Parameter: NPOS -> "30"
+  
+ CHARMM>      gene @posid setu warn noan nodi
+ Parameter: POSID -> "SOD"
+ NO PATCHING WILL BE DONE ON THE FIRST RESIDUE
+ NO PATCHING WILL BE DONE ON THE LAST  RESIDUE
+ GENPSF> Segment   4 has been generated. Its identifier is SOD.
+ PSFSUM> PSF modified: NONBOND lists and IMAGE atoms cleared.
+ PSFSUM> Summary of the structure file counters :
+         Number of segments      =        4   Number of residues   =    13260
+         Number of atoms         =    41443   Number of groups     =    13770
+         Number of bonds         =    41431   Number of angles     =    16969
+         Number of dihedrals     =     5639   Number of impropers  =      340
+         Number of cross-terms   =      128
+         Number of HB acceptors  =    13294   Number of HB donors  =    26452
+         Number of NB exclusions =        0   Total charge =   37.00000
+  
+ CHARMM>     
+  
+ CHARMM>    endif
+  
+ CHARMM>     
+  
+ CHARMM>    if @nneg .GT. 0 then
+ Parameter: NNEG -> "37"
+ Comparing "37" and "0".
+ IF test evaluated as true.  Performing command
+  
+ CHARMM>      read sequ @negid @nneg
+ Parameter: NEGID -> "CLA"
+ Parameter: NNEG -> "37"
+  
+ CHARMM>      gene @negid setu warn noan nodi
+ Parameter: NEGID -> "CLA"
+ NO PATCHING WILL BE DONE ON THE FIRST RESIDUE
+ NO PATCHING WILL BE DONE ON THE LAST  RESIDUE
+ GENPSF> Segment   5 has been generated. Its identifier is CLA.
+ PSFSUM> PSF modified: NONBOND lists and IMAGE atoms cleared.
+ PSFSUM> Summary of the structure file counters :
+         Number of segments      =        5   Number of residues   =    13297
+         Number of atoms         =    41480   Number of groups     =    13807
+         Number of bonds         =    41431   Number of angles     =    16969
+         Number of dihedrals     =     5639   Number of impropers  =      340
+         Number of cross-terms   =      128
+         Number of HB acceptors  =    13294   Number of HB donors  =    26452
+         Number of NB exclusions =        0   Total charge =    0.00000
+  
+ CHARMM>     
+  
+ CHARMM>    endif
+  
+ CHARMM>     
+  
+ CHARMM>    open unit 1 read card name @{struc}_ions.crd
+ Parameter: STRUC -> "PROT_XWAT"
+ VOPEN> Attempting to open::prot_xwat_ions.crd::
+ OPNLGU> Unit  1 opened for READONLY access to prot_xwat_ions.crd
+  
+ CHARMM>    read coor card unit 1 append
+          SPATIAL COORDINATES BEING READ FROM UNIT  1
+ A RESIDUE OFFSET OF**** WILL BE USED.
+ INFO: A subset of total atoms will be read.
+
+ TITLE> * ADD IONS AND TITRATABLE WATER
+ TITLE> *  DATE:     9/20/24     16:21:55      CREATED BY USER: CRAIGP
+ TITLE> *
+  
+ CHARMM>    close unit 1
+ VCLOSE: Closing unit    1 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    ! Delete overlapping waters
+ CHARMM>    ! -------------------------
+ CHARMM>    delete atom sele .byres. ( ( type OH2 .and. segi SOLV ) -
+ CHARMM>                       .and. ( ( .not. hydrogen .and. .not. segi SOLV ) .around. 2.6 ) ) end
+ SELRPN>   3009 atoms have been selected out of  41480
+
+ Message from MAPIC: Atom numbers are changed.
+
+ Message from MAPIC:       1003 residues deleted.
+ DELTIC:      3009 bonds deleted
+ DELTIC:      1003 angles deleted
+ DELTIC:      2006 donors deleted
+ DELTIC:      1003 acceptors deleted
+ PSFSUM> PSF modified: NONBOND lists and IMAGE atoms cleared.
+ PSFSUM> Summary of the structure file counters :
+         Number of segments      =        5   Number of residues   =    12294
+         Number of atoms         =    38471   Number of groups     =    12804
+         Number of bonds         =    38422   Number of angles     =    15966
+         Number of dihedrals     =     5639   Number of impropers  =      340
+         Number of cross-terms   =      128
+         Number of HB acceptors  =    12291   Number of HB donors  =    24446
+         Number of NB exclusions =        0   Total charge =    0.00000
+  
+ CHARMM>     
+  
+ CHARMM>    ! Renumber waters - Including Crystal Waters
+ CHARMM>    ! ------------------------------------------
+ CHARMM>    join SOLV renumber
+ THE RESIDUE IDENTIFIERS HAVE BEEN RENUMBERED
+ PSFSUM> PSF modified: NONBOND lists and IMAGE atoms cleared.
+ PSFSUM> Summary of the structure file counters :
+         Number of segments      =        5   Number of residues   =    12294
+         Number of atoms         =    38471   Number of groups     =    12804
+         Number of bonds         =    38422   Number of angles     =    15966
+         Number of dihedrals     =     5639   Number of impropers  =      340
+         Number of cross-terms   =      128
+         Number of HB acceptors  =    12291   Number of HB donors  =    24446
+         Number of NB exclusions =        0   Total charge =    0.00000
+  
+ CHARMM>    join TIP3 SOLV renumber
+ SEGMENTS "TIP3    " AND "SOLV    " HAVE BEEN JOINED.
+ THE RESIDUE IDENTIFIERS HAVE BEEN RENUMBERED
+ PSFSUM> PSF modified: NONBOND lists and IMAGE atoms cleared.
+ PSFSUM> Summary of the structure file counters :
+         Number of segments      =        4   Number of residues   =    12294
+         Number of atoms         =    38471   Number of groups     =    12804
+         Number of bonds         =    38422   Number of angles     =    15966
+         Number of dihedrals     =     5639   Number of impropers  =      340
+         Number of cross-terms   =      128
+         Number of HB acceptors  =    12291   Number of HB donors  =    24446
+         Number of NB exclusions =        0   Total charge =    0.00000
+  
+ CHARMM>     
+  
+ CHARMM>    ! Rename the Segid XWAT
+ CHARMM>    !----------------------
+ CHARMM>    RENAME SEGID SOLV sele segid TIP3 end
+ SELRPN>  36294 atoms have been selected out of  38471
+ SEGMENT 'TIP3    ' IS RENAMED TO 'SOLV    '
+  
+ CHARMM>     
+  
+ CHARMM>    ! Define selections
+ CHARMM>    ! -----------------
+ CHARMM>    define WAT  sele resn TIP3 end
+ SELRPN>  36294 atoms have been selected out of  38471
+  
+ CHARMM>    define ION  sele resn @posid .or. resn @negid .or. resn @poscoionid .or. resn @negcoionid end
+ Parameter: POSID -> "SOD"
+ Parameter: NEGID -> "CLA"
+ Parameter: POSCOIONID -> "SOD"
+ Parameter: NEGCOIONID -> "CLA"
+ SELRPN>     67 atoms have been selected out of  38471
+  
+ CHARMM>    define SOLV sele WAT .or. ION end
+ SELRPN>  36361 atoms have been selected out of  38471
+  
+ CHARMM>    define SOLU sele .not. SOLV end
+ SELRPN>   2110 atoms have been selected out of  38471
+  
+ CHARMM>    define HEAV sele SOLU .and. .not. hydrogen end
+ SELRPN>   1039 atoms have been selected out of  38471
+  
+ CHARMM>     
+  
+ CHARMM>    !!!!!!!!!!!!!!!!!!
+ CHARMM>    !! Set up image !!
+ CHARMM>    !!!!!!!!!!!!!!!!!!
+ CHARMM>     
+  
+ CHARMM>    ! Image setup
+ CHARMM>    ! -----------
+ CHARMM>    stream @watbox.prm ! read lattice parameters
+ Parameter: WATBOX -> "PROT_XWAT_WATERBOX"
+ VOPEN> Attempting to open::prot_xwat_waterbox.prm::
+ OPNLGU> Unit 99 opened for READONLY access to prot_xwat_waterbox.prm
+
+                    INPUT STREAM SWITCHING TO UNIT    99
+ RDTITL> SET BOXTYPE  = OCTAHEDRAL
+ RDTITL> No title read.
+ Parameter: IN1 <- "" <empty>
+  
+ CHARMM>     SET BOXTYPE  = OCTAHEDRAL
+ Parameter: BOXTYPE <- "OCTAHEDRAL"
+  
+ CHARMM>     SET XTLTYPE  = CUBIC
+ Parameter: XTLTYPE <- "CUBIC"
+  
+ CHARMM>     SET A = 74
+ Parameter: A <- "74"
+  
+ CHARMM>     SET B = 74
+ Parameter: B <- "74"
+  
+ CHARMM>     SET C = 74
+ Parameter: C <- "74"
+  
+ CHARMM>     SET ALPHA = 90
+ Parameter: ALPHA <- "90"
+  
+ CHARMM>     SET BETA  = 90
+ Parameter: BETA <- "90"
+  
+ CHARMM>     SET GAMMA = 90
+ Parameter: GAMMA <- "90"
+  
+ CHARMM>     SET XCEN = 0
+ Parameter: XCEN <- "0"
+  
+ CHARMM>     SET YCEN = 0
+ Parameter: YCEN <- "0"
+  
+ CHARMM>     SET ZCEN = 0
+ Parameter: ZCEN <- "0"
+  
+ VCLOSE: Closing unit   99 with status "KEEP"
+
+                    RETURNING TO INPUT STREAM     5
+  
+ CHARMM>    open unit 1 read card name @images.str
+ Parameter: IMAGES -> "CRYSTAL_IMAGE"
+ VOPEN> Attempting to open::crystal_image.str::
+ OPNLGU> Unit  1 opened for READONLY access to crystal_image.str
+  
+ CHARMM>    crystal define @XTLTYPE @A @B @C @ALPHA @BETA @GAMMA
+ Parameter: XTLTYPE -> "CUBIC"
+ Parameter: A -> "74"
+ Parameter: B -> "74"
+ Parameter: C -> "74"
+ Parameter: ALPHA -> "90"
+ Parameter: BETA -> "90"
+ Parameter: GAMMA -> "90"
+ Crystal Parameters : Crystal Type = CUBI
+           A     =   74.00000 B    =   74.00000 C     =   74.00000
+           Alpha =   90.00000 Beta =   90.00000 Gamma =   90.00000
+  
+ CHARMM>    crystal read card unit 1
+ CRYSTAL FILE BEING READ FROM UNIT     1
+ TITLE> * MAKE WATER BOX INPUT
+ TITLE> *  DATE:     9/20/24     16:20:49      CREATED BY USER: CRAIGP
+ TITLE> *
+ TITLE>  * MAKE WATER BOX INPUT
+ TITLE>  *  DATE:     9/20/24     16:20:49      CREATED BY USER: CRAIGP
+ TITLE>  *
+                     THERE ARE NO ROTATIONS FOR THIS TRANSFORMATION SET
+    26 Transformations have been processed.
+
+  
+ CHARMM>    close unit 1
+ VCLOSE: Closing unit    1 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    ! Image centering
+ CHARMM>    ! ---------------
+ CHARMM>    image byse xcen 0.0 ycen 0.0 zcen 0.0 sele SOLU end ! center solute  by segment
+ SELRPN>   2110 atoms have been selected out of  38471
+ IMAGE CENTERING ON FOR SOME ATOMS
+  
+ CHARMM>    image byre xcen 0.0 ycen 0.0 zcen 0.0 sele SOLV end ! center solvent by residue
+ SELRPN>  36361 atoms have been selected out of  38471
+ IMAGE CENTERING ON FOR SOME ATOMS
+  
+ CHARMM>     
+  
+ CHARMM>     
+  
+ CHARMM>    ! Write psf, crd, and pdb
+ CHARMM>    ! -----------------------
+ CHARMM>    open unit 90 write card name @out.psf
+ Parameter: OUT -> "PROT_XWAT_SOLV_ION_MINI"
+ VOPEN> Attempting to open::prot_xwat_solv_ion_mini.psf::
+ OPNLGU> Unit 90 opened for WRITE access to prot_xwat_solv_ion_mini.psf
+  
+ CHARMM>    write psf card unit 90
+ RDTITL> * FINAL PSF FOR PROT_XWAT_SOLV_ION_MINI
+ RDTITL> *
+  
+ CHARMM>     
+  
+ CHARMM>    open unit 90 write card name @out.crd
+ Parameter: OUT -> "PROT_XWAT_SOLV_ION_MINI"
+ OPNLGU> Unit already open. The old file will be closed first.
+ VCLOSE: Closing unit   90 with status "KEEP"
+ VOPEN> Attempting to open::prot_xwat_solv_ion_mini.crd::
+ OPNLGU> Unit 90 opened for WRITE access to prot_xwat_solv_ion_mini.crd
+  
+ CHARMM>    write coor card unit 90
+ RDTITL> * FINAL CRD FOR PROT_XWAT_SOLV_ION_MINI
+ RDTITL> *
+ VCLOSE: Closing unit   90 with status "KEEP"
+  
+ CHARMM>     
+  
+ CHARMM>    open unit 90 write card name @out.pdb
+ Parameter: OUT -> "PROT_XWAT_SOLV_ION_MINI"
+ VOPEN> Attempting to open::prot_xwat_solv_ion_mini.pdb::
+ OPNLGU> Unit 90 opened for WRITE access to prot_xwat_solv_ion_mini.pdb
+  
+ CHARMM>    write coor pdb unit 90
+ RDTITL> * FINAL PDB FOR PROT_XWAT_SOLV_ION_MINI
+ RDTITL> *
+  Write CHARMM-pdb format
+  
+ CHARMM>     
+  
+ CHARMM>    ! Write system information
+ CHARMM>    ! ------------------------
+ CHARMM>    coor stat sele WAT .and. type OH2 end
+ SELRPN>  12098 atoms have been selected out of  38471
+ STATISTICS FOR     12098 SELECTED ATOMS:
+    XMIN =  -37.221760 XMAX =   37.233790 XAVE =    0.171075
+    YMIN =  -37.244790 YMAX =   37.100210 YAVE =   -0.159247
+    ZMIN =  -36.942670 ZMAX =   36.877000 ZAVE =    0.373931
+    WMIN =    0.000000 WMAX =    0.000000 WAVE =    0.000000
+  
+ CHARMM>    set Nwater = ?nsel ! number of waters
+ RDCMND substituted energy or value "?NSEL" to "12098"
+ Parameter: NWATER <- "12098"
+  
+ CHARMM>    open write unit 90 card name @out.str
+ Parameter: OUT -> "PROT_XWAT_SOLV_ION_MINI"
+ OPNLGU> Unit already open. The old file will be closed first.
+ VCLOSE: Closing unit   90 with status "KEEP"
+ VOPEN> Attempting to open::prot_xwat_solv_ion_mini.str::
+ OPNLGU> Unit 90 opened for WRITE access to prot_xwat_solv_ion_mini.str
+  
+ CHARMM>    write title unit 90
+ RDTITL> * SET XTLTYPE   = CUBIC
+ RDTITL> * SET A         = 74
+ RDTITL> * SET B         = 74
+ RDTITL> * SET C         = 74
+ RDTITL> * SET ALPHA     = 90
+ RDTITL> * SET BETA      = 90
+ RDTITL> * SET GAMMA     = 90
+ RDTITL> * SET NWATER    = 12098
+ RDTITL> * SET NPOSCOION = 0
+ RDTITL> * SET NNEGCOION = 0
+ RDTITL> * SET NPOS      = 30
+ RDTITL> * SET NNEG      = 37
+ RDTITL> * SET POSCOION  = SOD
+ RDTITL> * SET NEGCOION  = CLA
+ RDTITL> * SET POSION    = SOD
+ RDTITL> * SET NEGION    = CLA
+ RDTITL> *
+  
+ CHARMM>     
+  
+ CHARMM>    stop
+ VCLOSE: Closing unit   90 with status "KEEP"
+$$$$$$  New timer profile $$$$$
+ Total time                      2.27 Other:            0.00
+
+                    NORMAL TERMINATION BY NORMAL STOP
+                    MOST SEVERE WARNING WAS AT LEVEL  0
+
+                    $$$$$ JOB ACCOUNTING INFORMATION $$$$$
+                     ELAPSED TIME:     2.27  SECONDS 
+                         CPU TIME:     2.27  SECONDS 

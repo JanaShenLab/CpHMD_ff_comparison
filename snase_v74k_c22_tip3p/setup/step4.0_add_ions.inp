@@ -1,0 +1,507 @@
+* ADD IONS AND TITRATABLE WATER 
+*
+
+set segid = PROT
+set in = prot_xwat  ! previous scripts have generated @{in}_waterbox.prm
+set shift = 0          ! selected resi is from pdb, shift may occur
+set conc = 0.15 ! bulk ion concentration
+
+set negcoion = CLA  !3ruz has a net +7 charge at pH=7, so we need to put one more CLA than SOD
+set poscoion = SOD  
+
+! read force field
+set TOPPAR = /home/craigp/software/c36b2/toppar 
+set top = @TOPPAR/top_all22_prot.rtf
+set par = @TOPPAR/par_all22_prot.prm
+set watstr = @TOPPAR/toppar_water_ions.str
+set phstr = @TOPPAR/toppar_phmd_c22_foramber.str
+set titrflag = 0 
+
+open unit 1 read form name @top
+read rtf card unit 1
+close unit 1
+
+open unit 1 read form name @par
+read param card unit 1 flex
+close unit 1
+
+stream @phstr
+stream @watstr
+
+! Read PSF and Coordinates
+open read unit 10 card name @in.psf
+read psf  unit 10 card 
+
+open read unit 10 card name @in.crd
+read coor unit 10 card
+
+! protein volume, calculation with a grid spacing of 0.5
+coor orient
+coor stat
+
+calc dcel = 0.5
+calc xdim = int ( ( ?xmax - ?xmin + 5.0 ) / @dcel ) + 1
+calc ydim = int ( ( ?ymax - ?ymin + 5.0 ) / @dcel ) + 1
+calc zdim = int ( ( ?zmax - ?zmin + 5.0 ) / @dcel ) + 1
+calc space = @xdim * @ydim * @zdim
+
+scalar wmain = radius
+scalar wmain add 1.4    ! use solvent accessible surface for molecular volume
+scalar 1 = wmain 
+scalar 2 set 6.0
+coor volume hole space @space sele all end
+
+set molvol = ?volume
+
+! system volume from parameters for water box
+stream @in_waterbox.prm
+
+if @XTLtype .eq. TETRagonal   calc sysvol = @A * @B * @C
+if @XTLtype .eq. CUBIc        calc sysvol = @A * @B * @C
+if @XTLtype .eq. ORTHorhombic calc sysvol = @A * @B * @C
+if @XTLtype .eq. MONOclinic   calc sysvol = @A * @B * @C * sin ( @beta * ?pi / 180.0 )
+if @XTLtype .eq. HEXAgonal    calc sysvol = sqrt( 0.75 ) * @C * @A * @A
+if @XTLtype .eq. OCTAhedral   calc sysvol = 4.0 * sqrt( 3.0 ) / 9 * @A * @A * @A
+if @XTLtype .eq. RHDO         calc sysvol = sqrt( 0.5 ) * @A * @A * @A
+if @XTLtype .eq. TRIClinic then
+   calc cosa = cos ( @alpha * ?pi / 180.0 )
+   calc cosb = cos ( @beta  * ?pi / 180.0 )
+   calc cosg = cos ( @gamma * ?pi / 180.0 )
+   calc sysvol = @A * @B * @C * sqrt ( 1.0 - @cosa * @cosa - @cosb * @cosb - @cosg * @cosg + 2.0 * @cosa * @cosb * @cosg )
+endif
+if @XTLtype .eq. RHOMbohedral then
+   calc cosa = cos ( @alpha * ?pi / 180.0 )
+   calc sysvol = @A * @A * @A * ( 1.0 - @cosa ) * sqrt ( 1.0 + 2.0 @cosa )
+endif
+
+!
+! conc   : concentration (M)
+! ionvol : ion accessible volume (Ang**3)
+! npos   : number of positive ions
+! nneg   : number of negative ions
+!
+
+calc ionvol = @sysvol - @molvol
+calc val    = 1
+
+set   ires = 1
+set   nacid = 17
+set   nbase = 24
+set   nhsp = 0
+set   nct = 0
+
+label ntitr
+calc  ires2 = @ires + @shift
+!if @ires .eq. 1 then
+!   define ace sele segi @segid .and. resi @ires2 .and. ( type CAY -
+!          .or. type HY1 .or. type HY2 .or. type HY3 ) end 
+!   if ?NSEL .eq. 0 then
+!       incr nbase
+!   endif 
+!endif
+
+!if @ires .eq. ?NRES then
+!   define cter sele segi @segid .and. resi @ires2 .and. ( type OT1 -
+!          .or. type OT2 ) end
+!   if ?NSEL .eq. 2 then
+!       incr nacid
+!       nct = 1 ! Currently, if cter is COO-, it's not titrated at present, Huang Oct 19 2019
+!   endif
+!endif
+
+
+define cres sele segi @segid .and. resi @ires2  end
+
+
+if ?selresn .eq. ASP then
+   incr nacid
+endif
+if ?selresn .eq. GLU then
+   incr nacid
+endif
+if ?selresn .eq. HSP then
+   incr nhsp
+endif
+if ?selresn .eq. LYS then
+   incr nbase
+endif
+if ?selresn .eq. ARG then
+   incr nbase
+endif
+
+if @ires .le. ?NRES then
+   incr ires
+   goto ntitr
+endif
+
+
+
+!set co-ion numbers
+if @titrflag .lt. 0 then
+   calc nposcoion = @nhsp
+   calc nnegcoion = @nacid - @nct
+endif
+if @titrflag .gt. 0 then
+   calc nposcoion = @nbase + @nhsp
+   calc nnegcoion = 0
+
+   !test if acidic groups are correctly configured
+  if @nacid .gt. 0 then
+   coor dipole sele resn ASP .or. resn GLU end
+   set charge = ?charge
+   define acids sele (resn ASP .or. resn GLU) .and. type CA end
+   if (?nsel .ne. @charge) then
+      ! "Acidic residues are not correctly configured!"
+      stop
+   endif
+  endif
+
+endif
+if @titrflag .eq. 0 then
+   !calc nposcoion = @nbase + @nhsp
+   !calc nnegcoion = @nacid - @nct
+   calc nposcoion = 0 ! don't use coions
+   calc nnegcoion = 0 ! don't use coions
+endif
+
+!set counter-ion numbers
+calc netcharge = @nbase - @nacid  !pH=7, assume all His are neutral, all Asp/Glu are negatively charged, all Lys/Arg are positively charged
+if @netcharge .lt. 0 then
+calc nposcntion = - @netcharge
+calc nnegcntion = 0
+else
+calc nposcntion = 0
+calc nnegcntion = @netcharge
+endif
+
+calc nion   = @{conc} * 6.022 * 0.0001 * @ionvol
+calc npos   =  int ( @nion - @netcharge / 2.0 + 0.5 )
+!calc npos = 3
+if @npos .lt. 0 then set npos = 0
+calc nneg   =  @npos + @netcharge
+
+
+!
+! Randomly Put the ions
+!
+
+!Generate positive co-ions
+if @nposcoion .gt. 0 then
+   if @poscoion .eq. TIPP then
+      open read unit 10 card name @toppar/tipp.crd
+      set i = 1
+      label dotipp1
+      read sequence @poscoion 1
+      generate COIO warn setup noangle nodihedra
+      read coor ignore unit 10 sele segid COIO end
+      if @i .eq. 1 then
+          rename segid TIPP sele segid COIO end
+      else
+          join TIPP COIO renumber
+      endif
+      increase i by 1
+      if @i .le. @nposcoion goto dotipp1
+      coor copy comp sele segid TIPP end
+   else
+      read sequence @poscoion @nposcoion
+      generate @poscoion warn setup noangle nodihedra
+   endif
+endif
+
+
+!Generate negtive co-ions
+if @nnegcoion .gt. 0 then
+   if @negcoion .eq. TIPU then
+      open read unit 10 card name @toppar/tipu.crd
+      set i = 1
+      label dotipu1
+      read sequence @negcoion 1
+      generate COIO warn setup noangle nodihedra
+      read coor ignore unit 10 sele segid COIO end
+      if @i .eq. 1 then
+          rename segid TIPU sele segid COIO end
+      else
+          join TIPU COIO renumber
+      endif
+      increase i by 1
+      if @i .le. @nnegcoion goto dotipu1
+      coor copy comp sele segid TIPU end
+   else
+      read sequence @negcoion @nnegcoion
+      generate @negcoion warn setup noangle nodihedra
+   endif
+endif
+
+!Generate SOD ions
+if npos .gt. 0 then
+    read sequence SOD @npos
+    generate SOD2 warn setup noangle nodihedra
+endif
+
+!Generate CLA ions
+if nneg .gt. 0 then
+    read sequence CLA @nneg
+    generate CLA2 warn setup noangle nodihedra
+endif
+
+calc nion = @nposcoion + @nnegcoion + @npos + @nneg
+
+! initial positions for all ions
+
+calc xpos = @A / 2.0
+calc ypos = @B / 2.0
+calc zpos = @C / 2.0
+
+coor set xdir @xpos ydir @ypos zdir @zpos select resname SOD .or. resname CLA end
+
+if @nposcoion .gt. 0 then
+  if @poscoion .eq. TIPP then
+   coor stat sele resname TIPP .and. type OH2 end
+   calc xinit  = ?xave
+   calc yinit  = ?yave
+   calc zinit  = ?zave
+
+   calc xdis = @xpos - @xinit
+   calc ydis = @ypos - @yinit
+   calc zdis = @zpos - @zinit
+
+   coor trans xdir @xdis ydir @ydis zdir @zdis select resname TIPP end
+  endif
+endif
+
+if @nnegcoion .gt. 0 then
+  if @negcoion .eq. TIPU then
+   coor stat sele resname TIPU .and. type OH2 end
+   calc xinit  = ?xave
+   calc yinit  = ?yave
+   calc zinit  = ?zave
+
+   calc xdis = @xpos - @xinit
+   calc ydis = @ypos - @yinit
+   calc zdis = @zpos - @zinit
+
+   coor trans xdir @xdis ydir @ydis zdir @zdis select resname TIPU end
+  endif
+endif
+
+
+!
+!Images & Energy Setup
+!
+
+COOR CONVERT ALIGNED SYMMETRIC @A @B @C @alpha @beta @gamma
+
+open read unit 10 card name crystal_image.str
+CRYSTAL DEFINE @XTLtype @A @B @C @alpha @beta @gamma
+CRYSTAL READ UNIT 10 CARD
+
+!Image centering by residue
+IMAGE BYATOM XCEN 0.0 YCEN 0.0 ZCEN 0.0 select segid @poscoion .or. segid @negcoion .or. segid SOD2 .or. segid CLA2 end
+
+!Note eps=80, truncation at 20 Angstrom
+nbonds atom switch vatom vswitch -
+       ctonnb 20.0 ctofnb 20.0 cutnb 21.0 cutim 21.0 -
+       inbfrq -1 imgfrq -1 wmin 1.0 cdie eps 80.0
+
+!
+! Initial placement of ions
+!
+
+calc i   = 1
+label doinit
+    
+    if i .le. @nion then
+       calc j = @i
+    else
+       calc j = int( ?random * @nion ) + 1
+       if ( @j .gt. @nion) then
+          set j = @nion
+       endif 
+    endif
+
+    if j .le. @nposcoion then
+       set ion = @poscoion
+    else
+       calc j = @j - @nposcoion
+       if j .le. @nnegcoion then
+          set ion = @negcoion
+       else
+          calc j = @j - @nnegcoion
+          if j .le. @npos then
+             set ion = SOD2
+          else
+             calc j = @j - @npos
+             set ion = CLA2
+          endif
+       endif
+    endif
+
+    define target select segid @ion .and. resid @j end
+    coor copy comp sele target end
+    coor stat sele target .and. .not. type H* end
+    calc xsave  = ?xave
+    calc ysave  = ?yave
+    calc zsave  = ?zave
+    
+    calc xpos = @A * ( ?random - 0.5 )
+    calc ypos = @B * ( ?random - 0.5 )
+    calc zpos = @C * ( ?random - 0.5 )
+
+    calc xdis = @xpos - @xsave
+    calc ydis = @ypos - @ysave
+    calc zdis = @zpos - @zsave
+    
+    ! check if the ions are too close to solute 
+    coor trans xdir @xdis ydir @ydis zdir @zdis select target end
+    nbonds
+    
+    coor dist cut 4.5 sele target end -
+                      sele .not. target .and. .not. hydrogen end images
+    
+    if ?npair .gt. 0 then
+       coor copy select target end
+       goto doinit
+    endif
+
+increase i by 1
+if i .le. @nion goto doinit
+
+cons fix sele .not. ( resn SOD .or. resn CLA .or. resn TIPP .or. resn TIPU) end
+
+!
+! Monte Carlo (MC) simulations of ions
+! 
+
+!Random number generation
+RAND TIME UNIF
+
+calc nmc = 2000
+
+calc i   = 1
+label domc 
+
+    if i .le. @nion then
+       calc j = @i
+    else
+       calc j = int( ?random * @nion ) + 1
+    endif
+
+    if j .le. @nposcoion then
+       set ion = @poscoion
+    else
+       calc j = @j - @nposcoion
+       if j .le. @nnegcoion then
+          set ion = @negcoion
+       else
+          calc j = @j - @nnegcoion
+          if j .le. @npos then
+             set ion = SOD2
+          else
+             calc j = @j - @npos
+             set ion = CLA2
+          endif
+       endif
+    endif
+
+    define target select segid @ion .and. resid @j end 
+    coor copy comp sele target end
+    coor stat sele target .and. .not. type H* end
+    calc xsave  = ?xave
+    calc ysave  = ?yave
+    calc zsave  = ?zave
+
+    calc xpos = @A * ( ?random - 0.5 )
+    calc ypos = @B * ( ?random - 0.5 )
+    calc zpos = @C * ( ?random - 0.5 )
+
+    calc xdis = @xpos - @xsave
+    calc ydis = @ypos - @ysave
+    calc zdis = @zpos - @zsave
+
+    ! check if the ions are too close to solute
+    coor trans xdir @xdis ydir @ydis zdir @zdis select target end
+    coor dist cut 4.5 sele target end -
+                      sele ( .not. target ) .and. .not. hydrogen end images
+    
+    if ?npair .gt. 0 then
+       coor copy select target end
+       goto domc
+    endif
+
+    ! before the move
+    coor copy select target end
+
+    energy
+    set pener = 99999.0
+    if ?ener .lt. @pener calc pener = ?ener
+
+    ! after the move
+    coor trans xdir @xdis ydir @ydis zdir @zdis select target end
+
+    energy
+    calc dener = ?ener - @pener
+    calc boltz = exp ( - @dener / 0.59 )
+
+    if xsave .eq. @a       goto next
+    if dener .lt. 0.0      goto next
+    if ?random .lt. @boltz goto next
+
+    coor copy select target end
+
+    label next
+
+incr i by 1
+if i le @nmc goto domc
+
+
+COOR CONVERT SYMMETRIC ALIGNED @A @B @C @alpha @beta @gamma
+CRYSTAL FREE
+
+open write unit 10 card name @in_ions.pdb
+write coor unit 10 pdb 
+close unit 10
+
+delete atom sele .not. ( segid @poscoion .or. segid @negcoion .or. segid SOD2 .or. segid CLA2 ) end
+
+open write unit 10 card name @in_ions.crd
+write coor unit 10 card
+close unit 10
+
+open write unit 10 card name @in_ions.prm
+write title unit 10
+* set nposcoion = @nposcoion ! Number of positive co-ions
+* set nnegcoion = @nnegcoion ! Number of negative co-ions
+* set npos = @npos ! Number of positive ions
+* set nneg = @nneg ! Number of negative ions
+* set poscoionid = @poscoion
+* set negcoionid = @negcoion
+* set posid = SOD
+* set negid = CLA
+*
+
+open write unit 10 card name @in_ions.str
+
+if @nposcoion .gt. 0 then
+write title unit 10
+* read sequence @poscoion @nposcoion !Generate positive co-ions
+* generate @poscoion warn setup noangle nodihedral
+endif
+if @nnegcoion .gt. 0 then
+write title unit 10
+* read sequence @negcoion @nnegcoion ! Generate negative co-ions
+* generate @negcoion warn setup noangle nodihedral
+endif
+if @nneg .gt. 0 then
+write title unit 10
+* read sequence CLA @nneg !Generate CLA
+* generate CLA2 warn
+endif
+if @npos .gt. 0 then
+write title unit 10
+* read sequence SOD @npos !Generate SOD
+* generate SOD2 warn
+endif
+
+
+
+stop

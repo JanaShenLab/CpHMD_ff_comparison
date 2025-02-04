@@ -1,0 +1,45 @@
+# Log started on 09/20/2024 [mm/dd/yyyy] at 10:58:42
+help
+exit
+quit
+# Log started on 09/20/2024 [mm/dd/yyyy] at 11:27:11
+chamber
+help chamber
+# Log started on 09/20/2024 [mm/dd/yyyy] at 15:37:11
+chamber -top /home/craigp/software/toppar/prot/top_all22_prot.rtf -param /home/craigp/software/toppar/prot/par_all22_prot.prm -str /home/craigp/software/toppar/toppar_water_ions.str -psf ./prot_dimer_solv_ion_mini.psf -crd ./prot_dimer_solv_ion_mini.crd  -box 74,74,74,90,90,90
+chamber -top /home/craigp/software/toppar/top_all22_prot.rtf -param /home/craigp/software/toppar/par_all22_prot.prm -str /home/craigp/software/toppar/toppar_water_ions.str -psf ./prot_dimer_solv_ion_mini.psf -crd ./prot_dimer_solv_ion_mini.crd  -box 74,74,74,90,90,90
+chamber -top /home/craigp/software/c362b/toppar/top_all22_prot.rtf -param /home/craigp/software/c362b/toppar/par_all22_prot.prm -str /home/craigp/software/c362b/toppar/toppar_water_ions.str -psf ./prot_dimer_solv_ion_mini.psf -crd ./prot_dimer_solv_ion_mini.crd  -box 74,74,74,90,90,90
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -psf ./prot_dimer_solv_ion_mini.psf -crd ./prot_dimer_solv_ion_mini.crd  -box 74,74,74,90,90,90
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90
+help
+printAngles :2
+# Log started on 09/20/2024 [mm/dd/yyyy] at 15:47:05
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90
+# Log started on 09/20/2024 [mm/dd/yyyy] at 15:55:57
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/topar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90 nosettle
+help chamber
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90 nosettle
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90 nosettle -nocamp
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90 nosettle -nocmap
+# Log started on 09/20/2024 [mm/dd/yyyy] at 16:12:20
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90 
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90 nosettle -nocmap
+# Log started on 09/20/2024 [mm/dd/yyyy] at 16:23:49
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90 nosettle -nocmap
+help
+printAngles :2-5
+outparm 3ruz_charmm.prmtop
+writeCoordinates 3ruz_charmm.rst7
+quit
+# Log started on 09/21/2024 [mm/dd/yyyy] at 11:34:03
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90 
+help
+defineSolvent :130-2227
+outparm 3ruz_charmm.prmtop
+outparm 3ruz_charmm.prmtop
+writeCoordinates 3ruz_charmm.rst7
+quit
+# Log started on 09/21/2024 [mm/dd/yyyy] at 15:47:51
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90> chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90

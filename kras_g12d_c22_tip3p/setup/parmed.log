@@ -1,0 +1,10 @@
+# Log started on 09/21/2024 [mm/dd/yyyy] at 15:47:44
+# Log started on 09/21/2024 [mm/dd/yyyy] at 15:48:43
+# Log started on 09/21/2024 [mm/dd/yyyy] at 15:49:58
+> chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90
+chamber -top /home/craigp/software/c36b2/toppar/top_all22_prot.rtf -param /home/craigp/software/c36b2/toppar/par_all22_prot.prm -str /home/craigp/software/c36b2/toppar/toppar_water_ions.str -str /home/craigp/software/c36b2/toppar/toppar_phmd_c22_foramber.str -psf ./prot_xwat_solv_ion_mini.psf -crd ./prot_xwat_solv_ion_mini.crd  -box 74,74,74,90,90,90
+help
+defineSolvent :170-10619
+outparm 6wgn_charmm.prmtop
+writeCoordinates 6wgn_charmm.rst7
+quit
